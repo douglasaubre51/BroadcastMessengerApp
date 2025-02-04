@@ -12,4 +12,6 @@ public class LoginAccountViewModel
     [Required]
     [DataType(DataType.Password)]
     public string? Password { get; set; }
+
+    public string? ErrorMessages { get; set; }
 }

@@ -50,6 +50,20 @@ namespace BroadcastMvcApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                var model = _repository.GetByEmail(loginVM.Email);
+
+                if (model == null)
+                {
+                    loginVM.ErrorMessages = "email doesnot exist!";
+                    return View(loginVM);
+                }
+
+                if (model.Password != loginVM.Password)
+                {
+                    loginVM.ErrorMessages = "incorrect password!";
+                    return View(loginVM);
+                }
+
                 return RedirectToAction("Index", "Home");
             }
             return View(loginVM);
