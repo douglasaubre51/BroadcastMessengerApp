@@ -1,4 +1,7 @@
 using BroadcastMvcApp.Data;
+using BroadcastMvcApp.Interface;
+using BroadcastMvcApp.Models;
+using BroadcastMvcApp.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +14,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("BroadcastDbString"));
 });
+//repo init
+builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 
 var app = builder.Build();
 
