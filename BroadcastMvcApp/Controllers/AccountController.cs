@@ -24,6 +24,15 @@ namespace BroadcastMvcApp.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult Login(LoginAccountViewModel loginVM)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View(loginVM);
+        }
 
     }
 }

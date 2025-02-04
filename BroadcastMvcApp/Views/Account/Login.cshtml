@@ -1,6 +1,34 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model BroadcastMvcApp.ViewModels.LoginAccountViewModel
+
 @{
     ViewBag.Title = "Login";
 }
+
+<div class="login-body">
+    <h1>Login :</h1>
+
+    <form class="form-container" asp-action="Login" method="post" asp-controller="Account">
+
+        <div>
+
+            <label asp-for="@Model.Email">Email :</label>
+            <input asp-for="@Model.Email" />
+            <span asp-validation-for="@Model.Email" class="text-danger"></span>
+
+        </div>
+
+        <div>
+
+            <label asp-for="@Model.Password">Password</label>
+            <input asp-for="@Model.Password" />
+            <span asp-validation-for="@Model.Password" class="text-danger"></span>
+
+        </div>
+
+        <div class="form-group">
+            <input type="submit" class="submit-btn" value="login" />
+
+            <input type="reset" class="reset-btn" value="clear" />
+        </div>
+    </form>
+</div>
