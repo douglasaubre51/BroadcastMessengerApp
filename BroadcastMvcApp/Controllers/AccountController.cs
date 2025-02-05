@@ -45,12 +45,13 @@ namespace BroadcastMvcApp.Controllers
         {
             return View();
         }
+
         [HttpPost]
-        public ActionResult Login(LoginAccountViewModel loginVM)
+        public async Task<ActionResult> Login(LoginAccountViewModel loginVM)
         {
             if (ModelState.IsValid)
             {
-                var model = _repository.GetByEmail(loginVM.Email);
+                var model = await _repository.GetByEmail(loginVM.Email);
 
                 if (model == null)
                 {
