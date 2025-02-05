@@ -9,3 +9,5 @@ select *
 from Accounts;
 
 exec sp_help Accounts;
+
+truncate table Accounts;

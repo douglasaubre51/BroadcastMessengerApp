@@ -13,4 +13,13 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<Account> Accounts { get; set; }
 
+    //fluent api
+    //added to make email unique
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Account>().HasIndex(e => e.Email).IsUnique();
+    }
+
 }
