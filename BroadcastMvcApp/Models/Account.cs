@@ -1,6 +1,7 @@
 using System;
 using BroadcastMvcApp.Enum;
 using System.ComponentModel.DataAnnotations;
+using BroadcastMvcApp.Attributes;
 
 namespace BroadcastMvcApp.Models;
 
@@ -11,7 +12,7 @@ public class Account
 
     [Required]
     public string? Username { get; set; }
-    [Required]
+    [UniqueEmail]
     [DataType(DataType.EmailAddress)]
     public string? Email { get; set; }
     [Required]
