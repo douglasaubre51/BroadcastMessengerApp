@@ -1,4 +1,3 @@
-using Azure.Identity;
 using BroadcastMvcApp.Interface;
 using BroadcastMvcApp.Models;
 using BroadcastMvcApp.ViewModels;
@@ -8,10 +7,12 @@ namespace BroadcastMvcApp.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly IPhotoService _photoService;
         private readonly IAccountRepository _repository;
-        public AccountController(IAccountRepository repository)
+        public AccountController(IAccountRepository repository, IPhotoService photoService)
         {
             _repository = repository;
+            _photoService = photoService;
         }
 
         public ActionResult Create()
@@ -19,16 +20,19 @@ namespace BroadcastMvcApp.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Create(CreateAccountViewModel createVM)
+        public async Task<ActionResult> Create(CreateAccountViewModel createVM)
         {
             if (ModelState.IsValid)
             {
+
+                var imageUrl = await _photoService.AddPhotoAsync(createVM.ProfilePhoto);
+
                 var model = new Account
                 {
                     Username = createVM.Username,
                     Email = createVM.Email,
                     Password = createVM.Password,
-                    ProfilePhotoURL = "",
+                    ProfilePhotoURL = imageUrl.Url.ToString(),
                     roles = createVM.roles,
                     departments = createVM.departments,
                     semesters = createVM.semesters

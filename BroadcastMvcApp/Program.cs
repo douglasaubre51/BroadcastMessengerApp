@@ -1,7 +1,8 @@
 using BroadcastMvcApp.Data;
+using BroadcastMvcApp.Helpers;
 using BroadcastMvcApp.Interface;
-using BroadcastMvcApp.Models;
 using BroadcastMvcApp.Repository;
+using BroadcastMvcApp.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("BroadcastDbString"));
 });
+//adding Iphotoservice
+builder.Services.AddScoped<IPhotoService, PhotoService>();
+//added cloudinary service
+builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinaryConfiguration"));
 //repo init
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 
