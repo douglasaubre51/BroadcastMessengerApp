@@ -7,10 +7,10 @@ namespace BroadcastMvcApp.Models;
 public class Channel
 {
     [Key]
-    int ChannelId { get; set; }
-    string ChannelName { get; set; }
+    public int ChannelId { get; set; }
+    public string ChannelName { get; set; }
     [ForeignKey("MessageId")]
-    Message Messages { get; set; }
-    int JoinedUsersId { get; set; }
+    public Message Messages { get; set; }
+    public int JoinedUsersId { get; set; }
 
 }

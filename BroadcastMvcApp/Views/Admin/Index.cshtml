@@ -1,5 +1,20 @@
-﻿@{
+﻿@model BroadcastMvcApp.ViewModels.IndexAdminViewModel
+
+@{
     ViewBag.Title = "Admin Page";
 }
 
 <h1>Welcome</h1>
+
+@foreach (var i in @Model.accounts)
+{
+    <ul>
+        <li>@i.Username</li>
+        <li>@i.Email</li>
+        <image src="@i.ProfilePhotoURL" />
+        <li>@i.roles</li>
+        <li>@i.departments</li>
+        <li>@i.semesters</li>
+    </ul>
+    <br>
+}

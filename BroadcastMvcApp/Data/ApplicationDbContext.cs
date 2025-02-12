@@ -12,6 +12,8 @@ public class ApplicationDbContext : DbContext
     }
 
     public DbSet<Account> Accounts { get; set; }
+    public DbSet<Channel> Channels { get; set; }
+    public DbSet<Message> Messages { get; set; }
 
     //fluent api
     //added to make email unique

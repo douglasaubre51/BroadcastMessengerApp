@@ -18,7 +18,7 @@ public class AccountRepository : IAccountRepository
     {
         return await _context.Accounts.ToListAsync();
     }
-    public async Task<Account> GetById(int id)
+    public async Task<Account> GetById(int? id)
     {
         return await _context.Accounts.FirstOrDefaultAsync(e => e.Id == id);
     }

@@ -11,3 +11,7 @@ from Accounts;
 exec sp_help Accounts;
 
 truncate table Accounts;
+
+exec sp_help Channels;
+
+exec sp_help Messages;

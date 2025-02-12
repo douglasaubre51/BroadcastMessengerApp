@@ -1,6 +1,7 @@
 using BroadcastMvcApp.Interface;
 using BroadcastMvcApp.Models;
 using BroadcastMvcApp.ViewModels;
+using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BroadcastMvcApp.Controllers
@@ -70,6 +71,9 @@ namespace BroadcastMvcApp.Controllers
                 }
 
                 HttpContext.Session.SetInt32("AccountId", model.Id);
+
+                if (model.roles == Enum.Roles.Admin)
+                    return RedirectToAction("Index", "Admin");
 
                 return RedirectToAction("Index", "Home");
             }
