@@ -1,4 +1,3 @@
-using System;
 using BroadcastMvcApp.Enum;
 using System.ComponentModel.DataAnnotations;
 using BroadcastMvcApp.Attributes;
@@ -23,4 +22,5 @@ public class Account
     public Roles roles { get; set; }
     public Departments departments { get; set; }
     public Semesters semesters { get; set; }
+    public Status status { get; set; }
 }

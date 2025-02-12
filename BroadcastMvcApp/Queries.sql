@@ -5,7 +5,7 @@ use BroadcastDb;
 select *
 from sys.tables;
 
-select *
+select*
 from Accounts;
 
 exec sp_help Accounts;
