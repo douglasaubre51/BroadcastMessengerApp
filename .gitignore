@@ -5,3 +5,11 @@
 /.vs/BroadcastMessengerApp/FileContentIndex/42b365b9-b1e1-4d55-b68a-bb4245bf4549.vsidx
 /.vs/BroadcastMessengerApp/FileContentIndex/759e1763-bece-491a-9a9b-316a92f8d69c.vsidx
 /.vs/BroadcastMessengerApp/FileContentIndex/ece48dd5-988c-41b5-b949-c8feaf819c41.vsidx
+*.sqlite-journal
+*.vsidx
+/.vs/BroadcastMessengerApp/CopilotIndices/17.12.53.23981/SemanticSymbols.db-shm
+/.vs/BroadcastMessengerApp/CopilotIndices/17.12.53.23981/CodeChunks.db-wal
+/.vs/BroadcastMessengerApp/CopilotIndices/17.12.53.23981/SemanticSymbols.db-wal
+/.vs/BroadcastMessengerApp/CopilotIndices/17.12.53.23981/CodeChunks.db
+*.sqlite
+/.vs/BroadcastMessengerApp/CopilotIndices/17.12.53.23981/CodeChunks.db-shm
