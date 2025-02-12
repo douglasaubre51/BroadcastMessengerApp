@@ -28,10 +28,6 @@ public class AccountRepository : IAccountRepository
         return await _context.Accounts.FirstOrDefaultAsync(e => e.Email == emailId);
     }
 
-    public async Task<Account> GetAccountIdByEmail(string emailId)
-    {
-        return await _context.Accounts.Where(e => e.Email == emailId);
-    }
     public bool Add(Account account)
     {
         _context.Add(account);
