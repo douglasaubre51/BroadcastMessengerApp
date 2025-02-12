@@ -21,6 +21,8 @@ builder.Services.AddScoped<IPhotoService, PhotoService>();
 builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinaryConfiguration"));
 //repo init
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+//session state
+builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -44,5 +46,6 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
-
+//session 
+app.UseSession();
 app.Run();

@@ -69,6 +69,8 @@ namespace BroadcastMvcApp.Controllers
                     return View(loginVM);
                 }
 
+                HttpContext.Session.SetInt32();
+
                 return RedirectToAction("Index", "Home");
             }
             return View(loginVM);
