@@ -13,3 +13,8 @@
 /.vs/BroadcastMessengerApp/CopilotIndices/17.12.53.23981/CodeChunks.db
 *.sqlite
 /.vs/BroadcastMessengerApp/CopilotIndices/17.12.53.23981/CodeChunks.db-shm
+*.v2
+/.vs/BroadcastMessengerApp/v17/.suo
+/.vs/BroadcastMessengerApp/v17/DocumentLayout.backup.json
+/.vs/BroadcastMessengerApp/v17/DocumentLayout.json
+*.bin
