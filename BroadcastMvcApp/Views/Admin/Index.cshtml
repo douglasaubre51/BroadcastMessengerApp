@@ -4,17 +4,27 @@
     ViewBag.Title = "Admin Page";
 }
 
-<h1>Welcome</h1>
+<link href="~/css/IndexAdminStyle.css" rel="stylesheet" />
 
-@foreach (var i in @Model.accounts)
-{
-    <ul>
-        <li>@i.Username</li>
-        <li>@i.Email</li>
-        <image src="@i.ProfilePhotoURL" />
-        <li>@i.roles</li>
-        <li>@i.departments</li>
-        <li>@i.semesters</li>
-    </ul>
-    <br>
-}
+<div class="index-body">
+
+    <h1>Welcome administrator</h1>
+
+    <div class="data-container">
+        @foreach (var i in @Model.accounts)
+        {
+            <div class="data-card">
+                <image class="image-container" alt="profile" src="@i.ProfilePhotoURL" />
+                <span>@i.Username</span>
+                <span>@i.departments @i.semesters</span>
+                <span>@i.roles</span>
+                <span>@i.Email</span>
+
+                <div class="btn-container">
+                    <a asp-action="AddToChannnel">add to</a>
+                    <a asp-action="RemoveFromChannnel">remove from</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
