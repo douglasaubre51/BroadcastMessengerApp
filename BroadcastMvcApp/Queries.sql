@@ -15,3 +15,5 @@ truncate table Accounts;
 exec sp_help Channels;
 
 exec sp_help Messages;
+
+delete from Accounts where Id=3;
