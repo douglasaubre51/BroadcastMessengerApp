@@ -34,9 +34,10 @@ namespace BroadcastMvcApp.Controllers
             return View();
         }
 
-        public IActionResult CreateChannel(Channel channel)
+        public IActionResult CreateChannel(CreateChannelAdminViewModel createChannelVM)
         {
-            var viewModel=new 
+            var channel = new Channel();
+
             return View(viewModel);
         }
 
