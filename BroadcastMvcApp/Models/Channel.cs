@@ -9,8 +9,9 @@ public class Channel
     [Key]
     public int ChannelId { get; set; }
     public string ChannelName { get; set; }
-    [ForeignKey("MessageId")]
-    public Message Messages { get; set; }
-    public int JoinedUsersId { get; set; }
+    [ForeignKey("Message")]
+    public int MessageId { get; set; }
+    [ForeignKey("Account")]
+    public int AccountId { get; set; }
 
 }

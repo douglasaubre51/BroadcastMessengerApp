@@ -26,11 +26,18 @@ namespace BroadcastMvcApp.Controllers
             return View(viewModel);
         }
 
-
         public async Task<IActionResult> AddToChannel(int userId)
-        {
+        { return View(); }
 
+        public IActionResult CreateNewChannel()
+        {
             return View();
+        }
+
+        public IActionResult CreateChannel(Channel channel)
+        {
+            var viewModel=new 
+            return View(viewModel);
         }
 
     }

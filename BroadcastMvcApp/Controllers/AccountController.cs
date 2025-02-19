@@ -70,7 +70,7 @@ namespace BroadcastMvcApp.Controllers
                     return View(loginVM);
                 }
 
-                HttpContext.Session.SetInt32("AccountId", model.Id);
+                HttpContext.Session.SetInt32("AccountId", model.AccountId);
 
                 if (model.roles == Enum.Roles.Admin)
                     return RedirectToAction("Index", "Admin");

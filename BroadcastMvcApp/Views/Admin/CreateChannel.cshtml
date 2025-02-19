@@ -1,0 +1,13 @@
+﻿@model BroadcastMvcApp.ViewModels
+
+@{
+	ViewBag.Title = "Create new channel";
+}
+
+<h1>Create New Channel</h1>
+
+<form method=post asp-action="CreateChannel">
+	<label>Channel Name :</label>
+	<input asp-for="@Model.ChannelName" />
+	<span asp-validation-for="@Model.ChannelName"></span>
+</form>
