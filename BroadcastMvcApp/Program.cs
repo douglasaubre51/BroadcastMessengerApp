@@ -21,6 +21,7 @@ builder.Services.AddScoped<IPhotoService, PhotoService>();
 builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinaryConfiguration"));
 //repo init
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+builder.Services.AddScoped<IChannelRepository, ChannelRepository>();
 //session state
 builder.Services.AddSession();
 

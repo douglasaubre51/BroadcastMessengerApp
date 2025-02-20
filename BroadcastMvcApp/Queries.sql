@@ -17,3 +17,7 @@ exec sp_help Channels;
 exec sp_help Messages;
 
 delete from Accounts where Id=3;
+
+select * from Channels;
+
+select * from Messages;

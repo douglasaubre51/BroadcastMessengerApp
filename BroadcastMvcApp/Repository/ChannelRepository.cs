@@ -41,8 +41,8 @@ namespace BroadcastMvcApp.Repository
 
         public bool Save()
         {
-            _context.SaveChanges();
-            return true;
+            int newEntries;
+            return (newEntries = _context.SaveChanges()) >0 ? true : false;
         }
     }
 }

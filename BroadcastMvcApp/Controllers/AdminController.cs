@@ -8,10 +8,12 @@ namespace BroadcastMvcApp.Controllers
     public class AdminController : Controller
     {
         private readonly IAccountRepository _accountRepository;
+        private readonly IChannelRepository _channelRepository;
 
-        public AdminController(IAccountRepository accountRepository)
+        public AdminController(IAccountRepository accountRepository, IChannelRepository channelRepository)
         {
             _accountRepository = accountRepository;
+            _channelRepository = channelRepository;
         }
 
         // GET: AdminController
@@ -26,20 +28,29 @@ namespace BroadcastMvcApp.Controllers
             return View(viewModel);
         }
 
-        public async Task<IActionResult> AddToChannel(int userId)
-        { return View(); }
-
-        public IActionResult CreateNewChannel()
+        public IActionResult CreateChannel()
         {
             return View();
         }
 
+        [HttpPost]
         public IActionResult CreateChannel(CreateChannelAdminViewModel createChannelVM)
         {
-            var channel = new Channel();
+            if (ModelState.IsValid)
+            {
+                string name = createChannelVM.ChannelName;
 
-            return View(viewModel);
+                Channel channel = new Channel
+                {
+                    ChannelName = name,
+                };
+
+                _channelRepository.Add(channel);
+
+                return RedirectToAction("Index");
+            }
+
+            return View(createChannelVM);
         }
-
     }
 }
