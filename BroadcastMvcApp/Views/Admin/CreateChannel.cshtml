@@ -5,11 +5,11 @@
 }
 
 <h1>Create New Channel</h1>
-
+<br>
 <form method="post" asp-action="CreateChannel" asp-controller="Admin">
 	<label>Channel Name :</label>
 	<input asp-for="@Model.ChannelName" type="text" />
-	<span asp-validation-for="@Model.ChannelName"></span>
 
 	<input type="submit" value="create" />
+	<span asp-validation-for="@Model.ChannelName"></span>
 </form>

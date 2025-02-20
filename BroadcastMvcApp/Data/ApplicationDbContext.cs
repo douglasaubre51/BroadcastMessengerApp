@@ -23,5 +23,4 @@ public class ApplicationDbContext : DbContext
 
         modelBuilder.Entity<Account>().HasIndex(e => e.Email).IsUnique();
     }
-
 }
