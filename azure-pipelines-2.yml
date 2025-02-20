@@ -33,5 +33,5 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- script: dotnet run --project BroadcastMessengerApp/BroadcastMessengerApp.csproj
+- script: dotnet run --project BroadcastMvcApp/BroadcastMvcApp.csproj
   displayName: 'Run Application'
