@@ -10,9 +10,10 @@ namespace BroadcastMvcApp.Controllers
         private readonly IAccountRepository _accountRepository;
         private readonly IChannelRepository _channelRepository;
 
-        public AdminController(IAccountRepository accountRepository,IChannelRepository channelRepository)
+        public AdminController(IAccountRepository accountRepository, IChannelRepository channelRepository)
         {
             _accountRepository = accountRepository;
+            _channelRepository = channelRepository;
         }
 
         // GET: AdminController
@@ -42,14 +43,14 @@ namespace BroadcastMvcApp.Controllers
             {
                 string name = createChannelVM.ChannelName;
 
-                var channel = new Channel
+                Channel channel = new Channel
                 {
                     ChannelName = name,
                 };
 
                 _channelRepository.Add(channel);
 
-                return View("Index");
+                return RedirectToAction("Index");
             }
 
             return View(createChannelVM);

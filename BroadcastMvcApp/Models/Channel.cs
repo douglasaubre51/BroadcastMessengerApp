@@ -10,8 +10,8 @@ public class Channel
     public int ChannelId { get; set; }
     public string ChannelName { get; set; }
     [ForeignKey("Message")]
-    public int? MessageId { get; set; }
+    public int MessageId { get; set; }
     [ForeignKey("Account")]
-    public int? AccountId { get; set; }
+    public int AccountId { get; set; }
 
 }
