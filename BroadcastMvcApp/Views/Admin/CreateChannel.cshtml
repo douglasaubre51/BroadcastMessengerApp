@@ -1,4 +1,4 @@
-﻿@model BroadcastMvcApp.ViewModels
+﻿@model BroadcastMvcApp.ViewModels.CreateChannelAdminViewModel
 
 @{
 	ViewBag.Title = "Create new channel";
@@ -6,8 +6,10 @@
 
 <h1>Create New Channel</h1>
 
-<form method=post asp-action="CreateChannel">
+<form method="post" asp-action="CreateChannel" asp-controller="Admin">
 	<label>Channel Name :</label>
 	<input asp-for="@Model.ChannelName" />
 	<span asp-validation-for="@Model.ChannelName"></span>
+
+	<input type="submit" value="create" />
 </form>
