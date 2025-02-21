@@ -15,14 +15,14 @@
         {
             <div class="data-card">
                 <image class="image-container" alt="profile" src="@i.ProfilePhotoURL" />
-                <span>@i.Username</span>
+                <h3>@i.Username</h3>
                 <span>@i.departments @i.semesters</span>
                 <span>@i.roles</span>
                 <span>@i.Email</span>
 
                 <div class="btn-container">
-                    <a asp-action="AddToChannnel" asp-route-id="@i.AccountId">add to</a>
-                    <a asp-action="RemoveFromChannnel" asp-route-id="@i.AccountId">remove from</a>
+                    <a class="add-btn" asp-action="AddToChannnel" asp-route-id="@i.AccountId">+</a>
+                    <a class="remove-btn" asp-action="RemoveFromChannnel" asp-route-id="@i.AccountId">-</a>
                 </div>
             </div>
         }

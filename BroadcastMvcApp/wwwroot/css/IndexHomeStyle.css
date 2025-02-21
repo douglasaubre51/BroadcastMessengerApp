@@ -1,0 +1,10 @@
+.home-body {
+    display: relative;
+    height: 100%;
+}
+
+.hero-text {
+    position: absolute;
+    font-size: 100px;
+    transform: translate(-50%, 100%);
+}

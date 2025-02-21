@@ -1,13 +1,14 @@
 body {
-  background-color: black;
-  color: whitesmoke;
+  background-color: #121212;
+  color: #004225;
 }
 
 .navbar-container {
+  margin-top: 10px;
   display: flex;
   flex-direction: row;
   gap: 10px;
-  background-color: rebeccapurple;
+  background-color: #004225;
   border-radius: 10px;
   padding: 10px;
 }
@@ -35,5 +36,6 @@ ul {
 .body-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
