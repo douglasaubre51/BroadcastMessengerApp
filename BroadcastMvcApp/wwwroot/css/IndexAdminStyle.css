@@ -63,7 +63,7 @@ span {
     font-size: 16px;
 }
 
-.add-btn:hover {
+#add-btn:hover {
     background-color: #004225;
     color: whitesmoke;
 }

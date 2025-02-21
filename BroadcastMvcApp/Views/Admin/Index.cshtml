@@ -21,10 +21,33 @@
                 <span>@i.Email</span>
 
                 <div class="btn-container">
-                    <a class="add-btn" asp-action="AddToChannnel" asp-route-id="@i.AccountId">+</a>
+                    <a id="add-btn">+</a>
                     <a class="remove-btn" asp-action="RemoveFromChannnel" asp-route-id="@i.AccountId">-</a>
                 </div>
+
+                <div id="channel-list"></div>
             </div>
         }
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        console.log('DOMContentLoaded');
+        document.getElementById('add-btn').addEventListener('click', function () {
+            console.log('addEventListener');
+            xhr = new XMLHttpRequest();
+
+            xhr.open('GET', '@Url.Action("AddChannelList", "Admin")', true);
+            console.log('url');
+
+            xhr.onreadystatechange = function () {
+
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    document.getElementById('channel-list').innerHTML = xhr.responseText;
+                    console.log(xhr.readyState, xhr.status, xhr.responseText);
+                }
+            };
+            xhr.send();
+        });
+    });
+</script>

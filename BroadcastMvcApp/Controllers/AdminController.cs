@@ -16,7 +16,7 @@ namespace BroadcastMvcApp.Controllers
             _channelRepository = channelRepository;
         }
 
-        // GET: AdminController
+        // GET: user cards showcase and admin page
         public async Task<ActionResult> Index()
         {
             IEnumerable<Account> accounts = await _accountRepository.GetAll();
@@ -27,7 +27,7 @@ namespace BroadcastMvcApp.Controllers
 
             return View(viewModel);
         }
-
+        //create new channel page
         public IActionResult CreateChannel()
         {
             return View();
@@ -51,6 +51,11 @@ namespace BroadcastMvcApp.Controllers
             }
 
             return View(createChannelVM);
+        }
+        //popup window for showing list of channels to add user to
+        public IActionResult AddChannelList()
+        {
+            return PartialView("AddChannelList");
         }
     }
 }
