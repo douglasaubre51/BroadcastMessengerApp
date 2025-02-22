@@ -57,5 +57,22 @@ namespace BroadcastMvcApp.Controllers
         {
             return PartialView("AddChannelList");
         }
+        [HttpPost]
+        public IActionResult AddChannelList(AddChannelListAdminViewModel viewModel)
+        {
+            foreach (ChannelList i in viewModel.channelLists)
+            {
+                if (i.IsChecked == true)
+                {
+                    var channel = new Channel();
+                }
+            }
+
+            return View("Index");
+        }
+        public IActionResult RemoveChannelList()
+        {
+            return View();
+        }
     }
 }

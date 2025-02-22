@@ -13,5 +13,4 @@ public class Channel
     public int MessageId { get; set; }
     [ForeignKey("Account")]
     public int AccountId { get; set; }
-
 }
