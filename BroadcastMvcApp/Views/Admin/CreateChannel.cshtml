@@ -4,12 +4,29 @@
 	ViewBag.Title = "Create new channel";
 }
 
-<h1>Create New Channel</h1>
-<br>
-<form method="post" asp-action="CreateChannel" asp-controller="Admin">
-	<label>Channel Name :</label>
-	<input asp-for="@Model.ChannelName" type="text" />
+<div class="login-body">
 
-	<input type="submit" value="create" />
-	<span asp-validation-for="@Model.ChannelName"></span>
-</form>
+	<h1>Create New Channel</h1>
+	<br>
+	<form method="post" asp-action="CreateChannel" asp-controller="Admin">
+		<label>Channel Name :</label>
+		<input asp-for="@Model.ChannelName" type="text" />
+
+		<input type="submit" value="create" />
+		<span asp-validation-for="@Model.ChannelName"></span>
+	</form>
+
+</div>
+
+<style>
+	.login-body {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.login-body h1 {
+		font-size: 50px;
+	}
+</style>

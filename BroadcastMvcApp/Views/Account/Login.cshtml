@@ -4,33 +4,52 @@
     ViewBag.Title = "Login";
 }
 
+<link rel="stylesheet" href="~/css/LoginAccountStyle.css" />
+
 <div class="login-body">
-    <h1>Login :</h1>
+    <h1>Login</h1>
 
     <form class="form-container" asp-action="Login" method="post" asp-controller="Account">
 
-        <div>
+        <table>
+            <tr>
+                <div class="form-group">
+                    <td>
+                        <label asp-for="@Model.Email">Email </label>
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Email" />
+                        <span asp-validation-for="@Model.Email" class="text-danger"></span>
+                    </td>
+                </div>
+            </tr>
 
-            <label asp-for="@Model.Email">Email :</label>
-            <input asp-for="@Model.Email" />
-            <span asp-validation-for="@Model.Email" class="text-danger"></span>
+            <tr>
+                <div class="form-group">
+                    <td>
+                        <label asp-for="@Model.Password">Password</label>
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Password" />
+                        <span asp-validation-for="@Model.Password" class="text-danger"></span>
+                        <span>@Model?.ErrorMessages</span>
+                    </td>
+                </div>
+            </tr>
 
-        </div>
+            <tr>
+                <div class="form-group">
+                    <div class="btn-group">
+                        <td>
+                            <input type="submit" class="submit-btn" value="login" />
+                        </td>
+                        <td> <input type="reset" class="reset-btn" value="clear" />
 
-        <div>
+                        </td>
+                    </div>
+                </div>
+            </tr>
+        </table>
 
-            <label asp-for="@Model.Password">Password</label>
-            <input asp-for="@Model.Password" />
-            <span asp-validation-for="@Model.Password" class="text-danger"></span>
-
-        </div>
-
-        <span>@Model?.ErrorMessages</span>
-
-        <div class="form-group">
-            <input type="submit" class="submit-btn" value="login" />
-
-            <input type="reset" class="reset-btn" value="clear" />
-        </div>
     </form>
 </div>

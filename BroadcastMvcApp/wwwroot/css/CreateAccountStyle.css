@@ -1,0 +1,10 @@
+.create-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-body h1 {
+    font-size: 50px;
+}

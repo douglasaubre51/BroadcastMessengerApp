@@ -1,9 +1,8 @@
 .index-body {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: left;
     gap: 30px;
+    margin-right: 20px;
 }
 
 h1 {
@@ -12,19 +11,22 @@ h1 {
 
 .data-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: auto;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-rows: auto;
 }
 
 .data-card {
     display: flex;
     flex-direction: column;
     margin: 20px;
-    border: 1px solid black;
-    border-radius: 13px;
+    border-radius: 15px;
+    align-items: center;
     text-align: center;
     font-size: 13px;
     font-family: Arial, Helvetica, sans-serif;
+    background-color: #004225;
+    color: whitesmoke;
+    gap: 5px;
     width: fit-content;
 }
 
@@ -33,24 +35,40 @@ span {
 }
 
 .image-container {
+    padding: 0;
+    margin: 0;
     border-top-left-radius: 13px;
     border-top-right-radius: 13px;
     width: 200px;
-    height: 50%;
+    height: 200px;
 }
 
 .btn-container {
     padding: 10px;
     display: flex;
+    flex-direction: row;
     justify-content: space-evenly;
+    gap: 15px;
+    border-radius: inherit;
 }
 
 .btn-container a {
+    border-radius: inherit;
+    border: 2px solid whitesmoke;
     text-decoration: none;
     font-family: cursive;
-    background-color: black;
+    background-color: whitesmoke;
+    color: #004225;
+    padding: 1px 20px;
+    font-size: 16px;
+}
+
+#add-btn:hover {
+    background-color: #004225;
     color: whitesmoke;
-    width: 87px;
-    padding: 3px;
-    border-radius: 5px;
+}
+
+#remove-btn:hover {
+    background-color: red;
+    color: whitesmoke;
 }

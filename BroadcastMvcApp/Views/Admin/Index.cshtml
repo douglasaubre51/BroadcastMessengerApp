@@ -15,16 +15,39 @@
         {
             <div class="data-card">
                 <image class="image-container" alt="profile" src="@i.ProfilePhotoURL" />
-                <span>@i.Username</span>
+                <h3>@i.Username</h3>
                 <span>@i.departments @i.semesters</span>
                 <span>@i.roles</span>
                 <span>@i.Email</span>
 
                 <div class="btn-container">
-                    <a asp-action="AddToChannnel" asp-route-id="@i.AccountId">add to</a>
-                    <a asp-action="RemoveFromChannnel" asp-route-id="@i.AccountId">remove from</a>
+                    <a id="add-btn">+</a>
+                    <a id="remove-btn" asp-action="RemoveChannelList">-</a>
                 </div>
+
+                <div id="channel-list"></div>
             </div>
         }
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        console.log('DOMContentLoaded');
+        document.getElementById('add-btn').addEventListener('click', function () {
+            console.log('addEventListener');
+            xhr = new XMLHttpRequest();
+
+            xhr.open('GET', '@Url.Action("AddChannelList", "Admin")', true);
+            console.log('url');
+
+            xhr.onreadystatechange = function () {
+
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    document.getElementById('channel-list').innerHTML = xhr.responseText;
+                    console.log(xhr.readyState, xhr.status, xhr.responseText);
+                }
+            };
+            xhr.send();
+        });
+    });
+</script>
