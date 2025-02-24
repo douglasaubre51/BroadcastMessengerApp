@@ -1,7 +1,7 @@
 services:
   - name: my-dotnet-mvc-app
     type: web
-    env: dotnetcore
+    env: dotnet
     plan: free
     buildCommand: dotnet publish -c Release -o out
     startCommand: dotnet out/my-dotnet-mvc-app.dll
