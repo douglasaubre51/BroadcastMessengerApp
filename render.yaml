@@ -1,7 +1,6 @@
 services:
   - name: BroadcastMvcApp
     type: web
-    env: dotnet
     plan: free
     buildCommand: "dotnet publish -c Release -o out"
     startCommand: "dotnet out/BroadcastMvcApp.dll"
@@ -10,6 +9,8 @@ services:
     envVars:
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
+      - key: PORT
+        value: 10000
 
     healthCheckPath: /
     autoDeploy: true
