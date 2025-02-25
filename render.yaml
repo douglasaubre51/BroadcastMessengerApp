@@ -1,11 +1,11 @@
 services:
-  - name: my-dotnet-mvc-app
+  - name: BroadcastMvcApp
     type: web
     env: dotnet
     plan: free
-    buildCommand: dotnet publish -c Release -o out
-    startCommand: dotnet out/my-dotnet-mvc-app.dll
-    repo: https://github.com/your-repo/my-dotnet-mvc-app
+    buildCommand: "dotnet publish -c Release -o out"
+    startCommand: "dotnet out/BroadcastMvcApp.dll"
+    repo: https://github.com/douglasaubre51/BroadcastMvcApp
 
     envVars:
       - key: ASPNETCORE_ENVIRONMENT
