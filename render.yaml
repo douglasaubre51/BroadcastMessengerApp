@@ -4,13 +4,12 @@ services:
     plan: free
     buildCommand: "dotnet publish -c Release -o out"
     startCommand: "dotnet out/BroadcastMvcApp.dll"
-    repo: https://github.com/douglasaubre51/BroadcastMvcApp
+    repo: https://github.com/douglasaubre51/BroadcastMessengerApp
 
     envVars:
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
       - key: PORT
         value: 10000
-
     healthCheckPath: /
     autoDeploy: true
