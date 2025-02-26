@@ -21,33 +21,32 @@
                 <span>@i.Email</span>
 
                 <div class="btn-container">
-                    <a id="add-btn">+</a>
-                    <a id="remove-btn" asp-action="RemoveChannelList">-</a>
+                    <a class="add-btn">+</a>
+                    <a class="remove-btn">-</a>
                 </div>
 
-                <div id="channel-list"></div>
+                @*channel list popup window*@
+                <div class="add-channel-list" id="adder">
+                    @foreach (var j in @Model.channels)
+                    {
+                        if (j.AccountId != i.AccountId)
+                        {
+                            @j.ChannelName
+                        }
+                    }
+                </div>
+
+                <div class="remove-channel-list">
+                    @foreach (var j in @Model.channels)
+                    {
+                        if (j.AccountId == i.AccountId)
+                        {
+                            @j.ChannelName
+                        }
+                    }
+                </div>
             </div>
         }
     </div>
 </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        console.log('DOMContentLoaded');
-        document.getElementById('add-btn').addEventListener('click', function () {
-            console.log('addEventListener');
-            xhr = new XMLHttpRequest();
-
-            xhr.open('GET', '@Url.Action("AddChannelList", "Admin")', true);
-            console.log('url');
-
-            xhr.onreadystatechange = function () {
-
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    document.getElementById('channel-list').innerHTML = xhr.responseText;
-                    console.log(xhr.readyState, xhr.status, xhr.responseText);
-                }
-            };
-            xhr.send();
-        });
-    });
-</script>
+<script src="~/js/admin/index.js"></script>

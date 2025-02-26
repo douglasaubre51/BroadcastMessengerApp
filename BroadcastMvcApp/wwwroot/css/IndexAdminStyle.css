@@ -17,6 +17,7 @@ h1 {
 
 .data-card {
     display: flex;
+    position: relative;
     flex-direction: column;
     margin: 20px;
     border-radius: 15px;
@@ -63,12 +64,38 @@ span {
     font-size: 16px;
 }
 
-#add-btn:hover {
+.add-btn:hover {
     background-color: #004225;
     color: whitesmoke;
 }
 
-#remove-btn:hover {
+.remove-btn:hover {
     background-color: red;
     color: whitesmoke;
+}
+
+.add-channel-list {
+    display: none;
+}
+
+.remove-channel-list {
+    display: none;
+}
+
+.show {
+    position: absolute;
+    margin-top: 20px;
+    top: 100%;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: left;
+    gap: 10px;
+
+    background-color: whitesmoke;
+    color: #004225;
+    border-radius: 10px;
+    padding: 20px;
 }

@@ -20,10 +20,11 @@ namespace BroadcastMvcApp.Controllers
         public async Task<ActionResult> Index()
         {
             IEnumerable<Account> accounts = await _accountRepository.GetAll();
+            IEnumerable<Channel> channels = await _channelRepository.GetAll();
 
             var viewModel = new IndexAdminViewModel();
-
             viewModel.accounts = accounts;
+            viewModel.channels = channels;
 
             return View(viewModel);
         }
@@ -44,7 +45,6 @@ namespace BroadcastMvcApp.Controllers
                 {
                     ChannelName = name,
                 };
-
                 _channelRepository.Add(channel);
 
                 return RedirectToAction("Index");

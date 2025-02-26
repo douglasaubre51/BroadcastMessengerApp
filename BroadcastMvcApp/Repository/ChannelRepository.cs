@@ -7,9 +7,11 @@ namespace BroadcastMvcApp.Repository
     public class ChannelRepository : IChannelRepository
     {
         private readonly ApplicationDbContext _context;
-        public ChannelRepository(ApplicationDbContext context) { 
-            _context= context;
+        public ChannelRepository(ApplicationDbContext context)
+        {
+            _context = context;
         }
+
         public async Task<IEnumerable<Channel>> GetAll()
         {
             return await _context.Channels.ToListAsync();
@@ -17,7 +19,7 @@ namespace BroadcastMvcApp.Repository
 
         public bool IsExists(string channelName)
         {
-            return _context.Channels.Any(e=> e.ChannelName==channelName);
+            return _context.Channels.Any(e => e.ChannelName == channelName);
         }
 
         public bool Add(Channel channel)
@@ -42,7 +44,7 @@ namespace BroadcastMvcApp.Repository
         public bool Save()
         {
             int newEntries;
-            return (newEntries = _context.SaveChanges()) >0 ? true : false;
+            return (newEntries = _context.SaveChanges()) > 0 ? true : false;
         }
     }
 }
