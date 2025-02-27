@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (!(addChannelList[i].textContent.trim() === "")) {
                 if (isRemoveChannelListShown == false) {
-                    isAddChannelListShown = addChannelList[i].classList.toggle('show')
+                    isAddChannelListShown = addChannelList[i].classList.toggle('show-add')
                     console.log('is add shown : ' + isAddChannelListShown)
                 }
             }
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (!(removeChannelList[i].textContent.trim() === "")) {
                 if (isAddChannelListShown == false) {
-                    isRemoveChannelListShown = removeChannelList[i].classList.toggle('show')
+                    isRemoveChannelListShown = removeChannelList[i].classList.toggle('show-remove')
                     console.log('is remove shown : ' + isRemoveChannelListShown)
                 }
             }
