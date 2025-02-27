@@ -29,6 +29,7 @@ h1 {
     color: whitesmoke;
     gap: 5px;
     width: fit-content;
+    user-select: none;
 }
 
 span {
@@ -62,6 +63,8 @@ span {
     color: #004225;
     padding: 1px 20px;
     font-size: 16px;
+    cursor: pointer;
+    user-select: none;
 }
 
 .add-btn:hover {
