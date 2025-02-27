@@ -52,27 +52,7 @@ namespace BroadcastMvcApp.Controllers
 
             return View(createChannelVM);
         }
-        //popup window for showing list of channels to add user to
-        public IActionResult AddChannelList()
-        {
-            return PartialView("AddChannelList");
-        }
-        [HttpPost]
-        public IActionResult AddChannelList(AddChannelListAdminViewModel viewModel)
-        {
-            foreach (ChannelList i in viewModel.channelLists)
-            {
-                if (i.IsChecked == true)
-                {
-                    var channel = new Channel();
-                }
-            }
 
-            return View("Index");
-        }
-        public IActionResult RemoveChannelList()
-        {
-            return View();
-        }
+        //add a user to selected channel
     }
 }
