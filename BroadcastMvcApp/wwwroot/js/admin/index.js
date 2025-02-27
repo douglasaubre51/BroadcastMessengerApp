@@ -1,3 +1,6 @@
+let isAddChannelListShown = false
+let isRemoveChannelListShown = false
+
 document.addEventListener('DOMContentLoaded', function () {
     let addBtn = document.getElementsByClassName('add-btn')
 
@@ -6,7 +9,10 @@ document.addEventListener('DOMContentLoaded', function () {
             let addChannelList = document.getElementsByClassName('add-channel-list')
 
             if (!(addChannelList[i].textContent.trim() === "")) {
-                addChannelList[i].classList.toggle('show')
+                if (isRemoveChannelListShown == false) {
+                    isAddChannelListShown = addChannelList[i].classList.toggle('show')
+                    console.log('is add shown : ' + isAddChannelListShown)
+                }
             }
         })
     }
@@ -18,7 +24,10 @@ document.addEventListener('DOMContentLoaded', function () {
             let removeChannelList = document.getElementsByClassName('remove-channel-list')
 
             if (!(removeChannelList[i].textContent.trim() === "")) {
-                removeChannelList[i].classList.toggle('show')
+                if (isAddChannelListShown == false) {
+                    isRemoveChannelListShown = removeChannelList[i].classList.toggle('show')
+                    console.log('is remove shown : ' + isRemoveChannelListShown)
+                }
             }
         })
     }
