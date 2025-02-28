@@ -92,6 +92,10 @@ span {
     display: none;
 }
 
+.add-channel-action-btn {
+    color: #004225;
+}
+
 .show-add {
     position: absolute;
     margin-top: 20px;

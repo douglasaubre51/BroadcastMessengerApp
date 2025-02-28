@@ -17,6 +17,16 @@ namespace BroadcastMvcApp.Repository
             return await _context.Channels.ToListAsync();
         }
 
+        public async Task AddToChannel(int userId, string channelName)
+        {
+            Console.WriteLine($"userId {userId} channel {channelName}");
+            // await _context.Channels.Where(e => e.ChannelName == channelName).ExecuteUpdateAsync(setters => setters.SetProperty(e => e.AccountId, userId));
+
+            string sql = "update Channels set AccountId=@p0 where ChannelName=@p1";
+            await _context.Database.ExecuteSqlRawAsync(sql, userId, channelName);
+
+        }
+
         public bool IsExists(string channelName)
         {
             return _context.Channels.Any(e => e.ChannelName == channelName);

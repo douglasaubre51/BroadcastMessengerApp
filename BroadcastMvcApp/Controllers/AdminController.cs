@@ -54,5 +54,12 @@ namespace BroadcastMvcApp.Controllers
         }
 
         //add a user to selected channel
+
+        public IActionResult AddToSelectChannel(int userId, string channelName)
+        {
+            _channelRepository.AddToChannel(userId, channelName);
+
+            return RedirectToAction("Index");
+        }
     }
 }

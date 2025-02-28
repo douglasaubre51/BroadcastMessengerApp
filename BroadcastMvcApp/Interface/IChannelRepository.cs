@@ -4,6 +4,7 @@ namespace BroadcastMvcApp.Interface
     public interface IChannelRepository
     {
         Task<IEnumerable<Channel>> GetAll();
+        Task AddToChannel(int userId, string ChannelName);
 
         bool IsExists(string channelName);
 
