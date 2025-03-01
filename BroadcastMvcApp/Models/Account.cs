@@ -1,4 +1,5 @@
 using BroadcastMvcApp.Enum;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using BroadcastMvcApp.Attributes;
 
@@ -8,6 +9,11 @@ public class Account
 {
     [Key]
     public int AccountId { get; set; }
+    [ForeignKey("Channel")]
+    public int ChannelId { get; set; }
+    public Channel? channel { get; set; }
+    public List<Message>? messages { get; set; }
+
 
     [Required]
     public string? Username { get; set; }
@@ -18,6 +24,7 @@ public class Account
     [DataType(DataType.Password)]
     public string? Password { get; set; }
     public string? ProfilePhotoURL { get; set; }
+
 
     public Roles roles { get; set; }
     public Departments departments { get; set; }

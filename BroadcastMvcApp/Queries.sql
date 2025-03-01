@@ -10,11 +10,12 @@ from Accounts;
 
 exec sp_help Accounts;
 
-
 exec sp_help Channels;
 
 exec sp_help Messages;
 
+SELECT *
+from __EFMigrationsHistory;
 
 select *
 from Channels;
@@ -22,4 +23,8 @@ from Channels;
 select *
 from Messages;
 
-update Channels set AccountId=5 where ChannelId=4;
+drop table Channels;
+drop table Accounts;
+drop table Messages;
+
+delete from __EFMigrationsHistory;

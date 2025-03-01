@@ -12,26 +12,29 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BroadcastMvcApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250213022929_changedforcollege")]
-    partial class changedforcollege
+    [Migration("20250301164612_initialCreate")]
+    partial class initialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.1")
+                .HasAnnotation("ProductVersion", "9.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("BroadcastMvcApp.Models.Account", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("AccountId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AccountId"));
+
+                    b.Property<int>("ChannelId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(450)");
@@ -59,7 +62,9 @@ namespace BroadcastMvcApp.Migrations
                     b.Property<int>("status")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("AccountId");
+
+                    b.HasIndex("ChannelId");
 
                     b.HasIndex("Email")
                         .IsUnique()
@@ -80,15 +85,7 @@ namespace BroadcastMvcApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("JoinedUsersId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MessageId")
-                        .HasColumnType("int");
-
                     b.HasKey("ChannelId");
-
-                    b.HasIndex("MessageId");
 
                     b.ToTable("Channels");
                 });
@@ -101,6 +98,9 @@ namespace BroadcastMvcApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MessageId"));
 
+                    b.Property<int>("AccountId")
+                        .HasColumnType("int");
+
                     b.Property<string>("TextMessage")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -110,18 +110,41 @@ namespace BroadcastMvcApp.Migrations
 
                     b.HasKey("MessageId");
 
+                    b.HasIndex("AccountId");
+
                     b.ToTable("Messages");
+                });
+
+            modelBuilder.Entity("BroadcastMvcApp.Models.Account", b =>
+                {
+                    b.HasOne("BroadcastMvcApp.Models.Channel", "channel")
+                        .WithMany("Accounts")
+                        .HasForeignKey("ChannelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("channel");
+                });
+
+            modelBuilder.Entity("BroadcastMvcApp.Models.Message", b =>
+                {
+                    b.HasOne("BroadcastMvcApp.Models.Account", "account")
+                        .WithMany("messages")
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("account");
+                });
+
+            modelBuilder.Entity("BroadcastMvcApp.Models.Account", b =>
+                {
+                    b.Navigation("messages");
                 });
 
             modelBuilder.Entity("BroadcastMvcApp.Models.Channel", b =>
                 {
-                    b.HasOne("BroadcastMvcApp.Models.Message", "Messages")
-                        .WithMany()
-                        .HasForeignKey("MessageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Messages");
+                    b.Navigation("Accounts");
                 });
 #pragma warning restore 612, 618
         }

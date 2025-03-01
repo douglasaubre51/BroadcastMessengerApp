@@ -30,7 +30,7 @@ namespace BroadcastMvcApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AccountId"));
 
-                    b.Property<int?>("ChannelId")
+                    b.Property<int>("ChannelId")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -95,7 +95,7 @@ namespace BroadcastMvcApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MessageId"));
 
-                    b.Property<int?>("ChannelId")
+                    b.Property<int>("AccountId")
                         .HasColumnType("int");
 
                     b.Property<string>("TextMessage")
@@ -107,30 +107,41 @@ namespace BroadcastMvcApp.Migrations
 
                     b.HasKey("MessageId");
 
-                    b.HasIndex("ChannelId");
+                    b.HasIndex("AccountId");
 
                     b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("BroadcastMvcApp.Models.Account", b =>
                 {
-                    b.HasOne("BroadcastMvcApp.Models.Channel", null)
-                        .WithMany("AccountList")
-                        .HasForeignKey("ChannelId");
+                    b.HasOne("BroadcastMvcApp.Models.Channel", "channel")
+                        .WithMany("Accounts")
+                        .HasForeignKey("ChannelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("channel");
                 });
 
             modelBuilder.Entity("BroadcastMvcApp.Models.Message", b =>
                 {
-                    b.HasOne("BroadcastMvcApp.Models.Channel", null)
-                        .WithMany("MessageList")
-                        .HasForeignKey("ChannelId");
+                    b.HasOne("BroadcastMvcApp.Models.Account", "account")
+                        .WithMany("messages")
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("account");
+                });
+
+            modelBuilder.Entity("BroadcastMvcApp.Models.Account", b =>
+                {
+                    b.Navigation("messages");
                 });
 
             modelBuilder.Entity("BroadcastMvcApp.Models.Channel", b =>
                 {
-                    b.Navigation("AccountList");
-
-                    b.Navigation("MessageList");
+                    b.Navigation("Accounts");
                 });
 #pragma warning restore 612, 618
         }

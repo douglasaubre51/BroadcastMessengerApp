@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
 namespace BroadcastMvcApp.Models;
@@ -9,5 +10,7 @@ public class Message
     public int MessageId { get; set; }
     public string TextMessage { get; set; }
     public DateTime UploadDateTime { get; set; }
-
+    [ForeignKey("Account")]
+    public int AccountId { get; set; }
+    public Account? account { get; set; }
 }
