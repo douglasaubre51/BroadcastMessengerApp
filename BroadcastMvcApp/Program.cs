@@ -26,6 +26,12 @@ builder.Services.AddScoped<IChannelRepository, ChannelRepository>();
 builder.Services.AddSession();
 
 var app = builder.Build();
+//seed data
+if (args.Length == 1 && args[0].ToLower() == "seeddata")
+{
+    Seed.SeedData(app);
+}
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

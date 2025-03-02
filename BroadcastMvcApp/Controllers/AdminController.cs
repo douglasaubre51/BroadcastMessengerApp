@@ -55,9 +55,13 @@ namespace BroadcastMvcApp.Controllers
 
         //add a user to selected channel
 
-        public IActionResult AddToSelectChannel(int userId, string channelName)
+        public async Task<IActionResult> AddToSelectChannel(int userId, int channelId, string channelName)
         {
-            _channelRepository.AddToChannel(userId, channelName);
+            var account = await _accountRepository.GetById(userId);
+            account.ChannelId = channelId;
+            account.channel = await _channelRepository.GetById(channelId);
+
+            await _channelRepository.AddToChannel(account, channelName);
 
             return RedirectToAction("Index");
         }

@@ -11,8 +11,8 @@
     <h1>Welcome administrator</h1>
 
     <div class="data-container">
-@foreach (var i in @Model.accounts)
-{
+        @foreach (var i in @Model.accounts)
+        {
             <div class="data-card">
                 <image class="image-container" alt="profile" src="@i.ProfilePhotoURL" />
                 <h3>@i.Username</h3>
@@ -25,27 +25,28 @@
                     <a class="remove-btn">-</a>
                 </div>
 
-    @* channel list popup window *@
+                @* channel list popup window *@
                 <div class="add-channel-list">
                     @foreach (var j in @Model.channels)
                     {
-                        @* @if (j.Channels. != i.AccountId)
+                        @if (j.Accounts.Any(e => e.AccountId == i.AccountId))
                         {
                             <div class="channel-list">
                                 <a class="add-channel-action-btn" asp-action="AddToSelectChannel" asp-controller="Admin"
-                                    asp-route-userId=@i.AccountId asp-route-channelName=@j.ChannelName>@j.ChannelName</a>
+                                    asp-route-userId=@i.AccountId asp-route-channelId=@j.ChannelId
+                                    asp-route-channelName=@j.ChannelName>@j.ChannelName</a>
                             </div>
-                        } *@
+                        }
                     }
                 </div>
 
                 <div class="remove-channel-list">
                     @foreach (var j in @Model.channels)
                     {
-                        @* if (j.AccountId == i.AccountId)
+                        if (j.Accounts.Any(e => e.AccountId == i.AccountId))
                         {
                             @j.ChannelName
-                        } *@
+                        }
                     }
                 </div>
             </div>
