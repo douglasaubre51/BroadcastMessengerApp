@@ -23,30 +23,36 @@
 
                 @* add channel list popup window *@
                 <div class="add-channel-list">
-                    @foreach (var j in @Model.channels)
+                    @foreach (var channel in @Model.channels)
                     {
-                        if (j.Accounts != null)
+                        if (channel.Accounts == null)
                         {
-                            @if (j.Accounts.Any(e => e.AccountId == i.AccountId))
-                            {
-                                <div class="channel-list">
-                                    <a class="add-channel-action-btn" asp-action="AddToSelectChannel" asp-controller="Admin"
-                                        asp-route-userId=@i.AccountId asp-route-channelName=@j.ChannelName>@j.ChannelName</a>
-                                </div>
-                            }
+                            <div class="channel-list">
+                                <a class="add-channel-action-btn" asp-action="AddToSelectChannel" asp-controller="Admin"
+                                    asp-route-userId=@i.AccountId
+                                    asp-route-channelName=@channel.ChannelName>@channel.ChannelName</a>
+                            </div>
+                        }
+                        else if (channel.Accounts.Any(e => e.AccountId != i.AccountId))
+                        {
+                            <div class="channel-list">
+                                <a class="add-channel-action-btn" asp-action="AddToSelectChannel" asp-controller="Admin"
+                                    asp-route-userId=@i.AccountId
+                                    asp-route-channelName=@channel.ChannelName>@channel.ChannelName</a>
+                            </div>
                         }
                     }
                 </div>
                 @* remove channel list popup window *@
-                <div class="remove-channel-list">
-                    @foreach (var j in @Model.channels)
+                @* <div class="remove-channel-list">
+                    @foreach (var channel in @Model.channels)
                     {
-                        @if (j.Accounts != null && j.Accounts.Any(e => e.AccountId != i.AccountId))
+                        @if (channel.Accounts.Any(e => e.AccountId != i.AccountId))
                         {
-                            @j.ChannelName
+                            @channel.ChannelName
                         }
                     }
-                </div>
+                </div> *@
             </div>
         }
     </div>
