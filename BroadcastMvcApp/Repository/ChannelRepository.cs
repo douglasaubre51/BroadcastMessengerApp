@@ -24,11 +24,15 @@ namespace BroadcastMvcApp.Repository
 
         public async Task AddToChannel(Account account, string channelName)
         {
-            Console.WriteLine($"userId {account.AccountId} channel {channelName}");
+            var channel = await _context.Channels.FirstAsync(e => e.ChannelName == channelName);
 
-            var accounts = await _context.Channels.FirstAsync(e => e.ChannelName == channelName);
+            channel.Accounts = new List<Account>()
+            {
+                account
+            };
 
-            accounts.Accounts.Add(account);
+            _context.Entry(channel).State = EntityState.Modified;
+
             Save();
         }
 

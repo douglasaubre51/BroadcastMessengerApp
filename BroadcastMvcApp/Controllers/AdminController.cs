@@ -33,7 +33,6 @@ namespace BroadcastMvcApp.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public IActionResult CreateChannel(CreateChannelAdminViewModel createChannelVM)
         {
@@ -54,11 +53,9 @@ namespace BroadcastMvcApp.Controllers
         }
 
         //add a user to selected channel
-
-        public async Task<IActionResult> AddToSelectChannel(int userId, int channelId, string channelName)
+        public async Task<IActionResult> AddToSelectChannel(int userId, string channelName)
         {
             var account = await _accountRepository.GetById(userId);
-            account.channel = await _channelRepository.GetById(channelId);
 
             await _channelRepository.AddToChannel(account, channelName);
 
