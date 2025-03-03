@@ -19,8 +19,8 @@ public class ApplicationDbContext : DbContext
     //added to make email unique
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(modelBuilder);
-
         modelBuilder.Entity<Account>().HasIndex(e => e.Email).IsUnique();
+        modelBuilder.Entity<Account>().Ignore(e => e.channel);
+        base.OnModelCreating(modelBuilder);
     }
 }

@@ -10,14 +10,28 @@ from Accounts;
 
 exec sp_help Accounts;
 
-truncate table Accounts;
-
 exec sp_help Channels;
 
 exec sp_help Messages;
 
-delete from Accounts where Id=3;
+SELECT *
+from __EFMigrationsHistory;
 
-select * from Channels;
+select *
+from Channels;
 
-select * from Messages;
+select *
+from Messages;
+
+update Accounts set ProfilePhotoURL='/images/reze.jpeg]' where AccountId=2;
+
+update Accounts set ProfilePhotoURL='/images/boruto.jpg' where AccountId=2;
+
+drop table Channels;
+drop table Accounts;
+drop table Messages;
+
+truncate table Accounts;
+
+delete from __EFMigrationsHistory;
+drop table __EFMigrationsHistory;

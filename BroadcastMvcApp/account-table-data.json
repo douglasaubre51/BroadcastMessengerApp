@@ -1,0 +1,90 @@
+[
+  {
+    "AccountId": 1,
+    "Username": "Aizen",
+    "Email": "hinamori@gmail.com",
+    "Password": "123",
+    "ProfilePhotoURL": "http://res.cloudinary.com/dwjpy8y0d/image/upload/v1739606592/ndqhmbsshqhjyejfs4tt.png",
+    "roles": 0,
+    "departments": 3,
+    "semesters": 5,
+    "status": 0
+  },
+  {
+    "AccountId": 2,
+    "Username": "Ken",
+    "Email": "Ken@gmail.com",
+    "Password": "123",
+    "ProfilePhotoURL": "http://res.cloudinary.com/dwjpy8y0d/image/upload/v1739606669/g0mtwpswism2fy141azs.jpg",
+    "roles": 2,
+    "departments": 0,
+    "semesters": 0,
+    "status": 0
+  },
+  {
+    "AccountId": 3,
+    "Username": "Momo",
+    "Email": "kenTakakura@gmail.com",
+    "Password": "123",
+    "ProfilePhotoURL": "http://res.cloudinary.com/dwjpy8y0d/image/upload/v1739606743/n8whsj3nxhffxytnzahc.jpg",
+    "roles": 2,
+    "departments": 2,
+    "semesters": 2,
+    "status": 0
+  },
+  {
+    "AccountId": 4,
+    "Username": "Reze",
+    "Email": "reze@gmail.com",
+    "Password": "123",
+    "ProfilePhotoURL": "http://res.cloudinary.com/dwjpy8y0d/image/upload/v1739606795/ietuxbhbdupzs0ebnsm2.jpg",
+    "roles": 2,
+    "departments": 3,
+    "semesters": 5,
+    "status": 0
+  },
+  {
+    "AccountId": 5,
+    "Username": "Asta",
+    "Email": "asta@gmail.com",
+    "Password": "123",
+    "ProfilePhotoURL": "http://res.cloudinary.com/dwjpy8y0d/image/upload/v1739606867/zgj0ebn77ygzwodpqyrz.jpg",
+    "roles": 2,
+    "departments": 3,
+    "semesters": 0,
+    "status": 0
+  },
+  {
+    "AccountId": 6,
+    "Username": "Eren",
+    "Email": "aot@gmail.com",
+    "Password": "123",
+    "ProfilePhotoURL": "http://res.cloudinary.com/dwjpy8y0d/image/upload/v1739606917/kaj6auodgkjvnuvvcsap.jpg",
+    "roles": 2,
+    "departments": 2,
+    "semesters": 2,
+    "status": 0
+  },
+  {
+    "AccountId": 7,
+    "Username": "Uta",
+    "Email": "red@gmail.com",
+    "Password": "123",
+    "ProfilePhotoURL": "http://res.cloudinary.com/dwjpy8y0d/image/upload/v1739606985/oepsugbxfz4vpybi3mkx.jpg",
+    "roles": 1,
+    "departments": 4,
+    "semesters": 5,
+    "status": 0
+  },
+  {
+    "AccountId": 8,
+    "Username": "Boruto",
+    "Email": "boruto@gmail.com",
+    "Password": "123",
+    "ProfilePhotoURL": "http://res.cloudinary.com/dwjpy8y0d/image/upload/v1739607044/ppv0azgyqblvavtwak1f.jpg",
+    "roles": 1,
+    "departments": 1,
+    "semesters": 5,
+    "status": 0
+  }
+]

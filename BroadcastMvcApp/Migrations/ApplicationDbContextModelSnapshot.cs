@@ -17,7 +17,7 @@ namespace BroadcastMvcApp.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.1")
+                .HasAnnotation("ProductVersion", "9.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -29,6 +29,9 @@ namespace BroadcastMvcApp.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AccountId"));
+
+                    b.Property<int?>("ChannelId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(450)");
@@ -58,6 +61,8 @@ namespace BroadcastMvcApp.Migrations
 
                     b.HasKey("AccountId");
 
+                    b.HasIndex("ChannelId");
+
                     b.HasIndex("Email")
                         .IsUnique()
                         .HasFilter("[Email] IS NOT NULL");
@@ -73,15 +78,9 @@ namespace BroadcastMvcApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ChannelId"));
 
-                    b.Property<int>("AccountId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ChannelName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MessageId")
-                        .HasColumnType("int");
 
                     b.HasKey("ChannelId");
 
@@ -96,6 +95,9 @@ namespace BroadcastMvcApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MessageId"));
 
+                    b.Property<int?>("AccountId")
+                        .HasColumnType("int");
+
                     b.Property<string>("TextMessage")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -105,7 +107,33 @@ namespace BroadcastMvcApp.Migrations
 
                     b.HasKey("MessageId");
 
+                    b.HasIndex("AccountId");
+
                     b.ToTable("Messages");
+                });
+
+            modelBuilder.Entity("BroadcastMvcApp.Models.Account", b =>
+                {
+                    b.HasOne("BroadcastMvcApp.Models.Channel", null)
+                        .WithMany("Accounts")
+                        .HasForeignKey("ChannelId");
+                });
+
+            modelBuilder.Entity("BroadcastMvcApp.Models.Message", b =>
+                {
+                    b.HasOne("BroadcastMvcApp.Models.Account", null)
+                        .WithMany("messages")
+                        .HasForeignKey("AccountId");
+                });
+
+            modelBuilder.Entity("BroadcastMvcApp.Models.Account", b =>
+                {
+                    b.Navigation("messages");
+                });
+
+            modelBuilder.Entity("BroadcastMvcApp.Models.Channel", b =>
+                {
+                    b.Navigation("Accounts");
                 });
 #pragma warning restore 612, 618
         }

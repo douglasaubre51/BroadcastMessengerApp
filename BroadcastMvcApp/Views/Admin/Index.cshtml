@@ -1,53 +1,53 @@
 ﻿@model BroadcastMvcApp.ViewModels.IndexAdminViewModel
 
-@{
-    ViewBag.Title = "Admin Page";
-}
-
 <link href="~/css/IndexAdminStyle.css" rel="stylesheet" />
 
 <div class="index-body">
-
     <h1>Welcome administrator</h1>
 
     <div class="data-container">
         @foreach (var i in @Model.accounts)
         {
+            @*person card*@
             <div class="data-card">
-                <image class="image-container" alt="profile" src="@i.ProfilePhotoURL" />
+                <image class="image-container" alt="profile" src=@i.ProfilePhotoURL />
                 <h3>@i.Username</h3>
                 <span>@i.departments @i.semesters</span>
                 <span>@i.roles</span>
                 <span>@i.Email</span>
 
                 <div class="btn-container">
-                    <a id="add-btn">+</a>
-                    <a id="remove-btn" asp-action="RemoveChannelList">-</a>
+                    <a class="add-btn">+</a>
+                    <a class="remove-btn">-</a>
                 </div>
 
-                <div id="channel-list"></div>
+                @* add channel list popup window *@
+                <div class="add-channel-list">
+                    @foreach (var j in @Model.channels)
+                    {
+                        @if (j.Accounts != null && j.Accounts.Any(e => e.AccountId ==
+                                        j.Accounts.First(z => z.AccountId == e.AccountId)))
+                        {
+                            <div class="channel-list">
+                                <a class="add-channel-action-btn" asp-action="AddToSelectChannel" asp-controller="Admin"
+                                    asp-route-userId=@i.AccountId asp-route-channelName=@j.ChannelName>@j.ChannelName</a>
+                            </div>
+                        }
+                    }
+                </div>
+                @* remove channel list popup window *@
+                <div class="remove-channel-list">
+                    @foreach (var j in @Model.channels)
+                    {
+                        @if (j.Accounts != null && j.Accounts.Any(e => e.AccountId != i.AccountId))
+                        {
+                            @j.ChannelName
+                        }
+                    }
+                </div>
             </div>
         }
     </div>
 </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        console.log('DOMContentLoaded');
-        document.getElementById('add-btn').addEventListener('click', function () {
-            console.log('addEventListener');
-            xhr = new XMLHttpRequest();
 
-            xhr.open('GET', '@Url.Action("AddChannelList", "Admin")', true);
-            console.log('url');
-
-            xhr.onreadystatechange = function () {
-
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    document.getElementById('channel-list').innerHTML = xhr.responseText;
-                    console.log(xhr.readyState, xhr.status, xhr.responseText);
-                }
-            };
-            xhr.send();
-        });
-    });
-</script>
+<script src="~/js/admin/index.js"></script>
