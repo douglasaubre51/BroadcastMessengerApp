@@ -10,7 +10,7 @@ public class Account
     [Key]
     public int AccountId { get; set; }
     [NotMapped]
-    public Channel? channel { get; set; }
+    public List<Channel>? channel { get; set; }
     public List<Message>? messages { get; set; }
 
 

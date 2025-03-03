@@ -25,13 +25,15 @@
                 <div class="add-channel-list">
                     @foreach (var j in @Model.channels)
                     {
-                        @if (j.Accounts != null && j.Accounts.Any(e => e.AccountId ==
-                                        j.Accounts.First(z => z.AccountId == e.AccountId)))
+                        if (j.Accounts != null)
                         {
-                            <div class="channel-list">
-                                <a class="add-channel-action-btn" asp-action="AddToSelectChannel" asp-controller="Admin"
-                                    asp-route-userId=@i.AccountId asp-route-channelName=@j.ChannelName>@j.ChannelName</a>
-                            </div>
+                            @if (j.Accounts.Any(e => e.AccountId == i.AccountId))
+                            {
+                                <div class="channel-list">
+                                    <a class="add-channel-action-btn" asp-action="AddToSelectChannel" asp-controller="Admin"
+                                        asp-route-userId=@i.AccountId asp-route-channelName=@j.ChannelName>@j.ChannelName</a>
+                                </div>
+                            }
                         }
                     }
                 </div>
