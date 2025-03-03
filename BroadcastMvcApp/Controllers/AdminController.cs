@@ -58,7 +58,6 @@ namespace BroadcastMvcApp.Controllers
         public async Task<IActionResult> AddToSelectChannel(int userId, int channelId, string channelName)
         {
             var account = await _accountRepository.GetById(userId);
-            account.ChannelId = channelId;
             account.channel = await _channelRepository.GetById(channelId);
 
             await _channelRepository.AddToChannel(account, channelName);

@@ -30,7 +30,7 @@ namespace BroadcastMvcApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AccountId"));
 
-                    b.Property<int>("ChannelId")
+                    b.Property<int?>("ChannelId")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -95,7 +95,7 @@ namespace BroadcastMvcApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MessageId"));
 
-                    b.Property<int>("AccountId")
+                    b.Property<int?>("AccountId")
                         .HasColumnType("int");
 
                     b.Property<string>("TextMessage")
@@ -114,24 +114,16 @@ namespace BroadcastMvcApp.Migrations
 
             modelBuilder.Entity("BroadcastMvcApp.Models.Account", b =>
                 {
-                    b.HasOne("BroadcastMvcApp.Models.Channel", "channel")
+                    b.HasOne("BroadcastMvcApp.Models.Channel", null)
                         .WithMany("Accounts")
-                        .HasForeignKey("ChannelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("channel");
+                        .HasForeignKey("ChannelId");
                 });
 
             modelBuilder.Entity("BroadcastMvcApp.Models.Message", b =>
                 {
-                    b.HasOne("BroadcastMvcApp.Models.Account", "account")
+                    b.HasOne("BroadcastMvcApp.Models.Account", null)
                         .WithMany("messages")
-                        .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("account");
+                        .HasForeignKey("AccountId");
                 });
 
             modelBuilder.Entity("BroadcastMvcApp.Models.Account", b =>

@@ -10,7 +10,6 @@ public class Message
     public int MessageId { get; set; }
     public string TextMessage { get; set; }
     public DateTime UploadDateTime { get; set; }
-    [ForeignKey("Account")]
-    public int AccountId { get; set; }
+    [NotMapped]
     public Account? account { get; set; }
 }

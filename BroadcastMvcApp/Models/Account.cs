@@ -9,8 +9,7 @@ public class Account
 {
     [Key]
     public int AccountId { get; set; }
-    [ForeignKey("Channel")]
-    public int ChannelId { get; set; }
+    [NotMapped]
     public Channel? channel { get; set; }
     public List<Message>? messages { get; set; }
 

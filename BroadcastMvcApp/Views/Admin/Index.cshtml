@@ -29,7 +29,8 @@
                 <div class="add-channel-list">
                     @foreach (var j in @Model.channels)
                     {
-                        @if (j.Accounts.Any(e => e.AccountId == i.AccountId))
+
+                        @if (j.Accounts != null && j.Accounts.Any(e => e.AccountId == i.AccountId))
                         {
                             <div class="channel-list">
                                 <a class="add-channel-action-btn" asp-action="AddToSelectChannel" asp-controller="Admin"
@@ -43,7 +44,7 @@
                 <div class="remove-channel-list">
                     @foreach (var j in @Model.channels)
                     {
-                        if (j.Accounts.Any(e => e.AccountId == i.AccountId))
+                        @if (j.Accounts != null && j.Accounts.Any(e => e.AccountId == i.AccountId))
                         {
                             @j.ChannelName
                         }

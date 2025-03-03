@@ -28,3 +28,4 @@ drop table Accounts;
 drop table Messages;
 
 delete from __EFMigrationsHistory;
+drop table __EFMigrationsHistory;

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BroadcastMvcApp.Migrations
 {
     /// <inheritdoc />
-    public partial class initialCreate : Migration
+    public partial class removedallforeignkeyspart2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,7 +30,6 @@ namespace BroadcastMvcApp.Migrations
                 {
                     AccountId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ChannelId = table.Column<int>(type: "int", nullable: false),
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -38,7 +37,8 @@ namespace BroadcastMvcApp.Migrations
                     roles = table.Column<int>(type: "int", nullable: false),
                     departments = table.Column<int>(type: "int", nullable: false),
                     semesters = table.Column<int>(type: "int", nullable: false),
-                    status = table.Column<int>(type: "int", nullable: false)
+                    status = table.Column<int>(type: "int", nullable: false),
+                    ChannelId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -47,8 +47,7 @@ namespace BroadcastMvcApp.Migrations
                         name: "FK_Accounts_Channels_ChannelId",
                         column: x => x.ChannelId,
                         principalTable: "Channels",
-                        principalColumn: "ChannelId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ChannelId");
                 });
 
             migrationBuilder.CreateTable(
@@ -59,7 +58,7 @@ namespace BroadcastMvcApp.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TextMessage = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UploadDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AccountId = table.Column<int>(type: "int", nullable: false)
+                    AccountId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -68,8 +67,7 @@ namespace BroadcastMvcApp.Migrations
                         name: "FK_Messages_Accounts_AccountId",
                         column: x => x.AccountId,
                         principalTable: "Accounts",
-                        principalColumn: "AccountId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "AccountId");
                 });
 
             migrationBuilder.CreateIndex(
