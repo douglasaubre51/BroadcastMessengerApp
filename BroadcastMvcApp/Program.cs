@@ -27,11 +27,20 @@ builder.Services.AddSession();
 
 var app = builder.Build();
 //seed data
-if (args.Length == 1 && args[0].ToLower() == "seeddata")
+if (args.Length == 1 && args[0].ToLower() == "see")
 {
     Seed.SeedData(app);
 }
-
+//retrieve data
+if (args.Length == 1 && args[0].ToLower() == "ret")
+{
+    Retrieve.RetrieveData(app);
+}
+//update data
+if (args.Length == 1 && args[0].ToLower() == "upd")
+{
+    Update.UpdateData(app);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

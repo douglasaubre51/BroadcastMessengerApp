@@ -5,8 +5,6 @@ use BroadcastDb;
 select *
 from sys.tables;
 
-select*
-from Accounts;
 
 exec sp_help Accounts;
 
@@ -16,6 +14,9 @@ exec sp_help Messages;
 
 SELECT *
 from __EFMigrationsHistory;
+
+select*
+from Accounts;
 
 select *
 from Channels;
