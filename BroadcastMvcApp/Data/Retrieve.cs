@@ -1,7 +1,3 @@
-using System;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
-
 namespace BroadcastMvcApp.Data;
 
 public class Retrieve
@@ -25,12 +21,13 @@ public class Retrieve
                     streamWriter.WriteLine($"Channel Id :{i.ChannelId}");
                     streamWriter.WriteLine($"Channel Name :{i.ChannelName}");
 
-                    if (i?.Accounts != null)
+                    if (i.Accounts != null)
                     {
                         streamWriter.WriteLine("\nChannels added to this user");
                         foreach (var j in i.Accounts)
                         {
                             streamWriter.WriteLine($"Account Id :{j.AccountId}");
+                            streamWriter.WriteLine($"Username :{j.Username}");
                         }
                     }
                 }
