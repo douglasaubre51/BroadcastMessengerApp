@@ -12,9 +12,9 @@ namespace BroadcastMvcApp.Repository
             _context = context;
         }
 
-        public async Task<IEnumerable<Channel>> GetAll()
+        public async Task<List<Channel>> GetAll()
         {
-            return await _context.Channels.ToListAsync();
+            return await _context.Channels.Include(e=>e.Accounts).ToListAsync();
         }
 
         public async Task<Channel> GetById(int id)

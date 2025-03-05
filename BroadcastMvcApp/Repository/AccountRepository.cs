@@ -14,7 +14,7 @@ public class AccountRepository : IAccountRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<Account>> GetAll()
+    public async Task<List<Account>> GetAll()
     {
         return await _context.Accounts.ToListAsync();
     }

@@ -30,16 +30,19 @@ var app = builder.Build();
 if (args.Length == 1 && args[0].ToLower() == "see")
 {
     Seed.SeedData(app);
+    return;
 }
 //retrieve data
 if (args.Length == 1 && args[0].ToLower() == "ret")
 {
     Retrieve.RetrieveData(app);
+    return;
 }
 //update data
 if (args.Length == 1 && args[0].ToLower() == "upd")
 {
     Update.UpdateData(app);
+    return;
 }
 
 // Configure the HTTP request pipeline.

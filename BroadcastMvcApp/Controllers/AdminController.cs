@@ -19,8 +19,9 @@ namespace BroadcastMvcApp.Controllers
         // GET: user cards showcase and admin page
         public async Task<ActionResult> Index()
         {
-            IEnumerable<Account> accounts = await _accountRepository.GetAll();
-            IEnumerable<Channel> channels = await _channelRepository.GetAll();
+            List<Account> accounts = await _accountRepository.GetAll();
+            List<Channel> channels = await _channelRepository.GetAll();
+
 
             var viewModel = new IndexAdminViewModel();
             viewModel.accounts = accounts;

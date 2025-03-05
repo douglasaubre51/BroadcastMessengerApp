@@ -1,5 +1,8 @@
 ﻿@model BroadcastMvcApp.ViewModels.IndexAdminViewModel
 
+@{
+}
+
 <link href="~/css/IndexAdminStyle.css" rel="stylesheet" />
 
 <div class="index-body">
@@ -44,15 +47,15 @@
                     }
                 </div>
                 @* remove channel list popup window *@
-                @* <div class="remove-channel-list">
+                 <div class="remove-channel-list">
                     @foreach (var channel in @Model.channels)
                     {
-                        @if (channel.Accounts.Any(e => e.AccountId != i.AccountId))
+                        @if (channel.Accounts.Any(e => e.AccountId == i.AccountId))
                         {
                             @channel.ChannelName
                         }
                     }
-                </div> *@
+                </div> 
             </div>
         }
     </div>

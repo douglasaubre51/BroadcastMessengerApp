@@ -1,10 +1,11 @@
-namespace BroadcastMvcApp.Data;
+using Microsoft.EntityFrameworkCore;
 
+namespace BroadcastMvcApp.Data;
 public class Retrieve
 {
     public static void RetrieveData(IApplicationBuilder applicationBuilder)
     {
-        using (var streamWriter = new StreamWriter("C:\\Users\\user\\OneDrive\\Desktop\\WorkSpaces\\miscellaneous\\Misc\\retreiveData.txt"))
+        using (var streamWriter = new StreamWriter("RetreiveData.txt"))
         {
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
@@ -12,6 +13,7 @@ public class Retrieve
                 context.Database.EnsureCreated();
 
                 var channel = context.Channels.ToList();
+                var accountList = context.Channels.Include(e => e.Accounts).ToList();
 
                 streamWriter.WriteLine(DateTime.Now);
 
@@ -20,15 +22,12 @@ public class Retrieve
                 {
                     streamWriter.WriteLine($"Channel Id :{i.ChannelId}");
                     streamWriter.WriteLine($"Channel Name :{i.ChannelName}");
+                }
 
-                    if (i.Accounts != null)
-                    {
-                        streamWriter.WriteLine("\nChannels added to this user");
-                        foreach (var j in i.Accounts)
-                        {
-                            streamWriter.WriteLine($"Account Id :{j.AccountId}");
-                            streamWriter.WriteLine($"Username :{j.Username}");
-                        }
+                foreach (var ch in accountList)
+                {
+                    foreach(var j in ch.Accounts){
+                        streamWriter.WriteLine($"account Name :{j.Username}");
                     }
                 }
 

@@ -1,0 +1,16 @@
+3/5/2025 12:18:27 PM
+Channels
+Channel Id :1
+Channel Name :Seireitai
+Channel Id :2
+Channel Name :CT Department
+Channel Id :3
+Channel Name :camaraderie
+account Name :Aizen
+account Name :allen
+
+Accounts
+Account id: 1
+Username : Aizen
+Account id: 2
+Username : allen
