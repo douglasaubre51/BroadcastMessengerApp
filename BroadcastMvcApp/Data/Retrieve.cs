@@ -10,6 +10,7 @@ public class Retrieve
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
+
                 context.Database.EnsureCreated();
 
                 var channel = context.Channels.ToList();
@@ -26,8 +27,11 @@ public class Retrieve
 
                 foreach (var ch in accountList)
                 {
-                    foreach(var j in ch.Accounts){
-                        streamWriter.WriteLine($"account Name :{j.Username}");
+                    streamWriter.WriteLine($"\nAccounts in channel : {ch.ChannelName}");
+                    foreach (var j in ch.Accounts)
+                    {
+                        streamWriter.WriteLine($"Account Name :{j.Username}");
+                        streamWriter.WriteLine($"Account Id:{j.AccountId}");
                     }
                 }
 
@@ -37,9 +41,9 @@ public class Retrieve
                     streamWriter.WriteLine($"Account id: {i.AccountId}");
                     streamWriter.WriteLine($"Username : {i.Username}");
 
-                    if (i.channel != null)
+                    if (i.channels != null)
                     {
-                        foreach (var j in i.channel)
+                        foreach (var j in i.channels)
                         {
                             streamWriter.WriteLine($"Channel Id:{j.ChannelId}");
                             streamWriter.WriteLine($"Channel Name:{j.ChannelName}");

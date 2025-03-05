@@ -1,8 +1,5 @@
 ﻿@model BroadcastMvcApp.ViewModels.IndexAdminViewModel
 
-@{
-}
-
 <link href="~/css/IndexAdminStyle.css" rel="stylesheet" />
 
 <div class="index-body">
@@ -26,36 +23,27 @@
 
                 @* add channel list popup window *@
                 <div class="add-channel-list">
-                    @foreach (var channel in @Model.channels)
+                    @foreach (var channel in Model.channels)
                     {
-                        if (channel.Accounts == null)
+                        if (!channel.Accounts.Select(e => e.AccountId).Contains(i.AccountId))
                         {
                             <div class="channel-list">
                                 <a class="add-channel-action-btn" asp-action="AddToSelectChannel" asp-controller="Admin"
-                                    asp-route-userId=@i.AccountId
-                                    asp-route-channelName=@channel.ChannelName>@channel.ChannelName</a>
-                            </div>
-                        }
-                        else if (channel.Accounts.Any(e => e.AccountId != i.AccountId))
-                        {
-                            <div class="channel-list">
-                                <a class="add-channel-action-btn" asp-action="AddToSelectChannel" asp-controller="Admin"
-                                    asp-route-userId=@i.AccountId
-                                    asp-route-channelName=@channel.ChannelName>@channel.ChannelName</a>
+                                    asp-route-accountId=@i.AccountId asp-route-channelId=@channel.ChannelId>@channel.ChannelName</a>
                             </div>
                         }
                     }
                 </div>
                 @* remove channel list popup window *@
-                 <div class="remove-channel-list">
+                <div class="remove-channel-list">
                     @foreach (var channel in @Model.channels)
                     {
-                        @if (channel.Accounts.Any(e => e.AccountId == i.AccountId))
+                        @if (channel.Accounts.Select(e => e.AccountId).Contains(i.AccountId))
                         {
                             @channel.ChannelName
                         }
                     }
-                </div> 
+                </div>
             </div>
         }
     </div>

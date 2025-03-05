@@ -5,7 +5,7 @@ namespace BroadcastMvcApp.Interface
     {
         Task<List<Channel>> GetAll();
         Task<Channel> GetById(int id);
-        Task AddToChannel(Account account, string ChannelName);
+        void AddToChannel(Account account, Channel ChannelId);
 
         bool IsExists(string channelName);
 

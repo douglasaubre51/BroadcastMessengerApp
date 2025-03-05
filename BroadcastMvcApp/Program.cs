@@ -14,6 +14,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("BroadcastDbString"));
+    options.EnableSensitiveDataLogging();
+    options.EnableDetailedErrors();
 });
 //adding Iphotoservice
 builder.Services.AddScoped<IPhotoService, PhotoService>();
@@ -42,6 +44,12 @@ if (args.Length == 1 && args[0].ToLower() == "ret")
 if (args.Length == 1 && args[0].ToLower() == "upd")
 {
     Update.UpdateData(app);
+    return;
+}
+//delete data
+if (args.Length == 1 && args[0].ToLower() == "del")
+{
+    Delete.DeleteData(app);
     return;
 }
 

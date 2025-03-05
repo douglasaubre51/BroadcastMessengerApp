@@ -2,6 +2,7 @@
 using BroadcastMvcApp.Interface;
 using BroadcastMvcApp.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 namespace BroadcastMvcApp.Repository
 {
     public class ChannelRepository : IChannelRepository
@@ -14,7 +15,7 @@ namespace BroadcastMvcApp.Repository
 
         public async Task<List<Channel>> GetAll()
         {
-            return await _context.Channels.Include(e=>e.Accounts).ToListAsync();
+            return await _context.Channels.Include(e => e.Accounts).ToListAsync();
         }
 
         public async Task<Channel> GetById(int id)
@@ -22,16 +23,15 @@ namespace BroadcastMvcApp.Repository
             return await _context.Channels.SingleAsync(c => c.ChannelId == id);
         }
 
-        public async Task AddToChannel(Account account, string channelName)
+        public void AddToChannel(Account account, Channel channel)
         {
-            var channel = await _context.Channels.FirstAsync(e => e.ChannelName == channelName);
 
-            channel.Accounts = new List<Account>()
+            using (var streamWriter = new StreamWriter("logForChannelRepo.txt"))
             {
-                account
-            };
+                streamWriter.WriteLine(DateTime.Now);
+            }
 
-            _context.Entry(channel).State = EntityState.Modified;
+            channel.Accounts.Add(account);
 
             Save();
         }

@@ -1,16 +1,38 @@
-3/5/2025 12:18:27 PM
+05-03-2025 10.33.11 PM
 Channels
 Channel Id :1
-Channel Name :Seireitai
+Channel Name :allen
 Channel Id :2
-Channel Name :CT Department
+Channel Name :asd
 Channel Id :3
-Channel Name :camaraderie
-account Name :Aizen
-account Name :allen
+Channel Name :Karakura Town
+Channel Id :4
+Channel Name :raftel
+Channel Id :1004
+Channel Name :joyboy vlogs
+
+Accounts in channel : allen
+
+Accounts in channel : asd
+
+Accounts in channel : Karakura Town
+
+Accounts in channel : raftel
+Account Name :Boruto Uzumaki
+Account Id:3
+Account Name :Luffy
+Account Id:8
+
+Accounts in channel : joyboy vlogs
 
 Accounts
 Account id: 1
-Username : Aizen
-Account id: 2
-Username : allen
+Username : Aizen Sosuke
+Account id: 3
+Username : Boruto Uzumaki
+Account id: 6
+Username : jimbei123@gmail.com
+Account id: 7
+Username : Momo
+Account id: 8
+Username : Luffy

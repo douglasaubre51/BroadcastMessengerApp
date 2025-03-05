@@ -6,10 +6,7 @@ namespace BroadcastMvcApp.Data;
 
 public class ApplicationDbContext : DbContext
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-    {
-
-    }
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
     public DbSet<Account> Accounts { get; set; }
     public DbSet<Channel> Channels { get; set; }
@@ -20,7 +17,7 @@ public class ApplicationDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Account>().HasIndex(e => e.Email).IsUnique();
-        modelBuilder.Entity<Account>().Ignore(e => e.channel);
+        modelBuilder.Entity<Account>().Ignore(e => e.channels);
         base.OnModelCreating(modelBuilder);
     }
 }
