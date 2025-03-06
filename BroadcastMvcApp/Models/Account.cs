@@ -8,6 +8,7 @@ namespace BroadcastMvcApp.Models;
 public class Account
 {
     [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int AccountId { get; set; }
     [NotMapped]
     public List<Channel>? channels { get; set; }

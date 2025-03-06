@@ -30,10 +30,12 @@ namespace BroadcastMvcApp.Repository
             {
                 streamWriter.WriteLine(DateTime.Now);
             }
-//add to database context not to channel object
-            channel.Accounts.Add(account);
 
-            Save();
+            var ch = _context.Channels.Include(e => e.Accounts).First(e => e.ChannelId == channel.ChannelId);
+
+            ch.Accounts.Add(account);
+
+            _context.SaveChanges();
         }
 
         public bool IsExists(string channelName)
