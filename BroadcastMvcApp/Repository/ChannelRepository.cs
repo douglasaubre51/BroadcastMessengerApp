@@ -30,7 +30,7 @@ namespace BroadcastMvcApp.Repository
             {
                 streamWriter.WriteLine(DateTime.Now);
             }
-
+//add to database context not to channel object
             channel.Accounts.Add(account);
 
             Save();
