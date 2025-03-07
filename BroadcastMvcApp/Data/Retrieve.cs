@@ -5,7 +5,7 @@ public class Retrieve
 {
     public static void RetrieveData(IApplicationBuilder applicationBuilder)
     {
-        using (var streamWriter = new StreamWriter("RetreiveData.txt", true))
+        using (var streamWriter = new StreamWriter("RetreiveData.txt"))
         {
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {

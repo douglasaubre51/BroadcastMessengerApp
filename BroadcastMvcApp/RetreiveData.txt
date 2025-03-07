@@ -1,4 +1,4 @@
-06-03-2025 6.47.56 PM
+07-03-2025 8.21.29 PM
 Channels
 Channel Id :1
 Channel Name :allen
@@ -14,63 +14,23 @@ Channel Name :joyboy vlogs
 Accounts in channel : allen
 
 Accounts in channel : asd
+Account Name :Momo
+Account Id:7
 
 Accounts in channel : Karakura Town
+Account Name :jimbei123@gmail.com
+Account Id:6
 
 Accounts in channel : raftel
-Account Name :Boruto Uzumaki
-Account Id:3
-Account Name :Luffy
-Account Id:8
+Account Name :Aizen Sosuke
+Account Id:1
 
 Accounts in channel : joyboy vlogs
 
 Accounts
 Account id: 1
 Username : Aizen Sosuke
-Account id: 3
-Username : Boruto Uzumaki
 Account id: 6
 Username : jimbei123@gmail.com
 Account id: 7
 Username : Momo
-Account id: 8
-Username : Luffy
-06-03-2025 6.49.42 PM
-Channels
-Channel Id :1
-Channel Name :allen
-Channel Id :2
-Channel Name :asd
-Channel Id :3
-Channel Name :Karakura Town
-Channel Id :4
-Channel Name :raftel
-Channel Id :1004
-Channel Name :joyboy vlogs
-
-Accounts in channel : allen
-
-Accounts in channel : asd
-
-Accounts in channel : Karakura Town
-
-Accounts in channel : raftel
-Account Name :Boruto Uzumaki
-Account Id:3
-Account Name :Luffy
-Account Id:8
-
-Accounts in channel : joyboy vlogs
-
-Accounts
-Account id: 1
-Username : Aizen Sosuke
-Account id: 3
-Username : Boruto Uzumaki
-Account id: 6
-Username : jimbei123@gmail.com
-Account id: 7
-Username : Momo
-Account id: 8
-Username : Luffy

@@ -25,15 +25,24 @@ namespace BroadcastMvcApp.Repository
 
         public void AddToChannel(Account account, Channel channel)
         {
+            var acc = _context.Channels.Include(e => e.Accounts).First(e => e.ChannelId == channel.ChannelId);
 
-            using (var streamWriter = new StreamWriter("logForChannelRepo.txt"))
+            if (acc.Accounts == null) acc.Accounts = new List<Account>();
+
+            acc.Accounts.Add(new Account
             {
-                streamWriter.WriteLine(DateTime.Now);
-            }
-
-            var ch = _context.Channels.Include(e => e.Accounts).First(e => e.ChannelId == channel.ChannelId);
-
-            ch.Accounts.Add(account);
+                AccountId = account.AccountId,
+                Username = account.Username,
+                channels = account.channels,
+                messages = account.messages,
+                Email = account.Email,
+                Password = account.Password,
+                ProfilePhotoURL = account.ProfilePhotoURL,
+                roles = account.roles,
+                departments = account.departments,
+                semesters = account.semesters,
+                status = account.status,
+            });
 
             _context.SaveChanges();
         }

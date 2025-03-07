@@ -1,4 +1,4 @@
-using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace BroadcastMvcApp.Data;
 
@@ -14,17 +14,31 @@ public class Delete
 
                 context.Database.EnsureCreated();
 
-                var account = context.Accounts.FirstOrDefault(e => e.Username == "Asta");
-
                 streamWriter.WriteLine($"{DateTime.Now}");
-                if (account != null)
-                {
-                    context.Accounts.Remove(account);
-                    context.SaveChanges();
-                    streamWriter.WriteLine("removed  account!");
-                }
 
-                else streamWriter.WriteLine("account doesnot exist!");
+                //to remove given accounts
+                // var account = context.Accounts.FirstOrDefault(e => e.Username == "Boruto Uzumaki");
+
+                // if (account != null)
+                // {
+                //     context.Accounts.Remove(account);
+                //     context.SaveChanges();
+                //     streamWriter.WriteLine("removed  account!");
+                // }
+
+                // else streamWriter.WriteLine("account doesnot exist!");
+
+                //to remove accounts inside all channels!
+                // var account = context.Channels.Include(e => e.Accounts).ToList();
+
+                // foreach (var acc in account)
+                // {
+                //     acc.Accounts.Clear();
+                // }
+
+                // context.SaveChanges();
+
+                // streamWriter.WriteLine("cleared all accounts inside the channels!");
             }
         }
     }
