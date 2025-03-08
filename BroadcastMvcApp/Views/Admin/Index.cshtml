@@ -34,13 +34,19 @@
                         }
                     }
                 </div>
+
                 @* remove channel list popup window *@
                 <div class="remove-channel-list">
                     @foreach (var channel in @Model.channels)
                     {
                         @if (channel.Accounts.Select(e => e.AccountId).Contains(i.AccountId))
                         {
-                            @channel.ChannelName
+                            <div class="channel-list">
+                                <a class="remove-channel-action-btn" asp-action="RemoveSelectedChannel" asp-controller="Admin"
+                                    asp-route-userId="@i.AccountId" asp-route-channelId="@channel.ChannelId">
+                                    @channel.ChannelName
+                                </a>
+                            </div>
                         }
                     }
                 </div>

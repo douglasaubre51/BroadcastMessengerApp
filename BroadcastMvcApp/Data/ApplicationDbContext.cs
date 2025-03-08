@@ -17,7 +17,6 @@ public class ApplicationDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Account>().HasIndex(e => e.Email).IsUnique();
-        modelBuilder.Entity<Account>().Ignore(e => e.channels);
         base.OnModelCreating(modelBuilder);
     }
 }

@@ -10,6 +10,5 @@ public class Message
     public int MessageId { get; set; }
     public string TextMessage { get; set; }
     public DateTime UploadDateTime { get; set; }
-    [NotMapped]
     public Account? account { get; set; }
 }
