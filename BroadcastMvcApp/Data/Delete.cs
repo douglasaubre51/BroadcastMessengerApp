@@ -16,7 +16,7 @@ public class Delete
 
                 streamWriter.WriteLine($"{DateTime.Now}");
 
-                //to remove given accounts
+                //to remove an account
                 // var account = context.Accounts.FirstOrDefault(e => e.Username == "Boruto Uzumaki");
 
                 // if (account != null)
@@ -29,16 +29,16 @@ public class Delete
                 // else streamWriter.WriteLine("account doesnot exist!");
 
                 //to remove accounts inside all channels!
-                // var account = context.Channels.Include(e => e.Accounts).ToList();
+                var account = context.Channels.Include(e => e.Accounts).ToList();
 
-                // foreach (var acc in account)
-                // {
-                //     acc.Accounts.Clear();
-                // }
+                foreach (var acc in account)
+                {
+                    acc.Accounts.Clear();
+                }
 
-                // context.SaveChanges();
+                context.SaveChanges();
 
-                // streamWriter.WriteLine("cleared all accounts inside the channels!");
+                streamWriter.WriteLine("cleared all accounts inside the channels!");
             }
         }
     }

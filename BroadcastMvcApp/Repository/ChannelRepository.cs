@@ -23,28 +23,15 @@ namespace BroadcastMvcApp.Repository
             return await _context.Channels.SingleAsync(c => c.ChannelId == id);
         }
 
-        public void AddToChannel(Account account, Channel channel)
+        public async Task AddToChannel(Account account, Channel channel)
         {
-            var acc = _context.Channels.Include(e => e.Accounts).First(e => e.ChannelId == channel.ChannelId);
+            var acc = await _context.Channels.Include(e => e.Accounts).FirstAsync(e => e.ChannelId == channel.ChannelId);
 
             if (acc.Accounts == null) acc.Accounts = new List<Account>();
 
-            acc.Accounts.Add(new Account
-            {
-                AccountId = account.AccountId,
-                Username = account.Username,
-                channels = account.channels,
-                messages = account.messages,
-                Email = account.Email,
-                Password = account.Password,
-                ProfilePhotoURL = account.ProfilePhotoURL,
-                roles = account.roles,
-                departments = account.departments,
-                semesters = account.semesters,
-                status = account.status,
-            });
+            acc.Accounts.Add(account);
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         public void RemoveFromChannel(Account account, Channel channel)

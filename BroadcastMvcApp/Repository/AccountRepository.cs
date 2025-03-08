@@ -18,14 +18,14 @@ public class AccountRepository : IAccountRepository
     {
         return await _context.Accounts.ToListAsync();
     }
-    public async Task<Account> GetById(int? id)
+    public async Task<Account> GetById(int id)
     {
-        return await _context.Accounts.AsNoTracking().FirstOrDefaultAsync(e => e.AccountId == id);
+        return await _context.Accounts.SingleAsync(x => x.AccountId == id);
     }
 
     public async Task<Account> GetByEmail(string emailId)
     {
-        return await _context.Accounts.FirstOrDefaultAsync(e => e.Email == emailId);
+        return await _context.Accounts.FirstAsync(e => e.Email == emailId);
     }
 
     public bool Add(Account account)

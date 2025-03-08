@@ -60,7 +60,9 @@ namespace BroadcastMvcApp.Controllers
             var account = await _accountRepository.GetById(userId);
             var channel = await _channelRepository.GetById(channelId);
 
-            _channelRepository.AddToChannel(account, channel);
+            if (account == null) Console.WriteLine("null account found!");
+
+            await _channelRepository.AddToChannel(account, channel);
             return RedirectToAction("Index");
         }
 
