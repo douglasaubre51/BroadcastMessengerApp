@@ -55,9 +55,9 @@ namespace BroadcastMvcApp.Controllers
 
         //add a user to selected channel
         [HttpGet]
-        public async Task<IActionResult> AddToSelectChannel(int userId, int channelId)
+        public async Task<IActionResult> AddToSelectChannel(int accountId, int channelId)
         {
-            var account = await _accountRepository.GetById(userId);
+            var account = await _accountRepository.GetById(accountId);
             var channel = await _channelRepository.GetById(channelId);
 
             if (account == null) Console.WriteLine("null account found!");

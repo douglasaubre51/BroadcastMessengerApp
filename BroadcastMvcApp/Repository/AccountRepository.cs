@@ -20,7 +20,7 @@ public class AccountRepository : IAccountRepository
     }
     public async Task<Account> GetById(int id)
     {
-        return await _context.Accounts.SingleAsync(x => x.AccountId == id);
+        return await _context.Accounts.Include(e => e.channels).FirstAsync(e => e.AccountId == id);
     }
 
     public async Task<Account> GetByEmail(string emailId)

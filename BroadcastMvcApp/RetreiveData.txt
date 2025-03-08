@@ -1,4 +1,4 @@
-08-03-2025 2.48.41 PM
+08-03-2025 8.40.04 PM
 Channels
 Channel Id :1
 Channel Name :allen
@@ -10,21 +10,39 @@ Channel Id :4
 Channel Name :raftel
 Channel Id :1004
 Channel Name :joyboy vlogs
+Channel Id :1005
+Channel Name :akatsuki
 
 Accounts in channel : allen
 
 Accounts in channel : asd
+Account Name :Aizen Sosuke
+Account Id:1
 
 Accounts in channel : Karakura Town
 
 Accounts in channel : raftel
 
 Accounts in channel : joyboy vlogs
+Account Name :Aizen Sosuke
+Account Id:1
+
+Accounts in channel : akatsuki
+Account Name :Aizen Sosuke
+Account Id:1
 
 Accounts
 Account id: 1
 Username : Aizen Sosuke
+Channel Id:2
+Channel Name:asd
+Channel Id:1004
+Channel Name:joyboy vlogs
+Channel Id:1005
+Channel Name:akatsuki
 Account id: 6
 Username : jimbei123@gmail.com
 Account id: 7
 Username : Momo
+Account id: 9
+Username : Hinamori
