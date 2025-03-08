@@ -12,82 +12,122 @@
 
     <form class="form-container" asp-action="Create" method="post" asp-controller="Account"
         enctype="multipart/form-data">
+        <table>
+            <tr>
+                <div class="form-group">
+                    <td>
+                        <label asp-for="@Model.Username">Username</label>
+                    </td>
 
-        <div class="form-group">
+                    <td>
+                        <input asp-for="@Model.Username" />
+                        <span asp-validation-for="@Model.Username" class="text-danger"></span>
+                    </td>
+                </div>
+            </tr>
 
-            <label asp-for="@Model.Username">User name :</label>
-            <input asp-for="@Model.Username" />
-            <span asp-validation-for="@Model.Username" class="text-danger"></span>
+            <tr>
+                <div>
+                    <td>
+                        <label asp-for="@Model.Email">Email</label>
 
-        </div>
+                    </td>
 
-        <div>
+                    <td>
+                        <input asp-for="@Model.Email" />
+                        <span asp-validation-for="@Model.Email" class="text-danger"></span>
 
-            <label asp-for="@Model.Email">Email :</label>
-            <input asp-for="@Model.Email" />
-            <span asp-validation-for="@Model.Email" class="text-danger"></span>
+                    </td>
+                </div>
+            </tr>
 
-        </div>
+            <tr>
+                <td>
+                    <label asp-for="@Model.Password">Password</label>
+                </td>
 
-        <div>
+                <td>
+                    <input asp-for="@Model.Password" />
+                    <span asp-validation-for="@Model.Password" class="text-danger"></span>
+                </td>
+            </tr>
 
-            <label asp-for="@Model.Password">Password</label>
-            <input asp-for="@Model.Password" />
-            <span asp-validation-for="@Model.Password" class="text-danger"></span>
+            <tr>
+                <td>
+                    <label asp-for="@Model.ConfirmPassword">Confirm Password</label>
+                </td>
 
-        </div>
+                <td>
+                    <input asp-for="@Model.ConfirmPassword" />
+                    <span asp-validation-for="@Model.ConfirmPassword" class="text-danger"></span>
+                </td>
+            </tr>
 
-        <div>
+            <tr>
+                <td>
+                    <label asp-for="@Model.ProfilePhoto">Profile Photo</label>
+                </td>
 
-            <label asp-for="@Model.ConfirmPassword">Confirm Password</label>
-            <input asp-for="@Model.ConfirmPassword" />
-            <span asp-validation-for="@Model.ConfirmPassword" class="text-danger"></span>
+                <td>
+                    <input type="file" asp-for="@Model.ProfilePhoto" />
+                    <span asp-validation-for="@Model.ProfilePhoto" class="text-danger"></span>
+                </td>
+            </tr>
 
-        </div>
+            <tr>
+                <td>
+                    <label asp-for="@Model.roles">Select a Role</label>
 
-        <div>
+                </td>
 
-            <label asp-for="@Model.ProfilePhoto">Upload Profile Photo :</label>
-            <input type="file" asp-for="@Model.ProfilePhoto" />
-            <span asp-validation-for="@Model.ProfilePhoto" class="text-danger"></span>
+                <td>
+                    <select id="selectRole" asp-items="@(new SelectList(Enum.GetValues(typeof(Roles))))"
+                        asp-for="@Model.roles">
+                        <option>----select----</option>
+                    </select>
+                    <span asp-validation-for="@Model.roles" class="text-danger"></span>
+                </td>
+            </tr>
 
-        </div>
+            <tr>
+                <td>
+                    <label asp-for="@Model.departments">Select a Department</label>
+                </td>
 
-        <div>
+                <td>
+                    <select asp-items="@Html.GetEnumSelectList<Departments>()" asp-for="@Model.departments">
+                        <option>----select----</option>
+                    </select>
+                    <span asp-validation-for="@Model.departments" class="text-danger"></span>
+                </td>
+            </tr>
 
-            <label asp-for="@Model.roles">Select a Role :</label>
-            <select asp-items="@Html.GetEnumSelectList<Roles>()" asp-for="@Model.roles">
-                <option>----select----</option>
-            </select>
-            <span asp-validation-for="@Model.roles" class="text-danger"></span>
+            <tr>
+                <td>
+                    <label asp-for="@Model.semesters">Select a Semester</label>
+                </td>
 
-        </div>
+                <td>
+                    <select asp-items="@Html.GetEnumSelectList<Semesters>()" asp-for="@Model.semesters">
+                        <option>----select----</option>
+                    </select>
+                    <span asp-validation-for="@Model.semesters" class="text-danger"></span>
+                </td>
+            </tr>
 
-        <div>
+            <tr>
+                <div class="form-group">
+                    <td>
+                        <input type="submit" id="getRole" class="submit-btn" value="create" />
+                    </td>
 
-            <label asp-for="@Model.departments">Select a Department :</label>
-            <select asp-items="@Html.GetEnumSelectList<Departments>()" asp-for="@Model.departments">
-                <option>----select----</option>
-            </select>
-            <span asp-validation-for="@Model.departments" class="text-danger"></span>
-
-        </div>
-
-        <div>
-
-            <label asp-for="@Model.semesters">Select a Semester :</label>
-            <select asp-items="@Html.GetEnumSelectList<Semesters>()" asp-for="@Model.semesters">
-                <option>----select----</option>
-            </select>
-            <span asp-validation-for="@Model.semesters" class="text-danger"></span>
-
-        </div>
-
-        <div class="form-group">
-            <input type="submit" class="submit-btn" value="create" />
-
-            <input type="reset" class="reset-btn" value="clear" />
-        </div>
-
+                    <td>
+                        <input type="reset" class="reset-btn" value="clear" />
+                    </td>
+                </div>
+            </tr>
+        </table>
     </form>
 </div>
+
+<script src="~/js/Account/Create.js"></script>

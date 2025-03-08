@@ -41,7 +41,7 @@ namespace BroadcastMvcApp.Controllers
 
                 _repository.Add(model);
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login");
             }
             return View(createVM);
         }
