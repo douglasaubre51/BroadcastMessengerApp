@@ -3,9 +3,10 @@ namespace BroadcastMvcApp.Interface
 {
     public interface IChannelRepository
     {
-        Task<IEnumerable<Channel>> GetAll();
+        Task<List<Channel>> GetAll();
         Task<Channel> GetById(int id);
-        Task AddToChannel(Account account, string ChannelName);
+        Task AddToChannel(Account account, Channel channel);
+        void RemoveFromChannel(Account account, Channel channel);
 
         bool IsExists(string channelName);
 

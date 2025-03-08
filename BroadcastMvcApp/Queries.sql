@@ -5,8 +5,6 @@ use BroadcastDb;
 select *
 from sys.tables;
 
-select*
-from Accounts;
 
 exec sp_help Accounts;
 
@@ -17,13 +15,16 @@ exec sp_help Messages;
 SELECT *
 from __EFMigrationsHistory;
 
+select*
+from Accounts;
+
 select *
 from Channels;
 
 select *
 from Messages;
 
-update Accounts set ProfilePhotoURL='/images/reze.jpeg]' where AccountId=2;
+update Accounts set ProfilePhotoURL='/images/reze.jpg' where AccountId=2;
 
 update Accounts set ProfilePhotoURL='/images/boruto.jpg' where AccountId=2;
 

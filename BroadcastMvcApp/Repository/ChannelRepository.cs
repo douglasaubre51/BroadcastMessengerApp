@@ -2,6 +2,7 @@
 using BroadcastMvcApp.Interface;
 using BroadcastMvcApp.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 namespace BroadcastMvcApp.Repository
 {
     public class ChannelRepository : IChannelRepository
@@ -12,9 +13,9 @@ namespace BroadcastMvcApp.Repository
             _context = context;
         }
 
-        public async Task<IEnumerable<Channel>> GetAll()
+        public async Task<List<Channel>> GetAll()
         {
-            return await _context.Channels.ToListAsync();
+            return await _context.Channels.Include(e => e.Accounts).ToListAsync();
         }
 
         public async Task<Channel> GetById(int id)
@@ -22,19 +23,25 @@ namespace BroadcastMvcApp.Repository
             return await _context.Channels.SingleAsync(c => c.ChannelId == id);
         }
 
-        public async Task AddToChannel(Account account, string channelName)
+        public async Task AddToChannel(Account account, Channel channel)
         {
-            var channel = await _context.Channels.FirstAsync(e => e.ChannelName == channelName);
+            var acc = await _context.Channels.Include(e => e.Accounts).FirstAsync(e => e.ChannelId == channel.ChannelId);
 
-            channel.Accounts = new List<Account>()
-            {
-                account
-            };
+            if (acc.Accounts == null) acc.Accounts = new List<Account>();
 
-            _context.Entry(channel).State = EntityState.Modified;
+            acc.Accounts.Add(account);
 
-            Save();
+            await _context.SaveChangesAsync();
         }
+
+        public void RemoveFromChannel(Account account, Channel channel)
+        {
+            var ch = _context.Channels.Include(e => e.Accounts).First(e => e.ChannelId == channel.ChannelId);
+
+            ch.Accounts.RemoveAll(e => e.AccountId == account.AccountId);
+            _context.SaveChanges();
+        }
+
 
         public bool IsExists(string channelName)
         {

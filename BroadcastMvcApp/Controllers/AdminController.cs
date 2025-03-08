@@ -19,8 +19,9 @@ namespace BroadcastMvcApp.Controllers
         // GET: user cards showcase and admin page
         public async Task<ActionResult> Index()
         {
-            IEnumerable<Account> accounts = await _accountRepository.GetAll();
-            IEnumerable<Channel> channels = await _channelRepository.GetAll();
+            List<Account> accounts = await _accountRepository.GetAll();
+            List<Channel> channels = await _channelRepository.GetAll();
+
 
             var viewModel = new IndexAdminViewModel();
             viewModel.accounts = accounts;
@@ -53,12 +54,26 @@ namespace BroadcastMvcApp.Controllers
         }
 
         //add a user to selected channel
-        public async Task<IActionResult> AddToSelectChannel(int userId, string channelName)
+        [HttpGet]
+        public async Task<IActionResult> AddToSelectChannel(int accountId, int channelId)
+        {
+            var account = await _accountRepository.GetById(accountId);
+            var channel = await _channelRepository.GetById(channelId);
+
+            if (account == null) Console.WriteLine("null account found!");
+
+            await _channelRepository.AddToChannel(account, channel);
+            return RedirectToAction("Index");
+        }
+
+        //remove user from selected channel
+        [HttpGet]
+        public async Task<IActionResult> RemoveSelectedChannel(int userId, int channelId)
         {
             var account = await _accountRepository.GetById(userId);
+            var channel = await _channelRepository.GetById(channelId);
 
-            await _channelRepository.AddToChannel(account, channelName);
-
+            _channelRepository.RemoveFromChannel(account, channel);
             return RedirectToAction("Index");
         }
     }

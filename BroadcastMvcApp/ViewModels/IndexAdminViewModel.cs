@@ -6,6 +6,6 @@ namespace BroadcastMvcApp.ViewModels;
 
 public class IndexAdminViewModel
 {
-    public IEnumerable<Account> accounts { get; set; }
-    public IEnumerable<Channel> channels { get; set; }
+    public List<Account> accounts { get; set; }
+    public List<Channel> channels { get; set; }
 }

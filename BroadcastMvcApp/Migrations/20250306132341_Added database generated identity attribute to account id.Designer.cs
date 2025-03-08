@@ -4,6 +4,7 @@ using BroadcastMvcApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BroadcastMvcApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250306132341_Added database generated identity attribute to account id")]
+    partial class Addeddatabasegeneratedidentityattributetoaccountid
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,21 +25,6 @@ namespace BroadcastMvcApp.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("AccountChannel", b =>
-                {
-                    b.Property<int>("AccountsAccountId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("channelsChannelId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AccountsAccountId", "channelsChannelId");
-
-                    b.HasIndex("channelsChannelId");
-
-                    b.ToTable("AccountChannel");
-                });
-
             modelBuilder.Entity("BroadcastMvcApp.Models.Account", b =>
                 {
                     b.Property<int>("AccountId")
@@ -44,6 +32,9 @@ namespace BroadcastMvcApp.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AccountId"));
+
+                    b.Property<int?>("ChannelId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(450)");
@@ -72,6 +63,8 @@ namespace BroadcastMvcApp.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("AccountId");
+
+                    b.HasIndex("ChannelId");
 
                     b.HasIndex("Email")
                         .IsUnique()
@@ -122,33 +115,28 @@ namespace BroadcastMvcApp.Migrations
                     b.ToTable("Messages");
                 });
 
-            modelBuilder.Entity("AccountChannel", b =>
+            modelBuilder.Entity("BroadcastMvcApp.Models.Account", b =>
                 {
-                    b.HasOne("BroadcastMvcApp.Models.Account", null)
-                        .WithMany()
-                        .HasForeignKey("AccountsAccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("BroadcastMvcApp.Models.Channel", null)
-                        .WithMany()
-                        .HasForeignKey("channelsChannelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Accounts")
+                        .HasForeignKey("ChannelId");
                 });
 
             modelBuilder.Entity("BroadcastMvcApp.Models.Message", b =>
                 {
-                    b.HasOne("BroadcastMvcApp.Models.Account", "account")
+                    b.HasOne("BroadcastMvcApp.Models.Account", null)
                         .WithMany("messages")
                         .HasForeignKey("AccountId");
-
-                    b.Navigation("account");
                 });
 
             modelBuilder.Entity("BroadcastMvcApp.Models.Account", b =>
                 {
                     b.Navigation("messages");
+                });
+
+            modelBuilder.Entity("BroadcastMvcApp.Models.Channel", b =>
+                {
+                    b.Navigation("Accounts");
                 });
 #pragma warning restore 612, 618
         }
