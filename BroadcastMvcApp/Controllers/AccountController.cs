@@ -25,19 +25,71 @@ namespace BroadcastMvcApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                Console.WriteLine("hello joyboy!");
+                Account model = null;
 
                 var imageUrl = await _photoService.AddPhotoAsync(createVM.ProfilePhoto);
 
-                var model = new Account
+                if (createVM.roles == Enum.Roles.Admin)
                 {
-                    Username = createVM.Username,
-                    Email = createVM.Email,
-                    Password = createVM.Password,
-                    ProfilePhotoURL = imageUrl.Url.ToString(),
-                    roles = createVM.roles,
-                    departments = createVM.departments,
-                    semesters = createVM.semesters
-                };
+                    if (createVM.Authorization == null)
+                    {
+                        ModelState.AddModelError("Authorization", "enter passkey!");
+                        return View(createVM);
+                    }
+                    if (createVM.Authorization != "chancellor66")
+                    {
+                        ModelState.AddModelError("Authorization", "wrong passkey!");
+                        return View(createVM);
+                    }
+
+                    model = new Account
+                    {
+                        Username = createVM.Username,
+                        Email = createVM.Email,
+                        Password = createVM.Password,
+                        ProfilePhotoURL = imageUrl.Url.ToString(),
+                        roles = createVM.roles,
+                    };
+                }
+
+                if (createVM.roles == Enum.Roles.Tutor)
+                {
+                    if (createVM.Authorization == null)
+                    {
+                        ModelState.AddModelError("Authorization", "enter passkey!");
+                        return View(createVM);
+                    }
+                    if (createVM.Authorization != "deusvult")
+                    {
+                        ModelState.AddModelError("Authorization", "wrong key!");
+                        return View(createVM);
+                    }
+
+                    model = new Account
+                    {
+                        Username = createVM.Username,
+                        Email = createVM.Email,
+                        Password = createVM.Password,
+                        ProfilePhotoURL = imageUrl.Url.ToString(),
+                        roles = createVM.roles,
+                        departments = createVM.departments,
+                    };
+                }
+
+                if (createVM.roles == Enum.Roles.Student)
+                {
+                    model = new Account
+                    {
+                        Username = createVM.Username,
+                        Email = createVM.Email,
+                        Password = createVM.Password,
+                        ProfilePhotoURL = imageUrl.Url.ToString(),
+                        roles = createVM.roles,
+                        departments = createVM.departments,
+                        semesters = createVM.semesters
+                    };
+                }
 
                 _repository.Add(model);
 

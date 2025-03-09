@@ -76,40 +76,49 @@
 
             <tr>
                 <td>
-                    <label asp-for="@Model.roles">Select a Role</label>
-
+                    <label asp-for="@Model.roles">Role</label>
                 </td>
 
                 <td>
                     <select id="selectRole" asp-items="@(new SelectList(Enum.GetValues(typeof(Roles))))"
                         asp-for="@Model.roles">
-                        <option>----select----</option>
+                        <option>select role</option>
                     </select>
                     <span asp-validation-for="@Model.roles" class="text-danger"></span>
                 </td>
             </tr>
 
-            <tr>
+            <tr class="hide-authorization" id="authorization-id">
                 <td>
-                    <label asp-for="@Model.departments">Select a Department</label>
+                    <label>Authorization Key</label>
+                </td>
+
+                <td>
+                    <input asp-for="@Model.Authorization" />
+                </td>
+            </tr>
+
+            <tr class="hide-department" id="department-id">
+                <td>
+                    <label asp-for="@Model.departments">Department</label>
                 </td>
 
                 <td>
                     <select asp-items="@Html.GetEnumSelectList<Departments>()" asp-for="@Model.departments">
-                        <option>----select----</option>
+                        <option>select department</option>
                     </select>
                     <span asp-validation-for="@Model.departments" class="text-danger"></span>
                 </td>
             </tr>
 
-            <tr>
+            <tr class="hide-semester" id="semester-id">
                 <td>
-                    <label asp-for="@Model.semesters">Select a Semester</label>
+                    <label asp-for="@Model.semesters">Semester</label>
                 </td>
 
                 <td>
                     <select asp-items="@Html.GetEnumSelectList<Semesters>()" asp-for="@Model.semesters">
-                        <option>----select----</option>
+                        <option>select semester</option>
                     </select>
                     <span asp-validation-for="@Model.semesters" class="text-danger"></span>
                 </td>
@@ -118,7 +127,7 @@
             <tr>
                 <div class="form-group">
                     <td>
-                        <input type="submit" id="getRole" class="submit-btn" value="create" />
+                        <input type="submit" class="submit-btn" value="create" />
                     </td>
 
                     <td>
@@ -127,6 +136,7 @@
                 </div>
             </tr>
         </table>
+        <span asp-validation-for="@Model.Authorization"></span>
     </form>
 </div>
 

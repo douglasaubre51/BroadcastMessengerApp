@@ -2,7 +2,6 @@ namespace BroadcastMvcApp.Enum;
 
 public enum Status
 {
-    Online,
-    Offline
-
+    Offline,
+    Online
 }

@@ -59,16 +59,16 @@ namespace BroadcastMvcApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("departments")
+                    b.Property<int?>("departments")
                         .HasColumnType("int");
 
                     b.Property<int>("roles")
                         .HasColumnType("int");
 
-                    b.Property<int>("semesters")
+                    b.Property<int?>("semesters")
                         .HasColumnType("int");
 
-                    b.Property<int>("status")
+                    b.Property<int?>("status")
                         .HasColumnType("int");
 
                     b.HasKey("AccountId");
