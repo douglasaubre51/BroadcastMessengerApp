@@ -4,6 +4,7 @@ using BroadcastMvcApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BroadcastMvcApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250310132816_updated props in account")]
+    partial class updatedpropsinaccount
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,16 +63,16 @@ namespace BroadcastMvcApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("departments")
+                    b.Property<int>("departments")
                         .HasColumnType("int");
 
                     b.Property<int>("roles")
                         .HasColumnType("int");
 
-                    b.Property<int?>("semesters")
+                    b.Property<int>("semesters")
                         .HasColumnType("int");
 
-                    b.Property<int?>("status")
+                    b.Property<int>("status")
                         .HasColumnType("int");
 
                     b.HasKey("AccountId");

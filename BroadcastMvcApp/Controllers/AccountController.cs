@@ -1,7 +1,6 @@
 using BroadcastMvcApp.Interface;
 using BroadcastMvcApp.Models;
 using BroadcastMvcApp.ViewModels;
-using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BroadcastMvcApp.Controllers
@@ -9,11 +8,13 @@ namespace BroadcastMvcApp.Controllers
     public class AccountController : Controller
     {
         private readonly IPhotoService _photoService;
+        private readonly IAuthorizationService _authorizationService;
         private readonly IAccountRepository _repository;
-        public AccountController(IAccountRepository repository, IPhotoService photoService)
+        public AccountController(IAccountRepository repository, IPhotoService photoService, IAuthorizationService authorizationService)
         {
             _repository = repository;
             _photoService = photoService;
+            _authorizationService = authorizationService;
         }
 
         public ActionResult Create()
@@ -23,78 +24,36 @@ namespace BroadcastMvcApp.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(CreateAccountViewModel createVM)
         {
+            bool isAuthorized = _authorizationService.CheckUserAuthentication(createVM, ModelState);
+
             if (ModelState.IsValid)
             {
-                Console.WriteLine("hello joyboy!");
-                Account model = null;
-
-                var imageUrl = await _photoService.AddPhotoAsync(createVM.ProfilePhoto);
-
-                if (createVM.roles == Enum.Roles.Admin)
+                if (isAuthorized)
                 {
-                    if (createVM.Authorization == null)
-                    {
-                        ModelState.AddModelError("Authorization", "enter passkey!");
-                        return View(createVM);
-                    }
-                    if (createVM.Authorization != "chancellor66")
-                    {
-                        ModelState.AddModelError("Authorization", "wrong passkey!");
-                        return View(createVM);
-                    }
+                    var photoUrl = await _photoService.AddPhotoAsync(createVM.ProfilePhoto);
 
-                    model = new Account
+                    var model = new Account()
                     {
                         Username = createVM.Username,
                         Email = createVM.Email,
                         Password = createVM.Password,
-                        ProfilePhotoURL = imageUrl.Url.ToString(),
-                        roles = createVM.roles,
-                    };
-                }
-
-                if (createVM.roles == Enum.Roles.Tutor)
-                {
-                    if (createVM.Authorization == null)
-                    {
-                        ModelState.AddModelError("Authorization", "enter passkey!");
-                        return View(createVM);
-                    }
-                    if (createVM.Authorization != "deusvult")
-                    {
-                        ModelState.AddModelError("Authorization", "wrong key!");
-                        return View(createVM);
-                    }
-
-                    model = new Account
-                    {
-                        Username = createVM.Username,
-                        Email = createVM.Email,
-                        Password = createVM.Password,
-                        ProfilePhotoURL = imageUrl.Url.ToString(),
                         roles = createVM.roles,
                         departments = createVM.departments,
+                        semesters = createVM.semesters,
+                        ProfilePhotoURL = photoUrl.Url.ToString(),
                     };
+
+                    _repository.Add(model);
+                    return RedirectToAction("Index", "Home");
                 }
 
-                if (createVM.roles == Enum.Roles.Student)
+                else
                 {
-                    model = new Account
-                    {
-                        Username = createVM.Username,
-                        Email = createVM.Email,
-                        Password = createVM.Password,
-                        ProfilePhotoURL = imageUrl.Url.ToString(),
-                        roles = createVM.roles,
-                        departments = createVM.departments,
-                        semesters = createVM.semesters
-                    };
+                    ModelState.AddModelError("Authorization", "invalid authentication key!");
+                    return View(createVM);
                 }
-
-                _repository.Add(model);
-
-                return RedirectToAction("Login");
             }
+
             return View(createVM);
         }
 

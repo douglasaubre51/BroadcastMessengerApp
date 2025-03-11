@@ -19,6 +19,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.EnableDetailedErrors();
 });
 
+//adding user account authentication
+builder.Services.AddScoped<IAuthorizationService, AuthorizationService>();
+
 //adding Iphotoservice
 builder.Services.AddScoped<IPhotoService, PhotoService>();
 
