@@ -25,7 +25,7 @@ public class AccountRepository : IAccountRepository
 
     public async Task<Account> GetByEmail(string emailId)
     {
-        return await _context.Accounts.FirstAsync(e => e.Email == emailId);
+        return await _context.Accounts.FirstOrDefaultAsync(e => e.Email == emailId);
     }
 
     public bool Add(Account account)

@@ -8,3 +8,27 @@
 .create-body h1 {
     font-size: 50px;
 }
+
+.hide-authorization {
+    display: none;
+}
+
+.hide-department {
+    display: none;
+}
+
+.hide-semester {
+    display: none;
+}
+
+.show-authorization {
+    display: table-row;
+}
+
+.show-department {
+    display: table-row;
+}
+
+.show-semester {
+    display: table-row;
+}

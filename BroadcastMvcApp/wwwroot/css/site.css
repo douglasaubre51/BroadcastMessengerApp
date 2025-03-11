@@ -7,7 +7,7 @@ body {
   margin-top: 10px;
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  justify-content: space-between;
   background-color: #004225;
   border-radius: 10px;
   padding: 10px;
@@ -32,5 +32,3 @@ a {
 ul {
   list-style-type: none;
 }
-
-.body-container {}

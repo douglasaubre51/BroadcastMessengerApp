@@ -1,7 +1,6 @@
 using BroadcastMvcApp.Interface;
 using BroadcastMvcApp.Models;
 using BroadcastMvcApp.ViewModels;
-using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BroadcastMvcApp.Controllers
@@ -9,11 +8,13 @@ namespace BroadcastMvcApp.Controllers
     public class AccountController : Controller
     {
         private readonly IPhotoService _photoService;
+        private readonly IAuthorizationService _authorizationService;
         private readonly IAccountRepository _repository;
-        public AccountController(IAccountRepository repository, IPhotoService photoService)
+        public AccountController(IAccountRepository repository, IPhotoService photoService, IAuthorizationService authorizationService)
         {
             _repository = repository;
             _photoService = photoService;
+            _authorizationService = authorizationService;
         }
 
         public ActionResult Create()
@@ -23,26 +24,36 @@ namespace BroadcastMvcApp.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(CreateAccountViewModel createVM)
         {
+            bool isAuthorized = _authorizationService.CheckUserAuthentication(createVM, ModelState);
+
             if (ModelState.IsValid)
             {
-
-                var imageUrl = await _photoService.AddPhotoAsync(createVM.ProfilePhoto);
-
-                var model = new Account
+                if (isAuthorized)
                 {
-                    Username = createVM.Username,
-                    Email = createVM.Email,
-                    Password = createVM.Password,
-                    ProfilePhotoURL = imageUrl.Url.ToString(),
-                    roles = createVM.roles,
-                    departments = createVM.departments,
-                    semesters = createVM.semesters
-                };
+                    var photoUrl = await _photoService.AddPhotoAsync(createVM.ProfilePhoto);
 
-                _repository.Add(model);
+                    var model = new Account()
+                    {
+                        Username = createVM.Username,
+                        Email = createVM.Email,
+                        Password = createVM.Password,
+                        roles = createVM.roles,
+                        departments = createVM.departments,
+                        semesters = createVM.semesters,
+                        ProfilePhotoURL = photoUrl.Url.ToString(),
+                    };
 
-                return RedirectToAction("Index", "Home");
+                    _repository.Add(model);
+                    return RedirectToAction("Index", "Home");
+                }
+
+                else
+                {
+                    ModelState.AddModelError("Authorization", "invalid authentication key!");
+                    return View(createVM);
+                }
             }
+
             return View(createVM);
         }
 
@@ -70,15 +81,19 @@ namespace BroadcastMvcApp.Controllers
                     return View(loginVM);
                 }
 
-                HttpContext.Session.SetInt32("AccountId", model.AccountId);
 
                 if (model.roles == Enum.Roles.Admin)
                     return RedirectToAction("Index", "Admin");
+
+                if (model.roles == Enum.Roles.Tutor)
+                {
+                    HttpContext.Session.SetInt32("AccountId", model.AccountId);
+                    return RedirectToAction("Index", "Tutor");
+                }
 
                 return RedirectToAction("Index", "Home");
             }
             return View(loginVM);
         }
-
     }
 }

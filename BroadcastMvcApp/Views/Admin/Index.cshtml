@@ -5,6 +5,8 @@
 <div class="index-body">
     <h1>Welcome administrator</h1>
 
+    <a asp-action="CreateChannel" asp-controller="Admin">create new channel</a>
+
     <div class="data-container">
         @foreach (var i in @Model.accounts)
         {

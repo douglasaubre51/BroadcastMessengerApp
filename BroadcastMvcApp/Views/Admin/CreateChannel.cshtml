@@ -16,6 +16,8 @@
 		<span asp-validation-for="@Model.ChannelName"></span>
 	</form>
 
+	<a onclick="history.back()">go back to dashboard</a>
+
 </div>
 
 <style>
@@ -28,5 +30,9 @@
 
 	.login-body h1 {
 		font-size: 50px;
+	}
+
+	a {
+		cursor: pointer;
 	}
 </style>

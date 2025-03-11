@@ -1,0 +1,22 @@
+﻿@model BroadcastMvcApp.ViewModels.IndexTutorViewModel
+
+@{
+    ViewBag.Title = "Tutor";
+}
+
+<link href="~/css/IndexTutorStyle.css" rel="stylesheet /">
+<div class="body-container">
+    <div class="channel-container">
+        <h1>Channels</h1>
+
+        <div class="card-container">
+            @foreach (var i in @Model.Channels)
+            {
+                <div class="card">
+                    <span>@i.ChannelName</span>
+                </div>
+            }
+        </div>
+    </div>
+
+</div>

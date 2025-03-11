@@ -11,6 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 //added by me
+
+//session
+
 //appdbcontext initialization
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
@@ -18,6 +21,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.EnableSensitiveDataLogging();
     options.EnableDetailedErrors();
 });
+
+//adding user account authentication
+builder.Services.AddScoped<IAuthorizationService, AuthorizationService>();
 
 //adding Iphotoservice
 builder.Services.AddScoped<IPhotoService, PhotoService>();
@@ -82,6 +88,7 @@ app.UseHttpsRedirection();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseSession();
 
 app.MapStaticAssets();
 
@@ -89,8 +96,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
-
-//session 
-app.UseSession();
 
 app.Run();
