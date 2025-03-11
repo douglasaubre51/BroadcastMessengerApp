@@ -23,6 +23,11 @@ namespace BroadcastMvcApp.Repository
             return await _context.Channels.SingleAsync(c => c.ChannelId == id);
         }
 
+        public async Task<List<Channel>> GetByAccount(Account account)
+        {
+            return await _context.Channels.Include(e => e.Accounts).Where(e => e.Accounts.Contains(account)).ToListAsync();
+        }
+
         public async Task AddToChannel(Account account, Channel channel)
         {
             var acc = await _context.Channels.Include(e => e.Accounts).FirstAsync(e => e.ChannelId == channel.ChannelId);

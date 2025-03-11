@@ -81,15 +81,19 @@ namespace BroadcastMvcApp.Controllers
                     return View(loginVM);
                 }
 
-                HttpContext.Session.SetInt32("AccountId", model.AccountId);
 
                 if (model.roles == Enum.Roles.Admin)
                     return RedirectToAction("Index", "Admin");
+
+                if (model.roles == Enum.Roles.Tutor)
+                {
+                    HttpContext.Session.SetInt32("AccountId", model.AccountId);
+                    return RedirectToAction("Index", "Tutor");
+                }
 
                 return RedirectToAction("Index", "Home");
             }
             return View(loginVM);
         }
-
     }
 }
