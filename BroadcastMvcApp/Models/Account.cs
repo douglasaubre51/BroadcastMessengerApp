@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace BroadcastMvcApp.Models;
 
-public class Account
+public class Account : IdentityUser
 {
     [Key]
     public int AccountId { get; set; }
