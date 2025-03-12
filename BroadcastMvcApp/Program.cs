@@ -4,12 +4,15 @@ using BroadcastMvcApp.Hubs;
 using BroadcastMvcApp.Interface;
 using BroadcastMvcApp.Repository;
 using BroadcastMvcApp.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 
 //added by me
 //appdbcontext initialization
@@ -19,6 +22,22 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.EnableSensitiveDataLogging();
     options.EnableDetailedErrors();
 });
+
+//add identity
+builder.Services.AddIdentityCore<IdentityUser>(
+    e => e.SignIn.RequireConfirmedAccount = true
+    ).AddEntityFrameworkStores<ApplicationDbContext>();
+
+//configure identity
+builder.Services.Configure<IdentityOptions>(e =>
+{
+    e.Password.RequireDigit = true;
+    e.Password.RequiredLength = 8;
+    e.Password.RequireNonAlphanumeric = false;
+    e.Password.RequireUppercase = false;
+    e.Password.RequireLowercase = false;
+});
+
 
 //adding user account authentication
 builder.Services.AddScoped<IAuthorizationService, AuthorizationService>();
@@ -31,7 +50,7 @@ builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection(
 
 //repo init
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
-builder.Services.AddScoped<IChannelRepository, ChannelRepository>();
+// builder.Services.AddScoped<IChannelRepository, ChannelRepository>();
 
 //session state
 builder.Services.AddSession();
@@ -49,11 +68,11 @@ if (args.Length == 1 && args[0].ToLower() == "see")
 }
 
 //retrieve data
-if (args.Length == 1 && args[0].ToLower() == "ret")
-{
-    Retrieve.RetrieveData(app);
-    return;
-}
+// if (args.Length == 1 && args[0].ToLower() == "ret")
+// {
+//     Retrieve.RetrieveData(app);
+//     return;
+// }
 
 //update data
 if (args.Length == 1 && args[0].ToLower() == "upd")
@@ -63,11 +82,11 @@ if (args.Length == 1 && args[0].ToLower() == "upd")
 }
 
 //delete data
-if (args.Length == 1 && args[0].ToLower() == "del")
-{
-    Delete.DeleteData(app);
-    return;
-}
+// if (args.Length == 1 && args[0].ToLower() == "del")
+// {
+//     Delete.DeleteData(app);
+//     return;
+// }
 
 //get pending migration list
 if (args.Length == 1 && args[0].ToLower() == "pen")
@@ -88,6 +107,8 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
+
+app.UseAuthentication();
 app.UseAuthorization();
 app.UseSession();
 

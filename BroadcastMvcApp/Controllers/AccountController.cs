@@ -1,18 +1,21 @@
 using BroadcastMvcApp.Interface;
 using BroadcastMvcApp.Models;
 using BroadcastMvcApp.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BroadcastMvcApp.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly UserManager<Account> _user;
+        private readonly SignInManager<Account> _signIn;
         private readonly IPhotoService _photoService;
         private readonly IAuthorizationService _authorizationService;
-        private readonly IAccountRepository _repository;
-        public AccountController(IAccountRepository repository, IPhotoService photoService, IAuthorizationService authorizationService)
+        public AccountController(SignInManager<Account> signIn, UserManager<Account> user, IPhotoService photoService, IAuthorizationService authorizationService)
         {
-            _repository = repository;
+            _signIn = signIn;
+            _user = user;
             _photoService = photoService;
             _authorizationService = authorizationService;
         }
@@ -21,6 +24,7 @@ namespace BroadcastMvcApp.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public async Task<ActionResult> Create(CreateAccountViewModel createVM)
         {
@@ -32,18 +36,21 @@ namespace BroadcastMvcApp.Controllers
                 {
                     var photoUrl = await _photoService.AddPhotoAsync(createVM.ProfilePhoto);
 
-                    var model = new Account()
+                    var account = new Account()
                     {
-                        // Username = createVM.Username,
+                        UserName = createVM.Email,
+                        Name = createVM.Name,
                         Email = createVM.Email,
-                        // Password = createVM.Password,
                         roles = createVM.roles,
                         departments = createVM.departments,
                         semesters = createVM.semesters,
                         ProfilePhotoURL = photoUrl.Url.ToString(),
                     };
 
-                    _repository.Add(model);
+                    await _user.CreateAsync(account, createVM.Password);
+
+                    await _signIn.SignInAsync(account, isPersistent: true);
+
                     return RedirectToAction("Index", "Home");
                 }
 
@@ -67,27 +74,21 @@ namespace BroadcastMvcApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var model = await _repository.GetByEmail(loginVM.Email);
+                var result = await _signIn.PasswordSignInAsync(loginVM.Email, loginVM.Password, isPersistent: true, lockoutOnFailure: false);
 
-                if (model == null)
+                if (!result.Succeeded)
                 {
-                    loginVM.ErrorMessages = "email doesnot exist!";
+                    ModelState.AddModelError("Email", "invalid email or password!");
                     return View(loginVM);
                 }
 
-                // if (model.Password != loginVM.Password)
-                // {
-                //     loginVM.ErrorMessages = "incorrect password!";
-                //     return View(loginVM);
-                // }
+                var account = await _user.FindByNameAsync(loginVM.Email);
 
-
-                if (model.roles == Enum.Roles.Admin)
+                if (account.roles == Enum.Roles.Admin)
                     return RedirectToAction("Index", "Admin");
 
-                if (model.roles == Enum.Roles.Tutor)
+                if (account.roles == Enum.Roles.Tutor)
                 {
-                    // HttpContext.Session.SetInt32("AccountId", model.AccountId);
                     return RedirectToAction("Index", "Tutor");
                 }
 

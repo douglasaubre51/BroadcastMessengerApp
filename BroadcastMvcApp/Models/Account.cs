@@ -8,6 +8,8 @@ public class Account : IdentityUser
     public List<Channel>? channels { get; set; }
     public List<Message>? messages { get; set; }
 
+    public string Name { get; set; }
+
     public string? ProfilePhotoURL { get; set; }
 
     public Roles roles { get; set; }

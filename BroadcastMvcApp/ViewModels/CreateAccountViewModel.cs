@@ -7,7 +7,7 @@ namespace BroadcastMvcApp.ViewModels;
 public class CreateAccountViewModel
 {
     [Required]
-    public string Username { get; set; }
+    public string Name { get; set; }
 
     [UniqueEmail]
     [DataType(DataType.EmailAddress)]
