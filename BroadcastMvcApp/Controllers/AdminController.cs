@@ -57,12 +57,12 @@ namespace BroadcastMvcApp.Controllers
         [HttpGet]
         public async Task<IActionResult> AddToSelectChannel(int accountId, int channelId)
         {
-            var account = await _accountRepository.GetById(accountId);
+            // var account = await _accountRepository.GetById(accountId);
             var channel = await _channelRepository.GetById(channelId);
 
-            if (account == null) Console.WriteLine("null account found!");
+            // if (account == null) Console.WriteLine("null account found!");
 
-            await _channelRepository.AddToChannel(account, channel);
+            // await _channelRepository.AddToChannel(account, channel);
             return RedirectToAction("Index");
         }
 
@@ -70,10 +70,10 @@ namespace BroadcastMvcApp.Controllers
         [HttpGet]
         public async Task<IActionResult> RemoveSelectedChannel(int userId, int channelId)
         {
-            var account = await _accountRepository.GetById(userId);
+            // var account = await _accountRepository.GetById(userId);
             var channel = await _channelRepository.GetById(channelId);
 
-            _channelRepository.RemoveFromChannel(account, channel);
+            // _channelRepository.RemoveFromChannel(account, channel);
             return RedirectToAction("Index");
         }
     }

@@ -34,9 +34,9 @@ namespace BroadcastMvcApp.Controllers
 
                     var model = new Account()
                     {
-                        Username = createVM.Username,
+                        // Username = createVM.Username,
                         Email = createVM.Email,
-                        Password = createVM.Password,
+                        // Password = createVM.Password,
                         roles = createVM.roles,
                         departments = createVM.departments,
                         semesters = createVM.semesters,
@@ -75,11 +75,11 @@ namespace BroadcastMvcApp.Controllers
                     return View(loginVM);
                 }
 
-                if (model.Password != loginVM.Password)
-                {
-                    loginVM.ErrorMessages = "incorrect password!";
-                    return View(loginVM);
-                }
+                // if (model.Password != loginVM.Password)
+                // {
+                //     loginVM.ErrorMessages = "incorrect password!";
+                //     return View(loginVM);
+                // }
 
 
                 if (model.roles == Enum.Roles.Admin)
@@ -87,7 +87,7 @@ namespace BroadcastMvcApp.Controllers
 
                 if (model.roles == Enum.Roles.Tutor)
                 {
-                    HttpContext.Session.SetInt32("AccountId", model.AccountId);
+                    // HttpContext.Session.SetInt32("AccountId", model.AccountId);
                     return RedirectToAction("Index", "Tutor");
                 }
 

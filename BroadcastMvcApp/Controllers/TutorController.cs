@@ -17,28 +17,28 @@ namespace BroadcastMvcApp.Controllers
         }
 
         // GET: TutorController
-        public async Task<ActionResult> Index()
-        {
-            //get session value
-            int accountId = (int)HttpContext.Session.GetInt32("AccountId");
-            //get account of current user
-            var account = await _accountRepository.GetById(accountId);
-            //get all channels that include account
-            var channels = await _channelRepository.GetByAccount(account);
+        // public async Task<ActionResult> Index()
+        // {
+        //     //get session value
+        //     int accountId = (int)HttpContext.Session.GetInt32("AccountId");
+        //     //get account of current user
+        //     var account = await _accountRepository.GetById(accountId);
+        //     //get all channels that include account
+        //     var channels = await _channelRepository.GetByAccount(account);
 
-            var model = new IndexTutorViewModel()
-            {
-                Channels = channels,
-            };
+        //     var model = new IndexTutorViewModel()
+        //     {
+        //         Channels = channels,
+        //     };
 
 
-            return View(model);
-        }
-        [HttpPost]
-        public ActionResult Index(IndexTutorViewModel viewModel)
-        {
-            return View(viewModel);
-        }
+        //     return View(model);
+        // }
+        // [HttpPost]
+        // public ActionResult Index(IndexTutorViewModel viewModel)
+        // {
+        //     return View(viewModel);
+        // }
 
     }
 }
