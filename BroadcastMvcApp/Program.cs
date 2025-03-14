@@ -5,6 +5,7 @@ using BroadcastMvcApp.Interface;
 using BroadcastMvcApp.Repository;
 using BroadcastMvcApp.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -24,9 +25,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 });
 
 //add identity
-builder.Services.AddIdentityCore<IdentityUser>(
+builder.Services.AddIdentity<IdentityUser,IdentityRole>(
     e => e.SignIn.RequireConfirmedAccount = true
-    ).AddEntityFrameworkStores<ApplicationDbContext>();
+    ).AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
 
 //configure identity
 builder.Services.Configure<IdentityOptions>(e =>
@@ -41,6 +43,10 @@ builder.Services.Configure<IdentityOptions>(e =>
 
 //adding user account authentication
 builder.Services.AddScoped<IAuthorizationService, AuthorizationService>();
+
+//identity sign in and user
+builder.Services.AddScoped<SignInManager<ApplicationDbContext>>();
+builder.Services.AddScoped<UserManager<ApplicationDbContext>>();
 
 //adding Iphotoservice
 builder.Services.AddScoped<IPhotoService, PhotoService>();
