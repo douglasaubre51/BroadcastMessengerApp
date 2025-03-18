@@ -46,6 +46,9 @@ namespace BroadcastMvcApp.Controllers
 
                     _accountRepository.Add(account);
 
+                    if (account.roles == Enum.Roles.Admin)
+                        return RedirectToAction("Index", "Admin");
+
                     return RedirectToAction("Index", "Home");
                 }
 
