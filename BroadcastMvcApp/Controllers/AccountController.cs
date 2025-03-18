@@ -8,13 +8,11 @@ namespace BroadcastMvcApp.Controllers
     public class AccountController : Controller
     {
         private readonly IAccountRepository _accountRepository;
-        private readonly IChannelRepository _channelRepository;
         private readonly IPhotoService _photoService;
         private readonly IAuthorizationService _authorizationService;
-        public AccountController(IAccountRepository accountRepository, IChannelRepository channelRepository, IPhotoService photoService, IAuthorizationService authorizationService)
+        public AccountController(IAccountRepository accountRepository, IPhotoService photoService, IAuthorizationService authorizationService)
         {
             _accountRepository = accountRepository;
-            _channelRepository = channelRepository;
             _photoService = photoService;
             _authorizationService = authorizationService;
         }
@@ -39,6 +37,7 @@ namespace BroadcastMvcApp.Controllers
                     {
                         UserName = createVM.Name,
                         Email = createVM.Email,
+                        Password = createVM.Password,
                         roles = createVM.roles,
                         departments = createVM.departments,
                         semesters = createVM.semesters,
