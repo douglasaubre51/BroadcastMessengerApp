@@ -76,6 +76,12 @@ if (args.Length == 1 && args[0].ToLower() == "pen")
     return;
 }
 
+if (args.Length == 3 && args[0].ToLower() == "msg")
+{
+    AddMessage.SetMessage(args[1], args[2]);
+    return;
+}
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

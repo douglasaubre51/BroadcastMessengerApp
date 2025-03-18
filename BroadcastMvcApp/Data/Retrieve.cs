@@ -30,16 +30,16 @@ public class Retrieve
                     streamWriter.WriteLine($"\nAccounts in channel : {ch.ChannelName}");
                     foreach (var j in ch.Accounts)
                     {
-                        // streamWriter.WriteLine($"Account Name :{j.Username}");
-                        // streamWriter.WriteLine($"Account Id:{j.AccountId}");
+                        streamWriter.WriteLine($"Account Name :{j.UserName}");
+                        streamWriter.WriteLine($"Account Id:{j.AccountId}");
                     }
                 }
 
                 streamWriter.WriteLine("\nAccounts");
                 foreach (var i in context.Accounts.ToList())
                 {
-                    // streamWriter.WriteLine($"Account id: {i.AccountId}");
-                    // streamWriter.WriteLine($"Username : {i.Username}");
+                    streamWriter.WriteLine($"Account id: {i.AccountId}");
+                    streamWriter.WriteLine($"UserName : {i.UserName}");
 
                     if (i.channels != null)
                     {
