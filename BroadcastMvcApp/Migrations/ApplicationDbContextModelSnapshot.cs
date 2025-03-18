@@ -17,7 +17,7 @@ namespace BroadcastMvcApp.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.2")
+                .HasAnnotation("ProductVersion", "9.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -56,7 +56,7 @@ namespace BroadcastMvcApp.Migrations
                     b.Property<string>("ProfilePhotoURL")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Username")
+                    b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -108,7 +108,7 @@ namespace BroadcastMvcApp.Migrations
                     b.Property<int?>("AccountId")
                         .HasColumnType("int");
 
-                    b.Property<string>("TextMessage")
+                    b.Property<string>("Data")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

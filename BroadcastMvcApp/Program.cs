@@ -1,5 +1,6 @@
 using BroadcastMvcApp.Data;
 using BroadcastMvcApp.Helpers;
+using BroadcastMvcApp.Hubs;
 using BroadcastMvcApp.Interface;
 using BroadcastMvcApp.Repository;
 using BroadcastMvcApp.Services;
@@ -11,9 +12,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 //added by me
-
-//session
-
 //appdbcontext initialization
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
@@ -22,7 +20,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.EnableDetailedErrors();
 });
 
-//adding user account authentication
+//adding user account authorization
 builder.Services.AddScoped<IAuthorizationService, AuthorizationService>();
 
 //adding Iphotoservice
@@ -37,6 +35,9 @@ builder.Services.AddScoped<IChannelRepository, ChannelRepository>();
 
 //session state
 builder.Services.AddSession();
+
+//signalR
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -87,6 +88,8 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
+
+app.UseAuthentication();
 app.UseAuthorization();
 app.UseSession();
 
@@ -96,5 +99,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
+
+app.MapHub<MessageHub>("/Hubs/MessageHub");
 
 app.Run();

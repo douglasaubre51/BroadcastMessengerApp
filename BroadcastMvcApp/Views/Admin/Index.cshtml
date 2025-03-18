@@ -10,49 +10,52 @@
     <div class="data-container">
         @foreach (var i in @Model.accounts)
         {
-            @*person card*@
-            <div class="data-card">
-                <image class="image-container" alt="profile" src=@i.ProfilePhotoURL />
-                <h3>@i.Username</h3>
-                <span>@i.departments @i.semesters</span>
-                <span>@i.roles</span>
-                <span>@i.Email</span>
+            if (i.roles != BroadcastMvcApp.Enum.Roles.Admin)
+            {
+                @*person card*@
+                <div class="data-card">
+                    <image class="image-container" alt="profile" src=@i.ProfilePhotoURL />
+                    <h3>@i.UserName</h3>
+                    <span>@i.departments @i.semesters</span>
+                    <span>@i.roles</span>
+                    <span>@i.Email</span>
 
-                <div class="btn-container">
-                    <a class="add-btn">+</a>
-                    <a class="remove-btn">-</a>
-                </div>
+                    <div class="btn-container">
+                        <a class="add-btn">+</a>
+                        <a class="remove-btn">-</a>
+                    </div>
 
-                @* add channel list popup window *@
-                <div class="add-channel-list">
-                    @foreach (var channel in Model.channels)
-                    {
-                        if (!channel.Accounts.Select(e => e.AccountId).Contains(i.AccountId))
+                    @* add channel list popup window *@
+                    <div class="add-channel-list">
+                        @foreach (var channel in Model.channels)
                         {
-                            <div class="channel-list">
-                                <a class="add-channel-action-btn" asp-action="AddToSelectChannel" asp-controller="Admin"
-                                    asp-route-accountId=@i.AccountId asp-route-channelId=@channel.ChannelId>@channel.ChannelName</a>
-                            </div>
+                            if (!channel.Accounts.Select(e => e.AccountId).Contains(i.AccountId))
+                            {
+                                <div class="channel-list">
+                                    <a class="add-channel-action-btn" asp-action="AddToSelectChannel" asp-controller="Admin"
+                                        asp-route-accountId=@i.AccountId asp-route-channelId=@channel.ChannelId>@channel.ChannelName</a>
+                                </div>
+                            }
                         }
-                    }
-                </div>
+                    </div>
 
-                @* remove channel list popup window *@
-                <div class="remove-channel-list">
-                    @foreach (var channel in @Model.channels)
-                    {
-                        @if (channel.Accounts.Select(e => e.AccountId).Contains(i.AccountId))
+                    @* remove channel list popup window *@
+                    <div class="remove-channel-list">
+                        @foreach (var channel in @Model.channels)
                         {
-                            <div class="channel-list">
-                                <a class="remove-channel-action-btn" asp-action="RemoveSelectedChannel" asp-controller="Admin"
-                                    asp-route-userId="@i.AccountId" asp-route-channelId="@channel.ChannelId">
-                                    @channel.ChannelName
-                                </a>
-                            </div>
+                            @if (channel.Accounts.Select(e => e.AccountId).Contains(i.AccountId))
+                            {
+                                <div class="channel-list">
+                                    <a class="remove-channel-action-btn" asp-action="RemoveSelectedChannel" asp-controller="Admin"
+                                        asp-route-userId="@i.AccountId" asp-route-channelId="@channel.ChannelId">
+                                        @channel.ChannelName
+                                    </a>
+                                </div>
+                            }
                         }
-                    }
+                    </div>
                 </div>
-            </div>
+            }
         }
     </div>
 </div>

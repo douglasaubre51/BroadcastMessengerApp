@@ -12,15 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BroadcastMvcApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250310133443_updated props in account - 2 ")]
-    partial class updatedpropsinaccount2
+    [Migration("20250318123257_reverted-identity")]
+    partial class revertedidentity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.2")
+                .HasAnnotation("ProductVersion", "9.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -59,7 +59,7 @@ namespace BroadcastMvcApp.Migrations
                     b.Property<string>("ProfilePhotoURL")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Username")
+                    b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -111,7 +111,7 @@ namespace BroadcastMvcApp.Migrations
                     b.Property<int?>("AccountId")
                         .HasColumnType("int");
 
-                    b.Property<string>("TextMessage")
+                    b.Property<string>("Data")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

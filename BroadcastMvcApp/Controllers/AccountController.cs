@@ -7,12 +7,12 @@ namespace BroadcastMvcApp.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly IAccountRepository _accountRepository;
         private readonly IPhotoService _photoService;
         private readonly IAuthorizationService _authorizationService;
-        private readonly IAccountRepository _repository;
-        public AccountController(IAccountRepository repository, IPhotoService photoService, IAuthorizationService authorizationService)
+        public AccountController(IAccountRepository accountRepository, IPhotoService photoService, IAuthorizationService authorizationService)
         {
-            _repository = repository;
+            _accountRepository = accountRepository;
             _photoService = photoService;
             _authorizationService = authorizationService;
         }
@@ -21,6 +21,7 @@ namespace BroadcastMvcApp.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public async Task<ActionResult> Create(CreateAccountViewModel createVM)
         {
@@ -32,9 +33,9 @@ namespace BroadcastMvcApp.Controllers
                 {
                     var photoUrl = await _photoService.AddPhotoAsync(createVM.ProfilePhoto);
 
-                    var model = new Account()
+                    var account = new Account()
                     {
-                        Username = createVM.Username,
+                        UserName = createVM.Name,
                         Email = createVM.Email,
                         Password = createVM.Password,
                         roles = createVM.roles,
@@ -43,7 +44,11 @@ namespace BroadcastMvcApp.Controllers
                         ProfilePhotoURL = photoUrl.Url.ToString(),
                     };
 
-                    _repository.Add(model);
+                    _accountRepository.Add(account);
+
+                    if (account.roles == Enum.Roles.Admin)
+                        return RedirectToAction("Index", "Admin");
+
                     return RedirectToAction("Index", "Home");
                 }
 
@@ -67,29 +72,27 @@ namespace BroadcastMvcApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var model = await _repository.GetByEmail(loginVM.Email);
+                var account = await _accountRepository.GetByEmail(loginVM.Email);
 
-                if (model == null)
+                if (account == null)
                 {
-                    loginVM.ErrorMessages = "email doesnot exist!";
+                    ModelState.AddModelError("Email", "emailId doesnot exists!");
+
                     return View(loginVM);
                 }
 
-                if (model.Password != loginVM.Password)
+                if (account.Password != loginVM.Password)
                 {
-                    loginVM.ErrorMessages = "incorrect password!";
+                    ModelState.AddModelError("Password", "passwords does not match!");
+
                     return View(loginVM);
                 }
 
-
-                if (model.roles == Enum.Roles.Admin)
+                if (account.roles == Enum.Roles.Admin)
                     return RedirectToAction("Index", "Admin");
 
-                if (model.roles == Enum.Roles.Tutor)
-                {
-                    HttpContext.Session.SetInt32("AccountId", model.AccountId);
+                if (account.roles == Enum.Roles.Tutor)
                     return RedirectToAction("Index", "Tutor");
-                }
 
                 return RedirectToAction("Index", "Home");
             }

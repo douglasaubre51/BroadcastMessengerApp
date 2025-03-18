@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BroadcastMvcApp.Migrations
 {
     /// <inheritdoc />
-    public partial class initialmigrate : Migration
+    public partial class revertedidentity : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,8 +17,8 @@ namespace BroadcastMvcApp.Migrations
                 {
                     AccountId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProfilePhotoURL = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     roles = table.Column<int>(type: "int", nullable: false),
@@ -50,7 +50,7 @@ namespace BroadcastMvcApp.Migrations
                 {
                     MessageId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TextMessage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Data = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UploadDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     AccountId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -97,8 +97,7 @@ namespace BroadcastMvcApp.Migrations
                 name: "IX_Accounts_Email",
                 table: "Accounts",
                 column: "Email",
-                unique: true,
-                filter: "[Email] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Messages_AccountId",
