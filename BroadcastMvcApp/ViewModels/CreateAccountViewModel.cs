@@ -25,7 +25,7 @@ public class CreateAccountViewModel
     [Required]
     public string Authorization { get; set; }
 
-    public IFormFile? ProfilePhoto { get; set; }
+    public IFormFile ProfilePhoto { get; set; }
 
     public Roles roles { get; set; }
     public Departments? departments { get; set; }

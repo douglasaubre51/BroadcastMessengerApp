@@ -1,21 +1,20 @@
 using BroadcastMvcApp.Interface;
 using BroadcastMvcApp.Models;
 using BroadcastMvcApp.ViewModels;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BroadcastMvcApp.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<Account> _user;
-        private readonly SignInManager<Account> _signIn;
+        private readonly IAccountRepository _accountRepository;
+        private readonly IChannelRepository _channelRepository;
         private readonly IPhotoService _photoService;
         private readonly IAuthorizationService _authorizationService;
-        public AccountController(SignInManager<Account> signIn, UserManager<Account> user, IPhotoService photoService, IAuthorizationService authorizationService)
+        public AccountController(IAccountRepository accountRepository, IChannelRepository channelRepository, IPhotoService photoService, IAuthorizationService authorizationService)
         {
-            _signIn = signIn;
-            _user = user;
+            _accountRepository = accountRepository;
+            _channelRepository = channelRepository;
             _photoService = photoService;
             _authorizationService = authorizationService;
         }
@@ -38,8 +37,7 @@ namespace BroadcastMvcApp.Controllers
 
                     var account = new Account()
                     {
-                        UserName = createVM.Email,
-                        Name = createVM.Name,
+                        UserName = createVM.Name,
                         Email = createVM.Email,
                         roles = createVM.roles,
                         departments = createVM.departments,
@@ -47,9 +45,7 @@ namespace BroadcastMvcApp.Controllers
                         ProfilePhotoURL = photoUrl.Url.ToString(),
                     };
 
-                    await _user.CreateAsync(account, createVM.Password);
-
-                    await _signIn.SignInAsync(account, isPersistent: true);
+                    _accountRepository.Add(account);
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -74,23 +70,27 @@ namespace BroadcastMvcApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _signIn.PasswordSignInAsync(loginVM.Email, loginVM.Password, isPersistent: true, lockoutOnFailure: false);
+                var account = await _accountRepository.GetByEmail(loginVM.Email);
 
-                if (!result.Succeeded)
+                if (account == null)
                 {
-                    ModelState.AddModelError("Email", "invalid email or password!");
+                    ModelState.AddModelError("Email", "emailId doesnot exists!");
+
                     return View(loginVM);
                 }
 
-                var account = await _user.FindByNameAsync(loginVM.Email);
+                if (account.Password != loginVM.Password)
+                {
+                    ModelState.AddModelError("Password", "passwords does not match!");
+
+                    return View(loginVM);
+                }
 
                 if (account.roles == Enum.Roles.Admin)
                     return RedirectToAction("Index", "Admin");
 
                 if (account.roles == Enum.Roles.Tutor)
-                {
                     return RedirectToAction("Index", "Tutor");
-                }
 
                 return RedirectToAction("Index", "Home");
             }

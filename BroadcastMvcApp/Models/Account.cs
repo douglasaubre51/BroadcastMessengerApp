@@ -1,14 +1,19 @@
 using BroadcastMvcApp.Enum;
-using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace BroadcastMvcApp.Models;
 
-public class Account : IdentityUser
+public class Account
 {
     public List<Channel>? channels { get; set; }
     public List<Message>? messages { get; set; }
 
-    public string Name { get; set; }
+
+    [Key]
+    public int AccountId { get; set; }
+    public string UserName { get; set; }
+    public string Email { get; set; }
+    public string Password { get; set; }
 
     public string? ProfilePhotoURL { get; set; }
 

@@ -39,13 +39,13 @@ namespace BroadcastMvcApp.Repository
             await _context.SaveChangesAsync();
         }
 
-        // public void RemoveFromChannel(Account account, Channel channel)
-        // {
-        //     var ch = _context.Channels.Include(e => e.Accounts).First(e => e.ChannelId == channel.ChannelId);
+        public void RemoveFromChannel(Account account, Channel channel)
+        {
+            var ch = _context.Channels.Include(e => e.Accounts).First(e => e.ChannelId == channel.ChannelId);
 
-        //     ch.Accounts.RemoveAll(e => e.AccountId == account.AccountId);
-        //     _context.SaveChanges();
-        // }
+            ch.Accounts.RemoveAll(e => e.AccountId == account.AccountId);
+            _context.SaveChanges();
+        }
 
 
         public bool IsExists(string channelName)

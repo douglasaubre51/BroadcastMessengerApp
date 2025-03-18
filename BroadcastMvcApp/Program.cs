@@ -4,16 +4,12 @@ using BroadcastMvcApp.Hubs;
 using BroadcastMvcApp.Interface;
 using BroadcastMvcApp.Repository;
 using BroadcastMvcApp.Services;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
 
 //added by me
 //appdbcontext initialization
@@ -24,29 +20,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.EnableDetailedErrors();
 });
 
-//add identity
-builder.Services.AddIdentity<IdentityUser,IdentityRole>(
-    e => e.SignIn.RequireConfirmedAccount = true
-    ).AddEntityFrameworkStores<ApplicationDbContext>()
-    .AddDefaultTokenProviders();
-
-//configure identity
-builder.Services.Configure<IdentityOptions>(e =>
-{
-    e.Password.RequireDigit = true;
-    e.Password.RequiredLength = 8;
-    e.Password.RequireNonAlphanumeric = false;
-    e.Password.RequireUppercase = false;
-    e.Password.RequireLowercase = false;
-});
-
-
-//adding user account authentication
+//adding user account authorization
 builder.Services.AddScoped<IAuthorizationService, AuthorizationService>();
-
-//identity sign in and user
-builder.Services.AddScoped<SignInManager<ApplicationDbContext>>();
-builder.Services.AddScoped<UserManager<ApplicationDbContext>>();
 
 //adding Iphotoservice
 builder.Services.AddScoped<IPhotoService, PhotoService>();
@@ -56,7 +31,7 @@ builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection(
 
 //repo init
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
-// builder.Services.AddScoped<IChannelRepository, ChannelRepository>();
+builder.Services.AddScoped<IChannelRepository, ChannelRepository>();
 
 //session state
 builder.Services.AddSession();
@@ -74,11 +49,11 @@ if (args.Length == 1 && args[0].ToLower() == "see")
 }
 
 //retrieve data
-// if (args.Length == 1 && args[0].ToLower() == "ret")
-// {
-//     Retrieve.RetrieveData(app);
-//     return;
-// }
+if (args.Length == 1 && args[0].ToLower() == "ret")
+{
+    Retrieve.RetrieveData(app);
+    return;
+}
 
 //update data
 if (args.Length == 1 && args[0].ToLower() == "upd")
@@ -88,11 +63,11 @@ if (args.Length == 1 && args[0].ToLower() == "upd")
 }
 
 //delete data
-// if (args.Length == 1 && args[0].ToLower() == "del")
-// {
-//     Delete.DeleteData(app);
-//     return;
-// }
+if (args.Length == 1 && args[0].ToLower() == "del")
+{
+    Delete.DeleteData(app);
+    return;
+}
 
 //get pending migration list
 if (args.Length == 1 && args[0].ToLower() == "pen")
