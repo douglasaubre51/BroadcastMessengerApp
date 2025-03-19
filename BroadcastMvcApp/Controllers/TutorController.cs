@@ -1,3 +1,4 @@
+using System.Threading.Channels;
 using BroadcastMvcApp.Interface;
 using BroadcastMvcApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -35,6 +36,19 @@ namespace BroadcastMvcApp.Controllers
             };
 
             return View(model);
+        }
+        //get messages from selected channel
+        public async Task<JsonResult> GetMessages(int id)
+        {
+            var channel = await _channelRepository.GetById(id);
+
+            Console.WriteLine("step into");
+
+            var messages = channel.Messages;
+
+            messages.ForEach(e => Console.WriteLine(e.Data));
+
+            return Json(messages);
         }
     }
 }

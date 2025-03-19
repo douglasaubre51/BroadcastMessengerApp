@@ -1,29 +1,53 @@
-console.log("message hub!")
-
-var _conn = new signalR.HubConnectionBuilder()
-    .withUrl("/Hubs/MessageHub")
-    .build()
-
 document.addEventListener("DOMContentLoaded", function () {
-    _conn.on("sendAMessage", (message) => {
-        var signalRMessage = document.getElementById('signalr-message')
+    const chatBody = document.getElementById("chatBody")
 
-        signalRMessage.innerHTML = message.toString()
-        alert(message)
-        console.log("given message")
-    })
+    fetch("/Tutor/GetMessages?id=2")
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .then(data => {
+            const messages = data
+            messages.forEach((e) => {
+                let chat = document.createElement("div")
+                chat.classList.add("chat")
+                chat.textContent = e.Data
 
-    function SendOnClient() {
-        _conn.send("SendAMessage")
-    }
-
-    function fulfilled() {
-        SendOnClient()
-    }
-
-    function rejected() {
-        console.log("error connecting to signalr!")
-    }
-
-    _conn.start().then(fulfilled, rejected)
+                chatBody.appendChild(chat)
+            })
+        })
 })
+
+
+
+
+
+
+
+// console.log("message hub!")
+
+// var _conn = new signalR.HubConnectionBuilder()
+//     .withUrl("/Hubs/MessageHub")
+//     .build()
+
+// document.addEventListener("DOMContentLoaded", function () {
+//     _conn.on("sendAMessage", (message) => {
+//         var signalRMessage = document.getElementById('signalr-message')
+
+//         signalRMessage.innerHTML = message.toString()
+//         alert(message)
+//         console.log("given message")
+//     })
+
+//     function SendOnClient() {
+//         _conn.send("SendAMessage")
+//     }
+
+//     function fulfilled() {
+//         SendOnClient()
+//     }
+
+//     function rejected() {
+//         console.log("error connecting to signalr!")
+//     }
+
+//     _conn.start().then(fulfilled, rejected)
+// })

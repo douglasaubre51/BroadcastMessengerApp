@@ -17,6 +17,11 @@
     border-bottom-right-radius: 10px;
 }
 
+.chat-body {
+    float: right;
+    background-color: white;
+}
+
 .card-container {
     display: flex;
     flex-direction: column;

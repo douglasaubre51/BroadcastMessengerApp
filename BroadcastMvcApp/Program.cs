@@ -78,7 +78,7 @@ if (args.Length == 1 && args[0].ToLower() == "pen")
 
 if (args.Length == 3 && args[0].ToLower() == "msg")
 {
-    AddMessage.SetMessage(args[1], args[2]);
+    AddMessage.SetMessage(app, args[1], args[2]);
     return;
 }
 
