@@ -20,7 +20,7 @@ namespace BroadcastMvcApp.Repository
 
         public async Task<Channel> GetById(int id)
         {
-            return await _context.Channels.SingleAsync(c => c.ChannelId == id);
+            return await _context.Channels.Include(e=>e.Messages).SingleAsync(c => c.ChannelId == id);
         }
 
         public async Task<List<Channel>> GetByAccount(Account account)
