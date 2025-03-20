@@ -1,16 +1,7 @@
-message :1234!
-message :who are you!
-message :who are you!
-message :who are you!
-message :i am sosuke aizen!
-message :hello there!
-message :1234!
-message :get on the floor!
-message :get on the floor!
-message :he he he haw!
-message id:10
-message data:he he he haw!
-upload Date Time:19-03-2025 6.12.36 AM
+message :bankai
+message id:1
+message data:bankai
+upload Date Time:20-03-2025 15:54:48
 
 
 

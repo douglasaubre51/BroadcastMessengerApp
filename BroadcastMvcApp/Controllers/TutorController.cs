@@ -38,11 +38,13 @@ namespace BroadcastMvcApp.Controllers
             return View(model);
         }
         //get messages from selected channel
+        [HttpGet]
         public async Task<JsonResult> GetMessages(int id)
         {
+            Console.WriteLine("step into\n\n\n");
             var channel = await _channelRepository.GetById(id);
 
-            Console.WriteLine("step into");
+            Console.WriteLine("step into\n\n\n");
 
             var messages = channel.Messages;
 
