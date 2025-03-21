@@ -1,18 +1,19 @@
 document.addEventListener("DOMContentLoaded", function () {
     const chatBody = document.getElementById("chatBody")
 
-    fetch("/Tutor/GetMessages")
+    fetch("/Tutor/GetMessages?id=3")
         .then(response => response.json())
-        .then(data => console.log(data))
         .then(data => {
             let messages = data
+            console.log(JSON.parse(data[0].Data))
             messages.forEach((e) => {
+                let test=document.getElementById("test")
                 let chat = document.createElement("div")
                 chat.classList.add("chat")
-                chat.textContent = e.Data
 
                 chatBody.appendChild(chat)
             })
+            .catch(e=>console.error(error))
         })
 })
 

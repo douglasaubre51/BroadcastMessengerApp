@@ -1,0 +1,64 @@
+21-03-2025 12:37:52
+Channels
+Channel Id :1
+Channel Name :gotei 13
+Channel Id :2
+Channel Name :akatsuki
+Channel Id :3
+Channel Name :espada
+Channel Id :4
+Channel Name :z fighters
+Channel Id :5
+Channel Name :kunnath team
+Channel Id :6
+Channel Name :food kittunna sthalam
+
+Accounts in channel : gotei 13
+Account Name :ben
+Account Id:6
+
+Accounts in channel : akatsuki
+Account Name :abin
+Account Id:2
+Account Name :Allen Bose
+Account Id:4
+
+Accounts in channel : espada
+Account Name :Das
+Account Id:5
+
+Accounts in channel : z fighters
+
+Accounts in channel : kunnath team
+Account Name :Allen Bose
+Account Id:4
+
+Accounts in channel : food kittunna sthalam
+
+Accounts
+Account id: 1
+UserName : Lijo
+Account id: 2
+UserName : abin
+Channel Id:2
+Channel Name:akatsuki
+Account id: 3
+UserName : dibin
+Account id: 4
+UserName : Allen Bose
+Channel Id:2
+Channel Name:akatsuki
+Channel Id:5
+Channel Name:kunnath team
+Account id: 5
+UserName : Das
+Channel Id:3
+Channel Name:espada
+Account id: 6
+UserName : ben
+Channel Id:1
+Channel Name:gotei 13
+
+Messages
+bankai
+espada is here

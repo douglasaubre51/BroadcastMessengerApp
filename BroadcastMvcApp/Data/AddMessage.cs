@@ -13,6 +13,7 @@ public class AddMessage
             {
                 try
                 {
+                    streamWriter.WriteLine($"{DateTime.Now}");
                     var _context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
 
                     Message textMessage = new Message()
@@ -42,6 +43,7 @@ public class AddMessage
 
                     if (messageList == null) { streamWriter.WriteLine("message list is null!"); }
 
+                    streamWriter.WriteLine($"{DateTime.Now}");
                     foreach (var i in messageList)
                     {
                         streamWriter.WriteLine($"message id:{i.MessageId}");
@@ -50,7 +52,7 @@ public class AddMessage
                         streamWriter.WriteLine("\n\n");
                     }
                 }
-                catch (Exception e) { streamWriter.WriteLine($"error :{e.Message}"); }
+                catch (Exception e) { streamWriter.WriteLine($"error :{e.StackTrace}"); }
             }
         }
     }

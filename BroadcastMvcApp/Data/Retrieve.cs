@@ -50,6 +50,14 @@ public class Retrieve
                         }
                     }
                 }
+
+                streamWriter.WriteLine("\nMessages");
+
+                var messages= context.Messages.ToList();
+
+                foreach(var m in messages){
+                    streamWriter.WriteLine(m.Data);
+                }
             }
         }
     }
