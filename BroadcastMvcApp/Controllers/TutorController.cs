@@ -40,7 +40,14 @@ namespace BroadcastMvcApp.Controllers
         [HttpGet]
         public async Task<JsonResult> GetMessages(int id)
         {
-            var messages = await _channelRepository.GetChannelMessages(id);
+            var messages = await _channelRepository?.GetChannelMessages(id);
+
+            Console.WriteLine("after query inside tutor!");
+
+            if (messages is null)
+            {
+                return Json(null);
+            }
 
             foreach (var i in messages)
             {

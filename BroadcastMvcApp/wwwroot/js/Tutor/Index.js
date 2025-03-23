@@ -1,13 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
     const chatBody = document.getElementById("chatBody")
 
-    fetch("/Tutor/GetMessages?id=3")
+    fetch("/Tutor/GetMessages?id=1")
         .then(response => response.json())
         .then(data => {
-            for (const d of data) {
-                console.log(d.Data)
-                document.getElementById("test").innerHTML = d.Data
-
+            for (let d of data) {
+                console.log(d.data)
             }
         })
 })
