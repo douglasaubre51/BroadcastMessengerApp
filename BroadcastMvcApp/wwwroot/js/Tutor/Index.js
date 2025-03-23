@@ -1,9 +1,12 @@
-document.addEventListener("DOMContentLoaded", function () {
+function getMessages(id) {
     const chatBody = document.getElementById("chatBody")
+    chatBody.innerHTML = ''
 
-    fetch("/Tutor/GetMessages?id=3")
+    fetch("/Tutor/GetMessages?id=" + id)
         .then(response => response.json())
         .then(data => {
+            let chatBody = document.getElementById('chatBody')
+
             for (let d of data) {
                 console.log(d.data)
 
@@ -13,39 +16,33 @@ document.addEventListener("DOMContentLoaded", function () {
                     let messageBody = document.createElement("h4");
                     messageBody.textContent = d.data
 
-                    let chatBody = document.getElementById('chatBody')
                     chatBody.append(messageBody);
                 }
             }
+
+            let messageBox = document.createElement('input')
+            messageBox.setAttribute('type', 'text')
+            messageBox.setAttribute('id', 'messageBox')
+
+            let submitBtn = document.createElement('button')
+            submitBtn.setAttribute('onclick', 'sendMessage(' + id + ')')
         })
-})
+}
 
-// console.log("message hub!")
+function sendMessage(id) {
+    let messageBox = document.getElementById('messageBox')
+    const date = new Date()
 
-// var _conn = new signalR.HubConnectionBuilder()
-//     .withUrl("/Hubs/MessageHub")
-//     .build()
-
-// document.addEventListener("DOMContentLoaded", function () {
-//     _conn.on("sendAMessage", (message) => {
-//         var signalRMessage = document.getElementById('signalr-message')
-
-//         signalRMessage.innerHTML = message.toString()
-//         alert(message)
-//         console.log("given message")
-//     })
-
-//     function SendOnClient() {
-//         _conn.send("SendAMessage")
-//     }
-
-//     function fulfilled() {
-//         SendOnClient()
-//     }
-
-//     function rejected() {
-//         console.log("error connecting to signalr!")
-//     }
-
-//     _conn.start().then(fulfilled, rejected)
-// })
+    fetch('/Tutor/SendMessages', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            id: this.id,
+            data: messageBox.value,
+            created_time: date.getTime(),
+            created_date: date.getDate()
+        })
+    })
+}
