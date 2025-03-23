@@ -2,7 +2,6 @@
 using BroadcastMvcApp.Interface;
 using BroadcastMvcApp.Data;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
 namespace BroadcastMvcApp.Repository
 {
     public class ChannelRepository : IChannelRepository
@@ -55,7 +54,7 @@ namespace BroadcastMvcApp.Repository
 
         public async Task<List<Message>> GetChannelMessages(int id)
         {
-            return await _context.Channels.Include(e => e.Messages).Where(e => e.ChannelId == id).SelectMany(e => e.Messages).ToListAsync();
+            return await _context.Channels.Include(e => e.Messages).Where(e => e.ChannelId == id).Select(e => e.Messages).FirstAsync();
         }
 
         public bool Add(Channel channel)
