@@ -1,4 +1,3 @@
-using System.Threading.Channels;
 using BroadcastMvcApp.Interface;
 using BroadcastMvcApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -41,16 +40,12 @@ namespace BroadcastMvcApp.Controllers
         [HttpGet]
         public async Task<JsonResult> GetMessages(int id)
         {
-            Console.WriteLine("step into\n\n\n");
-            var channel = await _channelRepository.GetById(id);
-
-            Console.WriteLine("step into\n\n\n");
-
-            var messages = channel.Messages;
-
-            messages.ForEach(e => Console.WriteLine(e.Data));
-
-            return Json(messages);
+            Console.WriteLine("step into 1");
+            var channel = await _channelRepository.GetChannelMessages(id);
+            Console.WriteLine("step into 2");
+            Console.WriteLine($"{channel is null}");
+            channel.ForEach(e => Console.WriteLine(e.Data));
+            return Json(channel);
         }
     }
 }

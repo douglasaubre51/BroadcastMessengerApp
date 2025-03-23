@@ -8,6 +8,7 @@ namespace BroadcastMvcApp.Interface
         Task<List<Channel>> GetByAccount(Account account);
         Task AddToChannel(Account account, Channel channel);
         void RemoveFromChannel(Account account, Channel channel);
+        Task<List<Message>> GetChannelMessages(int id);
 
         bool IsExists(string channelName);
 

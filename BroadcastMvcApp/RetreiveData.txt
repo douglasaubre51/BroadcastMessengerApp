@@ -1,64 +1,63 @@
-21-03-2025 12:37:52
+23-03-2025 6.30.45 AM
 Channels
 Channel Id :1
-Channel Name :gotei 13
+Channel Name :Karakura Town
 Channel Id :2
-Channel Name :akatsuki
+Channel Name :hell verse
 Channel Id :3
-Channel Name :espada
-Channel Id :4
-Channel Name :z fighters
-Channel Id :5
-Channel Name :kunnath team
-Channel Id :6
-Channel Name :food kittunna sthalam
+Channel Name :akatsuki
 
-Accounts in channel : gotei 13
-Account Name :ben
-Account Id:6
+Accounts in channel : Karakura Town
+Account Name :Reze
+Account Id:2
+Account Name :Ken
+Account Id:3
+
+Accounts in channel : hell verse
+Account Name :Reze
+Account Id:2
+Account Name :Ken
+Account Id:3
+Account Name :Aizen Sosuke
+Account Id:4
 
 Accounts in channel : akatsuki
-Account Name :abin
-Account Id:2
-Account Name :Allen Bose
-Account Id:4
-
-Accounts in channel : espada
-Account Name :Das
-Account Id:5
-
-Accounts in channel : z fighters
-
-Accounts in channel : kunnath team
-Account Name :Allen Bose
-Account Id:4
-
-Accounts in channel : food kittunna sthalam
+Account Name :Ken
+Account Id:3
 
 Accounts
-Account id: 1
-UserName : Lijo
 Account id: 2
-UserName : abin
-Channel Id:2
-Channel Name:akatsuki
-Account id: 3
-UserName : dibin
-Account id: 4
-UserName : Allen Bose
-Channel Id:2
-Channel Name:akatsuki
-Channel Id:5
-Channel Name:kunnath team
-Account id: 5
-UserName : Das
-Channel Id:3
-Channel Name:espada
-Account id: 6
-UserName : ben
+UserName : Reze
 Channel Id:1
-Channel Name:gotei 13
+Channel Name:Karakura Town
+Channel Id:2
+Channel Name:hell verse
+Account id: 3
+UserName : Ken
+Channel Id:1
+Channel Name:Karakura Town
+Channel Id:2
+Channel Name:hell verse
+Channel Id:3
+Channel Name:akatsuki
+Account id: 4
+UserName : Aizen Sosuke
+Channel Id:2
+Channel Name:hell verse
+Account id: 5
+UserName : Boruto Uzumaki
+Account id: 6
+UserName : Hinamori
 
 Messages
-bankai
-espada is here
+1234!
+who are you!
+who are you!
+who are you!
+i am sosuke aizen!
+hello there!
+1234!
+get on the floor!
+get on the floor!
+he he he haw!
+he he he haw!

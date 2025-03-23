@@ -20,7 +20,7 @@ namespace BroadcastMvcApp.Repository
 
         public async Task<Channel> GetById(int id)
         {
-            return await _context.Channels.Include(e=>e.Messages).SingleAsync(c => c.ChannelId == id);
+            return await _context.Channels.Include(e => e.Accounts).Include(e => e.Messages).SingleAsync(c => c.ChannelId == id);
         }
 
         public async Task<List<Channel>> GetByAccount(Account account)
@@ -51,6 +51,11 @@ namespace BroadcastMvcApp.Repository
         public bool IsExists(string channelName)
         {
             return _context.Channels.Any(e => e.ChannelName == channelName);
+        }
+
+        public async Task<List<Message>> GetChannelMessages(int id)
+        {
+            return await _context.Channels.Include(e => e.Messages).Where(e => e.ChannelId == id).SelectMany(e => e.Messages).ToListAsync();
         }
 
         public bool Add(Channel channel)

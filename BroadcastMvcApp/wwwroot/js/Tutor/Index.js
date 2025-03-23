@@ -4,24 +4,13 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch("/Tutor/GetMessages?id=3")
         .then(response => response.json())
         .then(data => {
-            let messages = data
-            console.log(JSON.parse(data[0].Data))
-            messages.forEach((e) => {
-                let test=document.getElementById("test")
-                let chat = document.createElement("div")
-                chat.classList.add("chat")
+            for (const d of data) {
+                console.log(d.Data)
+                document.getElementById("test").innerHTML = d.Data
 
-                chatBody.appendChild(chat)
-            })
-            .catch(e=>console.error(error))
+            }
         })
 })
-
-
-
-
-
-
 
 // console.log("message hub!")
 
