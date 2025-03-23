@@ -1,4 +1,4 @@
-23-03-2025 3.02.13 PM
+23-03-2025 4.27.15 PM
 Channels
 Channel Id :1
 Channel Name :Karakura Town
@@ -12,6 +12,8 @@ Account Name :Reze
 Account Id:2
 Account Name :Ken
 Account Id:3
+Account Name :Aizen Sosuke
+Account Id:4
 
 Accounts in channel : hell verse
 Account Name :Reze
@@ -24,6 +26,8 @@ Account Id:4
 Accounts in channel : akatsuki
 Account Name :Ken
 Account Id:3
+Account Name :Aizen Sosuke
+Account Id:4
 
 Accounts
 Account id: 2
@@ -42,8 +46,12 @@ Channel Id:3
 Channel Name:akatsuki
 Account id: 4
 UserName : Aizen Sosuke
+Channel Id:1
+Channel Name:Karakura Town
 Channel Id:2
 Channel Name:hell verse
+Channel Id:3
+Channel Name:akatsuki
 Account id: 5
 UserName : Boruto Uzumaki
 Account id: 6
@@ -61,3 +69,4 @@ get on the floor!
 get on the floor!
 he he he haw!
 he he he haw!
+pain has arived,and this world shall know pain!

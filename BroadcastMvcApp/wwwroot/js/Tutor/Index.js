@@ -1,11 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
     const chatBody = document.getElementById("chatBody")
 
-    fetch("/Tutor/GetMessages?id=1")
+    fetch("/Tutor/GetMessages?id=3")
         .then(response => response.json())
         .then(data => {
             for (let d of data) {
                 console.log(d.data)
+
+                if (d.data.trim() === "") { }
+
+                else {
+                    let messageBody = document.createElement("h4");
+                    messageBody.textContent = d.data
+
+                    let chatBody = document.getElementById('chatBody')
+                    chatBody.append(messageBody);
+                }
             }
         })
 })

@@ -9,7 +9,6 @@
     width: 20%;
     max-width: 30%;
 
-    background-color: white;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     padding-left: 10px;
@@ -19,7 +18,13 @@
 
 .chat-body {
     float: right;
+}
+
+.chat-body h4 {
     background-color: white;
+    border-radius: 3px;
+    padding: 10px;
+    width: fit-content;
 }
 
 .card-container {
@@ -27,6 +32,11 @@
     flex-direction: column;
     overflow-y: auto;
     overflow-x: hidden;
+}
+
+.card-container div:first-child {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 
@@ -39,4 +49,11 @@
     background-color: white;
     padding: 20px 20px;
     width: auto;
+    transition: background-color 0.2s ease;
+}
+
+.card:hover {
+    transition: background-color 0.2s ease;
+    background-color: green;
+    color: whitesmoke;
 }
