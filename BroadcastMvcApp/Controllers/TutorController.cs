@@ -1,4 +1,5 @@
 using BroadcastMvcApp.Interface;
+using BroadcastMvcApp.Models;
 using BroadcastMvcApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -55,6 +56,19 @@ namespace BroadcastMvcApp.Controllers
             }
 
             return Json(messages);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> SendMessage([FromBody] Post post)
+        {
+            var message = new Message
+            {
+                Data = post.data,
+            };
+
+            await _channelRepository.SetChannelMessage(post.id, message);
+
+            return RedirectToAction("Index");
         }
     }
 }

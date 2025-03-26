@@ -23,17 +23,22 @@ function getMessages(id) {
             let messageBox = document.createElement('input')
             messageBox.setAttribute('type', 'text')
             messageBox.setAttribute('id', 'messageBox')
+            chatBody.append(messageBox)
 
-            let submitBtn = document.createElement('button')
+            let submitBtn = document.createElement('input')
+            submitBtn.setAttribute('type', 'button')
             submitBtn.setAttribute('onclick', 'sendMessage(' + id + ')')
+            submitBtn.setAttribute('value', 'send')
+            chatBody.append(submitBtn)
         })
 }
 
 function sendMessage(id) {
     let messageBox = document.getElementById('messageBox')
     const date = new Date()
+    console.log(id)
 
-    fetch('/Tutor/SendMessages', {
+    fetch('/Tutor/SendMessage', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

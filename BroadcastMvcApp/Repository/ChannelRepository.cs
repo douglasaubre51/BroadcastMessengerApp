@@ -46,7 +46,6 @@ namespace BroadcastMvcApp.Repository
             _context.SaveChanges();
         }
 
-
         public bool IsExists(string channelName)
         {
             return _context.Channels.Any(e => e.ChannelName == channelName);
@@ -59,6 +58,13 @@ namespace BroadcastMvcApp.Repository
             return await _context.Channels.Include(e => e.Messages).Where(e => e.ChannelId == id).Select(e => e.Messages).FirstOrDefaultAsync() ?? null;
         }
 
+        public async Task SetChannelMessage(int id, Message message)
+        {
+            var messages = await _context.Channels.Include(e => e.Messages).Where(e => e.ChannelId == id).Select(e => e.Messages).SingleAsync();
+
+            messages.Add(message);
+            _context.SaveChanges();
+        }
         public bool Add(Channel channel)
         {
             _context.Add(channel);
