@@ -1,6 +1,5 @@
-using BroadcastMvcApp.Models;
-using System.Threading.Channels;
 using BroadcastMvcApp.Interface;
+using BroadcastMvcApp.Models;
 using BroadcastMvcApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,28 +16,52 @@ namespace BroadcastMvcApp.Controllers
         }
 
         // GET: TutorController
-        // public async Task<ActionResult> Index()
-        // {
-        //     //get session value
-        //     int accountId = (int)HttpContext.Session.GetInt32("AccountId");
-        //     //get account of current user
-        //     var account = await _accountRepository.GetById(accountId);
-        //     //get all channels that include account
-        //     var channels = await _channelRepository.GetByAccount(account);
+        public async Task<ActionResult> Index()
+        {
+            //get session value
+            if (HttpContext.Session.GetInt32("AccountId") == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
 
-        //     var model = new IndexTutorViewModel()
-        //     {
-        //         Channels = channels,
-        //     };
+            int accountId = (int)HttpContext.Session.GetInt32("AccountId");
+            //get account of current user
+            var account = await _accountRepository.GetById(accountId);
+            //get all channels that include account
+            var channels = await _channelRepository.GetByAccount(account);
 
+            var model = new IndexTutorViewModel()
+            {
+                Channels = channels,
+            };
 
-        //     return View(model);
-        // }
-        // [HttpPost]
-        // public ActionResult Index(IndexTutorViewModel viewModel)
-        // {
-        //     return View(viewModel);
-        // }
+            return View(model);
+        }
+        //get messages from selected channel
+        [HttpGet]
+        public async Task<JsonResult> GetMessages(int id)
+        {
+            var messages = await _channelRepository?.GetChannelMessages(id);
 
+            if (messages is null)
+            {
+                return Json(null);
+            }
+
+            return Json(messages);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> SendMessage([FromBody] Post post)
+        {
+            var message = new Message
+            {
+                Data = post.data,
+            };
+
+            await _channelRepository.SetChannelMessage(post.id, message);
+
+            return RedirectToAction("Index");
+        }
     }
 }

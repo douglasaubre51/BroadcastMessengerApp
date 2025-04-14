@@ -5,11 +5,28 @@
 
 .channel-container {
     float: left;
-    width: 30%;
-    background-color: white;
+    min-width: max-content;
+    width: 20%;
+    max-width: 30%;
+
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     padding-left: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+    color:whitesmoke;
+}
+
+.chat-body {
+    float: right;
+}
+
+.chat-body h4 {
+    background-color: #002e18;
+    border-radius: 3px;
+    padding: 10px;
+    width: fit-content;
 }
 
 .card-container {
@@ -19,6 +36,11 @@
     overflow-x: hidden;
 }
 
+.card-container div:first-child {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
 
 .card-container div:last-child {
     border-bottom-left-radius: 10px;
@@ -26,7 +48,20 @@
 }
 
 .card {
-    background-color: white;
+    background-color: #002e18;
     padding: 20px 20px;
     width: auto;
+    transition: background-color 0.2s ease;
+}
+
+.card:hover {
+    transition: background-color 0.2s ease;
+    background-color: green;
+    color: whitesmoke;
+}
+
+.card-container a {
+    text-decoration: none;
+    cursor: pointer;
+    color: green;
 }
