@@ -53,8 +53,6 @@ namespace BroadcastMvcApp.Repository
 
         public async Task<List<Message>> GetChannelMessages(int id)
         {
-            Console.WriteLine("before query inside channel repo!");
-
             return await _context.Channels.Include(e => e.Messages).Where(e => e.ChannelId == id).Select(e => e.Messages).FirstOrDefaultAsync() ?? null;
         }
 
