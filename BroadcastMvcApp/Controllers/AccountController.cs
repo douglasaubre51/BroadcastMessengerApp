@@ -92,7 +92,11 @@ namespace BroadcastMvcApp.Controllers
                     return RedirectToAction("Index", "Admin");
 
                 if (account.roles == Enum.Roles.Tutor)
+                {
+                    HttpContext.Session.SetInt32("AccountId", account.AccountId);
+
                     return RedirectToAction("Index", "Tutor");
+                }
 
                 return RedirectToAction("Index", "Home");
             }
