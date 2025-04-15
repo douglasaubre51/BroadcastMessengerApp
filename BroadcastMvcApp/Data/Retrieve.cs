@@ -53,9 +53,10 @@ public class Retrieve
 
                 streamWriter.WriteLine("\nMessages");
 
-                var messages= context.Messages.ToList();
+                var messages = context.Messages.ToList();
 
-                foreach(var m in messages){
+                foreach (var m in messages)
+                {
                     streamWriter.WriteLine(m.Data);
                 }
             }
