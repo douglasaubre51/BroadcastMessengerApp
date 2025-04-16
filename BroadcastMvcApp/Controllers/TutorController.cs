@@ -54,12 +54,22 @@ namespace BroadcastMvcApp.Controllers
         [HttpPost]
         public async Task<ActionResult> SendMessage([FromBody] Post post)
         {
+            // show payload!
+            Console.WriteLine("got payload:-");
+            Console.WriteLine(post.Id);
+            Console.WriteLine(post.Body);
+            Console.WriteLine(post.CreatedDate);
+
+            DateOnly date;
+            DateOnly.TryParse(post.CreatedDate, out date);
+            Console.WriteLine($"date:{date}");
+
             var message = new Message
             {
-                Data = post.data,
+                Data = post.Body,
             };
 
-            await _channelRepository.SetChannelMessage(post.id, message);
+            await _channelRepository.SetChannelMessage(post.Id, message);
 
             return RedirectToAction("Index");
         }

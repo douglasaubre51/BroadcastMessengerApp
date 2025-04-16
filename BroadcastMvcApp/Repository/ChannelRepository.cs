@@ -58,10 +58,11 @@ namespace BroadcastMvcApp.Repository
 
         public async Task SetChannelMessage(int id, Message message)
         {
+	  Console.WriteLine("exec SetChannelMessage!");
             var messages = await _context.Channels.Include(e => e.Messages).Where(e => e.ChannelId == id).Select(e => e.Messages).SingleAsync();
 
             messages.Add(message);
-            _context.SaveChanges();
+	    Save();
         }
         public bool Add(Channel channel)
         {
