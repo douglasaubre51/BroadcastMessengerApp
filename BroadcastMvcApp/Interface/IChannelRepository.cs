@@ -5,7 +5,7 @@ namespace BroadcastMvcApp.Interface
     {
         bool IsExists(string channelName);
 
-	// getters
+        // getters
         Task<List<Channel>> GetAll();
 
         Task<Channel> GetById(int id);
@@ -14,12 +14,12 @@ namespace BroadcastMvcApp.Interface
 
         Task<List<Message>> GetChannelMessages(int id);
 
-	// advanced crud
+        // advanced crud
         Task AddToChannel(Account account, Channel channel);
 
         void RemoveFromChannel(Account account, Channel channel);
 
-	// basic crud
+        // basic crud
         bool Add(Channel channel);
         bool Update(Channel channel);
         bool Delete(Channel channel);

@@ -1,6 +1,6 @@
 "use strict";
 
-let accountId=document.getElementById('account-id').value;
+let accountId = document.getElementById("account-id").value;
 
 // create divs for chats
 let chatBody = document.createElement("div");
@@ -54,15 +54,15 @@ function sendMessage(id) {
   const date = new Date();
 
   const minutes = date.getMinutes();
-  let temp=minutes < 10 ? ":0" : ":" + "" + minutes;
-  const time = date.getHours() + "" + temp+":"+date.getSeconds()
+  let temp = minutes < 10 ? ":0" : ":" + "" + minutes;
+  const time = date.getHours() + "" + temp + ":" + date.getSeconds();
 
   // show payload!
   console.log(id);
   console.log(accountId);
   console.log(messageBox.value);
   console.log(
-    date.getFullYear() + "-" +(1+ date.getMonth())+ "-" + date.getDate(),
+    date.getFullYear() + "-" + (1 + date.getMonth()) + "-" + date.getDate(),
   );
   console.log(time);
 
@@ -76,7 +76,7 @@ function sendMessage(id) {
 
     body: JSON.stringify({
       Id: id,
-      AccountId:accountId,
+      AccountId: accountId,
 
       Body: messageBox.value,
       CreatedDate:
