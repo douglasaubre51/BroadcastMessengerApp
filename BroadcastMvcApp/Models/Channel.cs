@@ -14,6 +14,6 @@ public class Channel
 
 
     public string ChannelName { get; set; }
-    public string? ProfilePhotoURL {get;set;}
-    public string? Description {get;set;}
+    public string? ProfilePhotoURL { get; set; }
+    public string? Description { get; set; }
 }

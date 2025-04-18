@@ -9,8 +9,8 @@ public class Message
     public int Id { get; set; }
 
     // navigation properties
-    public Account Account {get;set;}
-    public Channel Channel{get;set;}
+    public Account Account { get; set; }
+    public Channel Channel { get; set; }
 
 
     public string Data { get; set; }

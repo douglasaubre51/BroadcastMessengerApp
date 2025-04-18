@@ -12,7 +12,7 @@ namespace BroadcastMvcApp.Controllers
         private readonly IMessageRepository _messageRepository;
 
 
-        public TutorController(IChannelRepository channelRepository, IAccountRepository accountRepository,IMessageRepository messageRepository)
+        public TutorController(IChannelRepository channelRepository, IAccountRepository accountRepository, IMessageRepository messageRepository)
         {
             _channelRepository = channelRepository;
             _accountRepository = accountRepository;
@@ -34,12 +34,12 @@ namespace BroadcastMvcApp.Controllers
             //get all channels that include account
             var channels = await _channelRepository.GetByAccount(account);
 
-	    Console.WriteLine(accountId);
+            Console.WriteLine(accountId);
 
             var model = new IndexTutorViewModel()
             {
                 Channels = channels,
-			 AccountId=accountId
+                AccountId = accountId
             };
 
             return View(model);
@@ -82,18 +82,18 @@ namespace BroadcastMvcApp.Controllers
             DateTime.TryParse(date + " " + time, out dateTime);
             Console.WriteLine(dateTime);
 
-	    var channel=await _channelRepository.GetById(post.Id);
-	    var account=await _accountRepository.GetById(post.AccountId);
+            var channel = await _channelRepository.GetById(post.Id);
+            var account = await _accountRepository.GetById(post.AccountId);
 
             var message = new Message
             {
-	      Channel=channel,
-		Account=account,
+                Channel = channel,
+                Account = account,
                 Data = post.Body,
                 UploadDateTime = dateTime
             };
 
-            _messageRepository.Add( message);
+            _messageRepository.Add(message);
 
             return RedirectToAction("Index");
         }

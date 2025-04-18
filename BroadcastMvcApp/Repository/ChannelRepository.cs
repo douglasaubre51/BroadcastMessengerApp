@@ -17,7 +17,7 @@ namespace BroadcastMvcApp.Repository
             return _context.Channels.Any(e => e.ChannelName == channelName);
         }
 
-	// getters
+        // getters
         public async Task<List<Channel>> GetAll()
         {
             return await _context.Channels.Include(e => e.Accounts).ToListAsync();
@@ -33,7 +33,7 @@ namespace BroadcastMvcApp.Repository
             return await _context.Channels.Include(e => e.Accounts).Where(e => e.Accounts.Contains(account)).ToListAsync();
         }
 
-	// advanced crud
+        // advanced crud
         public async Task AddToChannel(Account account, Channel channel)
         {
             var acc = await _context.Channels.Include(e => e.Accounts).FirstAsync(e => e.Id == channel.Id);
@@ -59,7 +59,7 @@ namespace BroadcastMvcApp.Repository
             return await _context.Channels.Include(e => e.Messages).Where(e => e.Id == id).Select(e => e.Messages).FirstOrDefaultAsync() ?? null;
         }
 
-	// basic crud
+        // basic crud
         public bool Add(Channel channel)
         {
             _context.Add(channel);
