@@ -32,6 +32,7 @@ builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection(
 //repo init
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<IChannelRepository, ChannelRepository>();
+builder.Services.AddScoped<IMessageRepository,MessageRepository>();
 
 //session state
 builder.Services.AddSession();

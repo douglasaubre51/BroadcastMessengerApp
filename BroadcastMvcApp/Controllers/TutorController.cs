@@ -9,10 +9,14 @@ namespace BroadcastMvcApp.Controllers
     {
         private readonly IChannelRepository _channelRepository;
         private readonly IAccountRepository _accountRepository;
-        public TutorController(IChannelRepository channelRepository, IAccountRepository accountRepository)
+        private readonly IMessageRepository _messageRepository;
+
+
+        public TutorController(IChannelRepository channelRepository, IAccountRepository accountRepository,IMessageRepository messageRepository)
         {
             _channelRepository = channelRepository;
             _accountRepository = accountRepository;
+            _messageRepository = messageRepository;
         }
 
         // GET: TutorController
@@ -30,9 +34,12 @@ namespace BroadcastMvcApp.Controllers
             //get all channels that include account
             var channels = await _channelRepository.GetByAccount(account);
 
+	    Console.WriteLine(accountId);
+
             var model = new IndexTutorViewModel()
             {
                 Channels = channels,
+			 AccountId=accountId
             };
 
             return View(model);
@@ -57,19 +64,36 @@ namespace BroadcastMvcApp.Controllers
             // show payload!
             Console.WriteLine("got payload:-");
             Console.WriteLine(post.Id);
+            Console.WriteLine(post.AccountId);
             Console.WriteLine(post.Body);
             Console.WriteLine(post.CreatedDate);
+            Console.WriteLine(post.CreatedTime);
 
+            // create date
             DateOnly date;
             DateOnly.TryParse(post.CreatedDate, out date);
-            Console.WriteLine($"date:{date}");
+
+            // create time
+            TimeOnly time;
+            TimeOnly.TryParse(post.CreatedTime, out time);
+
+            // create date time
+            DateTime dateTime;
+            DateTime.TryParse(date + " " + time, out dateTime);
+            Console.WriteLine(dateTime);
+
+	    var channel=await _channelRepository.GetById(post.Id);
+	    var account=await _accountRepository.GetById(post.AccountId);
 
             var message = new Message
             {
+	      Channel=channel,
+		Account=account,
                 Data = post.Body,
+                UploadDateTime = dateTime
             };
 
-            await _channelRepository.SetChannelMessage(post.Id, message);
+            _messageRepository.Add( message);
 
             return RedirectToAction("Index");
         }

@@ -1,5 +1,7 @@
 "use strict";
 
+let accountId=document.getElementById('account-id').value;
+
 // create divs for chats
 let chatBody = document.createElement("div");
 chatBody.setAttribute("id", "chat-body");
@@ -43,16 +45,26 @@ function getMessages(id) {
 
 // when the send btn is clicked!
 function sendMessage(id) {
+  // play test
+  console.log(`time : ${new Date().getHours()}:${new Date().getMinutes()}`);
+
   // create payload!
   let messageBox = document.getElementById("messageBox");
+
   const date = new Date();
+
+  const minutes = date.getMinutes();
+  let temp=minutes < 10 ? ":0" : ":" + "" + minutes;
+  const time = date.getHours() + "" + temp+":"+date.getSeconds()
 
   // show payload!
   console.log(id);
+  console.log(accountId);
   console.log(messageBox.value);
   console.log(
-    date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate(),
+    date.getFullYear() + "-" +(1+ date.getMonth())+ "-" + date.getDate(),
   );
+  console.log(time);
 
   // send payload!
   fetch("/Tutor/SendMessage", {
@@ -64,9 +76,12 @@ function sendMessage(id) {
 
     body: JSON.stringify({
       Id: id,
+      AccountId:accountId,
+
       Body: messageBox.value,
       CreatedDate:
         date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate(),
+      CreatedTime: time,
     }),
   });
 }

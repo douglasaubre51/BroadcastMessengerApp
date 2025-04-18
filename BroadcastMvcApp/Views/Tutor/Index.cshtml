@@ -2,7 +2,10 @@
 
 @{
 ViewBag.Title = "Tutor";
+Console.WriteLine(Model.AccountId);
 }
+
+<input type="hidden" id="account-id" value=@Model.AccountId />
 
 <link href="~/css/IndexTutorStyle.css" rel="stylesheet /">
   <h1>Channels</h1>
@@ -13,7 +16,7 @@ ViewBag.Title = "Tutor";
       @foreach (var i in @Model.Channels)
       {
       <div class="card-btn">
-	<a onclick="getMessages(@i.ChannelId)">
+	<a onclick="getMessages(@i.Id)">
 	  <div class="card">
 	    <span>@i.ChannelName</span>
 	  </div>

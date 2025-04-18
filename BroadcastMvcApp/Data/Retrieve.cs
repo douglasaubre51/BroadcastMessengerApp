@@ -21,7 +21,7 @@ public class Retrieve
                 streamWriter.WriteLine("Channels");
                 foreach (var i in channel)
                 {
-                    streamWriter.WriteLine($"Channel Id :{i.ChannelId}");
+                    streamWriter.WriteLine($"Channel Id :{i.Id}");
                     streamWriter.WriteLine($"Channel Name :{i.ChannelName}");
                 }
 
@@ -31,21 +31,21 @@ public class Retrieve
                     foreach (var j in ch.Accounts)
                     {
                         streamWriter.WriteLine($"Account Name :{j.UserName}");
-                        streamWriter.WriteLine($"Account Id:{j.AccountId}");
+                        streamWriter.WriteLine($"Account Id:{j.Id}");
                     }
                 }
 
                 streamWriter.WriteLine("\nAccounts");
                 foreach (var i in context.Accounts.ToList())
                 {
-                    streamWriter.WriteLine($"Account id: {i.AccountId}");
+                    streamWriter.WriteLine($"Account id: {i.Id}");
                     streamWriter.WriteLine($"UserName : {i.UserName}");
 
-                    if (i.channels != null)
+                    if (i.Channels != null)
                     {
-                        foreach (var j in i.channels)
+                        foreach (var j in i.Channels)
                         {
-                            streamWriter.WriteLine($"Channel Id:{j.ChannelId}");
+                            streamWriter.WriteLine($"Channel Id:{j.Id}");
                             streamWriter.WriteLine($"Channel Name:{j.ChannelName}");
                         }
                     }

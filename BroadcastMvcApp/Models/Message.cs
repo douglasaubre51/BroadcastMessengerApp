@@ -6,8 +6,13 @@ namespace BroadcastMvcApp.Models;
 public class Message
 {
     [Key]
-    public int MessageId { get; set; }
+    public int Id { get; set; }
+
+    // navigation properties
+    public Account Account {get;set;}
+    public Channel Channel{get;set;}
+
+
     public string Data { get; set; }
     public DateTime UploadDateTime { get; set; }
-    public Account? account { get; set; }
 }

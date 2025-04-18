@@ -46,7 +46,7 @@ public class AddMessage
                     streamWriter.WriteLine($"{DateTime.Now}");
                     foreach (var i in messageList)
                     {
-                        streamWriter.WriteLine($"message id:{i.MessageId}");
+                        streamWriter.WriteLine($"message id:{i.Id}");
                         streamWriter.WriteLine($"message data:{i.Data}");
                         streamWriter.WriteLine($"upload Date Time:{i.UploadDateTime}");
                         streamWriter.WriteLine("\n\n");
