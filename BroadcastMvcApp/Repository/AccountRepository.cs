@@ -17,10 +17,10 @@ public class AccountRepository : IAccountRepository
     {
         return await _context.Accounts.ToListAsync();
     }
-    public async Task<Account> GetById(int id)
-    {
-        return await _context.Accounts.Include(e => e.Channels).FirstAsync(e => e.Id == id);
-    }
+//    public async Task<Account> GetById(int id)
+//    {
+//        return await _context.Accounts.Include(e => e.Channels).FirstAsync(e => e.Id == id);
+//    }
 
     public async Task<Account> GetByEmail(string emailId)
     {

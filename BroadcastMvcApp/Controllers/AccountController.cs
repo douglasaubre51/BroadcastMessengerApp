@@ -91,12 +91,12 @@ namespace BroadcastMvcApp.Controllers
                 if (account.roles == Enum.Roles.Admin)
                     return RedirectToAction("Index", "Admin");
 
-                if (account.roles == Enum.Roles.Tutor)
-                {
-                    HttpContext.Session.SetInt32("AccountId", account.Id);
-
-                    return RedirectToAction("Index", "Tutor");
-                }
+//                if (account.roles == Enum.Roles.Tutor)
+//                {
+//                    HttpContext.Session.SetInt32("AccountId", account.Id);
+//
+//                    return RedirectToAction("Index", "Tutor");
+//                }
 
                 return RedirectToAction("Index", "Home");
             }
