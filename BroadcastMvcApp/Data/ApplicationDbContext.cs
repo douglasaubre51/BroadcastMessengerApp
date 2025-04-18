@@ -17,33 +17,33 @@ public class ApplicationDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-	// accounts
-	// emails are always unique!
+        // accounts
+        // emails are always unique!
         modelBuilder
-	  .Entity<Account>()
-	  .HasIndex(e => e.Email)
-	  .IsUnique();
+      .Entity<Account>()
+      .HasIndex(e => e.Email)
+      .IsUnique();
 
-	// many to many relations
-	modelBuilder
-	  .Entity<Account>()
-	  .HasMany(e=>e.Channels)
-	  .WithMany(e=>e.Accounts);
+        // many to many relations
+        modelBuilder
+          .Entity<Account>()
+          .HasMany(e => e.Channels)
+          .WithMany(e => e.Accounts);
 
-	modelBuilder
-	  .Entity<Channel>()
-	  .HasMany(e=>e.Accounts)
-	  .WithMany(e=>e.Channels);
+        modelBuilder
+          .Entity<Channel>()
+          .HasMany(e => e.Accounts)
+          .WithMany(e => e.Channels);
 
-	// one to many relations
-	modelBuilder
-	  .Entity<Account>()
-	  .HasMany(e=>e.Messages)
-	  .WithOne(e=>e.Account);
+        // one to many relations
+        modelBuilder
+          .Entity<Account>()
+          .HasMany(e => e.Messages)
+          .WithOne(e => e.Account);
 
-	modelBuilder
-	  .Entity<Channel>()
-	  .HasMany(e=>e.Messages)
-	  .WithOne(e=>e.Channel);
+        modelBuilder
+          .Entity<Channel>()
+          .HasMany(e => e.Messages)
+          .WithOne(e => e.Channel);
     }
 }
