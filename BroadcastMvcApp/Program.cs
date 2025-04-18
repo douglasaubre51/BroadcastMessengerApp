@@ -1,10 +1,15 @@
+using BroadcastMvcApp.Models;
 using BroadcastMvcApp.Data;
 using BroadcastMvcApp.Helpers;
 using BroadcastMvcApp.Hubs;
 using BroadcastMvcApp.Interface;
 using BroadcastMvcApp.Repository;
 using BroadcastMvcApp.Services;
+
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +24,15 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.EnableSensitiveDataLogging();
     options.EnableDetailedErrors();
 });
+
+// identity
+builder.Services.AddIdentity<Account,IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+
+// because ted smith warned of a weird error!
+builder.Services.AddMemoryCache();
+
+// cookies
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
 
 //adding user account authorization
 builder.Services.AddScoped<IAuthorizationService, AuthorizationService>();
