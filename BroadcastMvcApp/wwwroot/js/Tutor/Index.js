@@ -1,66 +1,87 @@
-"use strict"
+"use strict";
+
+let accountId=document.getElementById('account-id').value;
 
 // create divs for chats
-let chatBody = document.createElement('div')
-chatBody.setAttribute('id','chat-body')
+let chatBody = document.createElement("div");
+chatBody.setAttribute("id", "chat-body");
 
-let chatContainer=document.createElement('div')
-chatContainer.setAttribute('id','chat-container')
-chatContainer.append(chatBody)
+let chatContainer = document.createElement("div");
+chatContainer.setAttribute("id", "chat-container");
+chatContainer.append(chatBody);
 
-let bodyContainer=document.getElementById('body-container')
-bodyContainer.append(chatContainer)
+let bodyContainer = document.getElementById("body-container");
+bodyContainer.append(chatContainer);
 
 // when a channel is clicked!
 function getMessages(id) {
-  chatBody.innerHTML = ''
+  chatBody.innerHTML = "";
 
   // fetch chats from .net
   fetch("/Tutor/GetMessages?id=" + id)
-    .then(response => response.json())
-    .then(data => {
-
+    .then((response) => response.json())
+    .then((data) => {
       for (let d of data) {
-	if (d.data.trim() === "") { }
-
-	else {
-	  let messageBody = document.createElement("h4");
-	  messageBody.textContent = d.data
-	  chatBody.append(messageBody);
-	}
+        if (d.data.trim() === "") {
+        } else {
+          let messageBody = document.createElement("h4");
+          messageBody.textContent = d.data;
+          chatBody.append(messageBody);
+        }
       }
 
-      let messageBox = document.createElement('input')
-      messageBox.setAttribute('type', 'text')
-      messageBox.setAttribute('id', 'messageBox')
-      chatBody.append(messageBox)
+      let messageBox = document.createElement("input");
+      messageBox.setAttribute("type", "text");
+      messageBox.setAttribute("id", "messageBox");
+      chatBody.append(messageBox);
 
-      let submitBtn = document.createElement('input')
-      submitBtn.setAttribute('type', 'button')
-      submitBtn.setAttribute('onclick', 'sendMessage(' + id + ')')
-      submitBtn.setAttribute('value', 'send')
-      chatBody.append(submitBtn)
-    })
+      let submitBtn = document.createElement("input");
+      submitBtn.setAttribute("type", "button");
+      submitBtn.setAttribute("onclick", "sendMessage(" + id + ");");
+      submitBtn.setAttribute("value", "send");
+      chatBody.append(submitBtn);
+    });
 }
 
 // when the send btn is clicked!
 function sendMessage(id) {
+  // play test
+  console.log(`time : ${new Date().getHours()}:${new Date().getMinutes()}`);
+
   // create payload!
-  let messageBox = document.getElementById('messageBox')
-  const date = new Date()
-  console.log(id)
+  let messageBox = document.getElementById("messageBox");
+
+  const date = new Date();
+
+  const minutes = date.getMinutes();
+  let temp=minutes < 10 ? ":0" : ":" + "" + minutes;
+  const time = date.getHours() + "" + temp+":"+date.getSeconds()
+
+  // show payload!
+  console.log(id);
+  console.log(accountId);
+  console.log(messageBox.value);
+  console.log(
+    date.getFullYear() + "-" +(1+ date.getMonth())+ "-" + date.getDate(),
+  );
+  console.log(time);
 
   // send payload!
-  fetch('/Tutor/SendMessage', {
-    method: 'POST',
+  fetch("/Tutor/SendMessage", {
+    method: "POST",
+
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
+
     body: JSON.stringify({
-      id: this.id,
-      data: messageBox.value,
-      created_time: date.getTime(),
-      created_date: date.getDate()
-    })
-  })
+      Id: id,
+      AccountId:accountId,
+
+      Body: messageBox.value,
+      CreatedDate:
+        date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate(),
+      CreatedTime: time,
+    }),
+  });
 }

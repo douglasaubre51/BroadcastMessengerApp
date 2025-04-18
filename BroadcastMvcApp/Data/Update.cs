@@ -17,12 +17,12 @@ public class Update
 
                 var channel = context.Channels.First(e => e.ChannelName == "raftel");
 
-                channel.Accounts.First(e => e.UserName == "Luffy").AccountId = account.AccountId;
+                channel.Accounts.First(e => e.UserName == "Luffy").Id = account.Id;
 
                 context.SaveChanges();
 
                 streamWriter.WriteLine($"account name :{channel.Accounts.First(e => e.UserName == account.UserName).UserName}");
-                streamWriter.WriteLine($"account id :{channel.Accounts.First(e => e.UserName == account.UserName).AccountId}");
+                streamWriter.WriteLine($"account id :{channel.Accounts.First(e => e.UserName == account.UserName).Id}");
 
                 streamWriter.WriteLine("hello? account added to selected channel!");
             }

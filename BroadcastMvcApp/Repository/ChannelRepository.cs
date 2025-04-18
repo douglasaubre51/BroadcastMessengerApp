@@ -12,6 +12,12 @@ namespace BroadcastMvcApp.Repository
             _context = context;
         }
 
+        public bool IsExists(string channelName)
+        {
+            return _context.Channels.Any(e => e.ChannelName == channelName);
+        }
+
+	// getters
         public async Task<List<Channel>> GetAll()
         {
             return await _context.Channels.Include(e => e.Accounts).ToListAsync();
@@ -19,7 +25,7 @@ namespace BroadcastMvcApp.Repository
 
         public async Task<Channel> GetById(int id)
         {
-            return await _context.Channels.Include(e => e.Accounts).Include(e => e.Messages).SingleAsync(c => c.ChannelId == id);
+            return await _context.Channels.Include(e => e.Accounts).Include(e => e.Messages).SingleAsync(c => c.Id == id);
         }
 
         public async Task<List<Channel>> GetByAccount(Account account)
@@ -27,9 +33,10 @@ namespace BroadcastMvcApp.Repository
             return await _context.Channels.Include(e => e.Accounts).Where(e => e.Accounts.Contains(account)).ToListAsync();
         }
 
+	// advanced crud
         public async Task AddToChannel(Account account, Channel channel)
         {
-            var acc = await _context.Channels.Include(e => e.Accounts).FirstAsync(e => e.ChannelId == channel.ChannelId);
+            var acc = await _context.Channels.Include(e => e.Accounts).FirstAsync(e => e.Id == channel.Id);
 
             if (acc.Accounts == null) acc.Accounts = new List<Account>();
 
@@ -40,29 +47,19 @@ namespace BroadcastMvcApp.Repository
 
         public void RemoveFromChannel(Account account, Channel channel)
         {
-            var ch = _context.Channels.Include(e => e.Accounts).First(e => e.ChannelId == channel.ChannelId);
+            var ch = _context.Channels.Include(e => e.Accounts).First(e => e.Id == channel.Id);
 
-            ch.Accounts.RemoveAll(e => e.AccountId == account.AccountId);
+            ch.Accounts.RemoveAll(e => e.Id == account.Id);
             _context.SaveChanges();
         }
 
-        public bool IsExists(string channelName)
-        {
-            return _context.Channels.Any(e => e.ChannelName == channelName);
-        }
 
         public async Task<List<Message>> GetChannelMessages(int id)
         {
-            return await _context.Channels.Include(e => e.Messages).Where(e => e.ChannelId == id).Select(e => e.Messages).FirstOrDefaultAsync() ?? null;
+            return await _context.Channels.Include(e => e.Messages).Where(e => e.Id == id).Select(e => e.Messages).FirstOrDefaultAsync() ?? null;
         }
 
-        public async Task SetChannelMessage(int id, Message message)
-        {
-            var messages = await _context.Channels.Include(e => e.Messages).Where(e => e.ChannelId == id).Select(e => e.Messages).SingleAsync();
-
-            messages.Add(message);
-            _context.SaveChanges();
-        }
+	// basic crud
         public bool Add(Channel channel)
         {
             _context.Add(channel);
@@ -85,7 +82,9 @@ namespace BroadcastMvcApp.Repository
         public bool Save()
         {
             int newEntries;
-            return (newEntries = _context.SaveChanges()) > 0 ? true : false;
+            bool result = (newEntries = _context.SaveChanges()) > 0 ? true : false;
+            Console.WriteLine(newEntries);
+            return result;
         }
     }
 }

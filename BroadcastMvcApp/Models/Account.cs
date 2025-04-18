@@ -5,10 +5,16 @@ namespace BroadcastMvcApp.Models;
 
 public class Account
 {
-    public List<Channel>? channels { get; set; }
 
     [Key]
-    public int AccountId { get; set; }
+    public int Id { get; set; }
+
+    // many to many relation with channels
+    public List<Channel>? Channels { get; set; }
+    // one to many relation with messages
+    public List<Message>? Messages { get; set; }
+
+
     public string UserName { get; set; }
     public string Email { get; set; }
     public string Password { get; set; }
