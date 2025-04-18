@@ -1,9 +1,9 @@
 .home-body {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .hero-text {
-    font-size: 100px;
-    padding: 20vh 0;
+  font-size: 100px;
+  padding: 20vh 0;
 }

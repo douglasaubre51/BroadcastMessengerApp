@@ -29,11 +29,11 @@
                     <div class="add-channel-list">
                         @foreach (var channel in Model.channels)
                         {
-                            if (!channel.Accounts.Select(e => e.AccountId).Contains(i.AccountId))
+                            if (!channel.Accounts.Select(e => e.Id).Contains(i.Id))
                             {
                                 <div class="channel-list">
                                     <a class="add-channel-action-btn" asp-action="AddToSelectChannel" asp-controller="Admin"
-                                        asp-route-accountId=@i.AccountId asp-route-channelId=@channel.ChannelId>@channel.ChannelName</a>
+                                        asp-route-accountId=@i.Id asp-route-channelId=@channel.Id>@channel.ChannelName</a>
                                 </div>
                             }
                         }
@@ -43,11 +43,11 @@
                     <div class="remove-channel-list">
                         @foreach (var channel in @Model.channels)
                         {
-                            @if (channel.Accounts.Select(e => e.AccountId).Contains(i.AccountId))
+                            @if (channel.Accounts.Select(e => e.Id).Contains(i.Id))
                             {
                                 <div class="channel-list">
                                     <a class="remove-channel-action-btn" asp-action="RemoveSelectedChannel" asp-controller="Admin"
-                                        asp-route-userId="@i.AccountId" asp-route-channelId="@channel.ChannelId">
+                                        asp-route-userId="@i.Id" asp-route-channelId="@channel.Id">
                                         @channel.ChannelName
                                     </a>
                                 </div>

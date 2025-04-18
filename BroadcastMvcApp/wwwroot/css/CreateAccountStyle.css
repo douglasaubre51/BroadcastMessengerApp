@@ -1,34 +1,34 @@
 .create-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .create-body h1 {
-    font-size: 50px;
+  font-size: 50px;
 }
 
 .hide-authorization {
-    display: none;
+  display: none;
 }
 
 .hide-department {
-    display: none;
+  display: none;
 }
 
 .hide-semester {
-    display: none;
+  display: none;
 }
 
 .show-authorization {
-    display: table-row;
+  display: table-row;
 }
 
 .show-department {
-    display: table-row;
+  display: table-row;
 }
 
 .show-semester {
-    display: table-row;
+  display: table-row;
 }

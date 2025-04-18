@@ -28,4 +28,8 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Watch Remove="*.*.swp;*.swp;**\*.swp;**\*.swo;**\*~;**\#*#;**\.DS_Store;**\Thumbs.db;**\*.obj;**\*.dll;**\*.exe;**\*.pdb;**\.git\*" />
+  </ItemGroup>
+
 </Project>

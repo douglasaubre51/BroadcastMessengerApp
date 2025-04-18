@@ -9,7 +9,7 @@ namespace BroadcastMvcApp.Attributes
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var _context=(IChannelRepository)validationContext.GetService(typeof(IChannelRepository));
+            var _context = (IChannelRepository)validationContext.GetService(typeof(IChannelRepository));
 
             var channelName = value?.ToString();
 
@@ -18,7 +18,7 @@ namespace BroadcastMvcApp.Attributes
                 return new ValidationResult("enter channel name!");
             }
 
-            bool isChannelExists =_context.IsExists(channelName);
+            bool isChannelExists = _context.IsExists(channelName);
 
             if (!isChannelExists)
             {

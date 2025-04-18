@@ -1,29 +1,30 @@
 ﻿@model BroadcastMvcApp.ViewModels.IndexTutorViewModel
 
 @{
-    ViewBag.Title = "Tutor";
+ViewBag.Title = "Tutor";
+Console.WriteLine(Model.AccountId);
 }
 
+<input type="hidden" id="account-id" value=@Model.AccountId />
+
 <link href="~/css/IndexTutorStyle.css" rel="stylesheet /">
-<div class="body-container">
-    <div class="channel-container">
-        <h1>Channels</h1>
+  <h1>Channels</h1>
+<div id="body-container">
+  <div class="channel-container">
 
-        <div class="card-container">
-            @foreach (var i in @Model.Channels)
-            {
-                <div class="card-btn">
-                    <a onclick="getMessages(@i.ChannelId)">
-                        <div class="card">
-                            <span>@i.ChannelName</span>
-                        </div>
-                    </a>
-                </div>
-            }
-        </div>
+    <div class="card-container">
+      @foreach (var i in @Model.Channels)
+      {
+      <div class="card-btn">
+	<a onclick="getMessages(@i.Id)">
+	  <div class="card">
+	    <span>@i.ChannelName</span>
+	  </div>
+	</a>
+      </div>
+      }
     </div>
-
-    <div id="chatBody" class="chat-body"></div>
+  </div>
 </div>
 
 <script src="~/js/signalr.js"></script>

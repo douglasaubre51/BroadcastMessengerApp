@@ -1,23 +1,23 @@
 .login-body {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
 }
 
 .login-body h1 {
-    font-size: 50px;
+  font-size: 50px;
 }
 
 .form-container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-group {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .link-text {
-    color: greenyellow;
+  color: greenyellow;
 }
