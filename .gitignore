@@ -19,3 +19,23 @@
 /.vs/BroadcastMessengerApp/v17/DocumentLayout.json
 *.bin
 /.vs/BroadcastMessengerApp/DesignTimeBuild/.dtbcache.v2
+
+# Ignore Vim swap files
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+
+# Ignore Vim session files
+Session.vim
+
+# Ignore temporary files
+.netrwhist
+*~
+
+# Ignore auto-generated tag files
+tags
+
+# Ignore persistent undo files
+[._]*.un~
+
+.env
+

@@ -54,27 +54,27 @@ namespace BroadcastMvcApp.Controllers
         }
 
         //add a user to selected channel
-        [HttpGet]
-        public async Task<IActionResult> AddToSelectChannel(int accountId, int channelId)
-        {
-            var account = await _accountRepository.GetById(accountId);
-            var channel = await _channelRepository.GetById(channelId);
-
-            if (account == null) Console.WriteLine("null account found!");
-
-            await _channelRepository.AddToChannel(account, channel);
-            return RedirectToAction("Index");
-        }
+//        [HttpGet]
+//        public async Task<IActionResult> AddToSelectChannel(int accountId, int channelId)
+//        {
+//            var account = await _accountRepository.GetById(accountId);
+//            var channel = await _channelRepository.GetById(channelId);
+//
+//            if (account == null) Console.WriteLine("null account found!");
+//
+//            await _channelRepository.AddToChannel(account, channel);
+//            return RedirectToAction("Index");
+//        }
 
         //remove user from selected channel
-        [HttpGet]
-        public async Task<IActionResult> RemoveSelectedChannel(int userId, int channelId)
-        {
-            var account = await _accountRepository.GetById(userId);
-            var channel = await _channelRepository.GetById(channelId);
-
-            _channelRepository.RemoveFromChannel(account, channel);
-            return RedirectToAction("Index");
-        }
+//        [HttpGet]
+//        public async Task<IActionResult> RemoveSelectedChannel(int userId, int channelId)
+//        {
+//            var account = await _accountRepository.GetById(userId);
+//            var channel = await _channelRepository.GetById(channelId);
+//
+//            _channelRepository.RemoveFromChannel(account, channel);
+//            return RedirectToAction("Index");
+//        }
     }
 }

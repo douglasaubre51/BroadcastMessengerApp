@@ -1,13 +1,12 @@
 using BroadcastMvcApp.Enum;
+
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace BroadcastMvcApp.Models;
 
-public class Account
+public class Account : IdentityUser
 {
-
-    [Key]
-    public int Id { get; set; }
 
     // many to many relation with channels
     public List<Channel>? Channels { get; set; }
