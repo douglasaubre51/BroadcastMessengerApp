@@ -39,7 +39,8 @@ tags
 
 .env
 
-/bin
-/obj
+bin/
+obj/
+.vs/
 
 .vs/BroadcastMessengerApp/config/applicationhost.config
