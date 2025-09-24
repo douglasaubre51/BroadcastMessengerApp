@@ -42,3 +42,4 @@ tags
 /bin
 /obj
 
+.vs/BroadcastMessengerApp/config/applicationhost.config
