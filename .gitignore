@@ -39,6 +39,7 @@ tags
 
 .env
 
-/bin
-/obj
+bin/
+obj/
+.vs/
 
