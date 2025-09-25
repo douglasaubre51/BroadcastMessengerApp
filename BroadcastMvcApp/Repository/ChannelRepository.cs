@@ -1,6 +1,6 @@
-﻿using BroadcastMvcApp.Models;
+﻿using BroadcastMvcApp.Data;
 using BroadcastMvcApp.Interface;
-using BroadcastMvcApp.Data;
+using BroadcastMvcApp.Models;
 using Microsoft.EntityFrameworkCore;
 namespace BroadcastMvcApp.Repository
 {
@@ -14,7 +14,7 @@ namespace BroadcastMvcApp.Repository
 
         public bool IsExists(string channelName)
         {
-            return _context.Channels.Any(e => e.ChannelName == channelName);
+            return _context.Channels.Any(e => e.Title == channelName);
         }
 
         // getters

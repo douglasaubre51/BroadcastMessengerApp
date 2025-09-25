@@ -1,12 +1,11 @@
+using BroadcastMvcApp.Helpers;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
-using BroadcastMvcApp.Interface;
 using Microsoft.Extensions.Options;
-using BroadcastMvcApp.Helpers;
 
 namespace BroadcastMvcApp.Services;
 
-public class PhotoService : IPhotoService
+public class PhotoService
 {
     private readonly Cloudinary _cloudinary;
     public PhotoService(IOptions<CloudinarySettings> options)
@@ -19,7 +18,7 @@ public class PhotoService : IPhotoService
 
         _cloudinary = new Cloudinary(account);
     }
-    public async Task<ImageUploadResult> AddPhotoAsync(IFormFile file)
+    public async Task<String> AddPhotoAsync(IFormFile file)
     {
         var uploadResult = new ImageUploadResult();
 
@@ -36,6 +35,6 @@ public class PhotoService : IPhotoService
             uploadResult = await _cloudinary.UploadAsync(uploadParams);
         }
 
-        return uploadResult;
+        return uploadResult.Url.ToString();
     }
 }

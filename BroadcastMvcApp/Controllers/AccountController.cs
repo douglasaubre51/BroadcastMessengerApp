@@ -1,106 +1,109 @@
 using BroadcastMvcApp.Interface;
 using BroadcastMvcApp.Models;
-using BroadcastMvcApp.ViewModels;
+using BroadcastMvcApp.Services;
+using BroadcastMvcApp.ViewModels.Account;
 using Microsoft.AspNetCore.Mvc;
-
-namespace BroadcastMvcApp.Controllers
+namespace BroadcastMvcApp.Controllers;
+public class AccountController(
+        IAccountRepository accountRepository,
+        PhotoService photoService,
+        AuthorizationService authorizationService
+    )
+    : Controller
 {
-    public class AccountController : Controller
+    private readonly IAccountRepository _accountRepository = accountRepository;
+    private readonly PhotoService _photoService = photoService;
+    private readonly AuthorizationService _authorizationService = authorizationService;
+
+    public ActionResult Login() => View();
+    public ActionResult Create() => View();
+
+    [HttpPost]
+    public async Task<ActionResult> Login(LoginViewModel viewModel)
     {
-        private readonly IAccountRepository _accountRepository;
-        private readonly IPhotoService _photoService;
-        private readonly IAuthorizationService _authorizationService;
-        public AccountController(IAccountRepository accountRepository, IPhotoService photoService, IAuthorizationService authorizationService)
-        {
-            _accountRepository = accountRepository;
-            _photoService = photoService;
-            _authorizationService = authorizationService;
-        }
+        if (ModelState.IsValid is false) View();
 
-        public ActionResult Create()
+        try
         {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> Create(CreateAccountViewModel createVM)
-        {
-            bool isAuthorized = _authorizationService.CheckUserAuthentication(createVM, ModelState);
-
-            if (ModelState.IsValid)
+            var account = await _accountRepository.GetByEmail(viewModel.Email);
+            if (account is null)
             {
-                if (isAuthorized)
-                {
-                    var photoUrl = await _photoService.AddPhotoAsync(createVM.ProfilePhoto);
-
-                    var account = new Account()
-                    {
-                        UserName = createVM.Name,
-                        Email = createVM.Email,
-                        Password = createVM.Password,
-                        roles = createVM.roles,
-                        departments = createVM.departments,
-                        semesters = createVM.semesters,
-                        ProfilePhotoURL = photoUrl.Url.ToString(),
-                    };
-
-                    _accountRepository.Add(account);
-
-                    if (account.roles == Enum.Roles.Admin)
-                        return RedirectToAction("Index", "Admin");
-
-                    return RedirectToAction("Index", "Home");
-                }
-
-                else
-                {
-                    ModelState.AddModelError("Authorization", "invalid authentication key!");
-                    return View(createVM);
-                }
+                ModelState.AddModelError("Email", "User doesnot exists!");
+                return View(viewModel);
+            }
+            if (account.Password != viewModel.Password)
+            {
+                ModelState.AddModelError("Password", "Invalid password!");
+                return View(viewModel);
             }
 
-            return View(createVM);
-        }
+            if (account.Role == Enum.Roles.Admin)
+                return RedirectToAction("Index", "Admin");
 
-        public ActionResult Login()
+            if (account.Role == Enum.Roles.Tutor)
+            {
+                HttpContext.Session.SetInt32("AccountId", account.Id);
+                return RedirectToAction("Index", "Tutor");
+            }
+
+            // for student
+            return RedirectToAction("Index", "Home");
+        }
+        catch (Exception ex)
         {
+            Console.WriteLine($"LoginAccount error: {ex.Message}");
             return View();
         }
+    }
 
-        [HttpPost]
-        public async Task<ActionResult> Login(LoginAccountViewModel loginVM)
+    [HttpPost]
+    public async Task<ActionResult> Create(CreateViewModel viewModel)
+    {
+        if (ModelState.IsValid is false)
+            return View(viewModel);
+
+        bool isAuthorized = _authorizationService
+            .CheckUserAuthentication(viewModel, ModelState);
+        if (isAuthorized is false)
         {
-            if (ModelState.IsValid)
+            ModelState.AddModelError(
+                nameof(CreateViewModel.Authorization),
+                "Invalid auth key!"
+                );
+            return View(viewModel);
+        }
+
+        try
+        {
+            string photoUrl = string.Empty;
+
+            if (viewModel.Profile is not null)
+                photoUrl = await _photoService.AddPhotoAsync(viewModel.Profile);
+
+            var account = new Account()
             {
-                var account = await _accountRepository.GetByEmail(loginVM.Email);
+                FirstName = viewModel.FirstName,
+                LastName = viewModel.LastName,
+                Email = viewModel.Email,
+                Password = viewModel.Password,
+                Role = viewModel.Role,
+                Department = viewModel.Department,
+                Semester = viewModel.Semester,
+                Profile = photoUrl,
+            };
 
-                if (account == null)
-                {
-                    ModelState.AddModelError("Email", "emailId doesnot exists!");
+            _accountRepository.Add(account);
 
-                    return View(loginVM);
-                }
+            if (account.Role == Enum.Roles.Admin)
+                return RedirectToAction("Index", "Admin");
 
-                if (account.Password != loginVM.Password)
-                {
-                    ModelState.AddModelError("Password", "passwords does not match!");
-
-                    return View(loginVM);
-                }
-
-                if (account.roles == Enum.Roles.Admin)
-                    return RedirectToAction("Index", "Admin");
-
-//                if (account.roles == Enum.Roles.Tutor)
-//                {
-//                    HttpContext.Session.SetInt32("AccountId", account.Id);
-//
-//                    return RedirectToAction("Index", "Tutor");
-//                }
-
-                return RedirectToAction("Index", "Home");
-            }
-            return View(loginVM);
+            // for teacher and student
+            return RedirectToAction("Index", "Home");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("CreateAccount error: " + ex.Message);
+            return View();
         }
     }
 }

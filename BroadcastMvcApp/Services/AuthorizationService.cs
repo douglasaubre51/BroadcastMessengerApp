@@ -1,49 +1,34 @@
-using System;
+using BroadcastMvcApp.Enum;
+using BroadcastMvcApp.ViewModels.Account;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using BroadcastMvcApp.Interface;
-using BroadcastMvcApp.ViewModels;
 
 namespace BroadcastMvcApp.Services;
 
-public class AuthorizationService : IAuthorizationService
+public class AuthorizationService
 {
-    private readonly string _adminAuthKey;
-    private readonly string _tutorAuthKey;
+    private readonly string _adminAuthKey = "chancellor66";
+    private readonly string _tutorAuthKey = "helldivers";
 
-    public AuthorizationService()
+    public bool CheckUserAuthentication(
+        CreateViewModel viewModel,
+        ModelStateDictionary modelState
+        )
     {
-        _adminAuthKey = "chancellor66";
-        _tutorAuthKey = "helldivers";
-    }
-    public bool CheckUserAuthentication(CreateAccountViewModel createVM, ModelStateDictionary modelState)
-    {
-        if (createVM.roles == Enum.Roles.Admin)
+        switch (viewModel.Role)
         {
-            modelState.Remove("departments");
-            modelState.Remove("semesters");
-            if (createVM.Authorization == _adminAuthKey)
-            {
+            case Roles.Admin:
+                if (viewModel.Authorization != _adminAuthKey)
+                    return false;
                 return true;
-            }
 
-            return false;
-        }
-
-        else if (createVM.roles == Enum.Roles.Tutor)
-        {
-            modelState.Remove("semesters");
-            if (createVM.Authorization == _tutorAuthKey)
-            {
+            case Roles.Tutor:
+                if (viewModel.Authorization != _tutorAuthKey)
+                    return false;
                 return true;
-            }
 
-            return false;
-        }
-
-        else
-        {
-            modelState.Remove("Authorization");
-            return true;
+            default:
+                Console.WriteLine("Role doesnot match!");
+                return false;
         }
     }
 }

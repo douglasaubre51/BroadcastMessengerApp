@@ -28,10 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <Compile Remove="Migrations\**" />
+    <Content Remove="Migrations\**" />
+    <EmbeddedResource Remove="Migrations\**" />
+    <None Remove="Migrations\**" />
     <Watch Remove="*.*.swp;*.swp;**\*.swp;**\*.swo;**\*~;**\#*#;**\.DS_Store;**\Thumbs.db;**\*.obj;**\*.dll;**\*.exe;**\*.pdb;**\.git\*" />
   </ItemGroup>
 
