@@ -1,34 +1,41 @@
 .create-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+
+    gap:25px;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    gap:5px;
+}
+
+.validation{
+    font-size:10px;
+    color:red;
 }
 
 .create-body h1 {
-  font-size: 50px;
+    font-size: 50px;
 }
 
-.hide-authorization {
-  display: none;
+.hide {
+    display: none;
 }
 
-.hide-department {
-  display: none;
-}
-
-.hide-semester {
-  display: none;
-}
-
-.show-authorization {
-  display: table-row;
-}
-
-.show-department {
-  display: table-row;
-}
-
-.show-semester {
-  display: table-row;
+.show {
+    display: flex;
 }

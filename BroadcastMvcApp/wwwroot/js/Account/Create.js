@@ -1,36 +1,46 @@
 console.log("executing js!");
 
 document.addEventListener("DOMContentLoaded", function () {
-  let roleSelector = document.getElementById("selectRole");
 
-  roleSelector.addEventListener("click", function () {
-    let selectedValue = roleSelector[roleSelector.selectedIndex].value;
+    let roleSelector = document.getElementById("selectRole");
 
-    console.log("you selected:", selectedValue);
+    let authorizationRow = document.getElementById("auth-field");
+    let departmentRow = document.getElementById("department-dropdown");
+    let semesterRow = document.getElementById("semester-dropdown");
 
-    let authorizationRow = document.getElementById("authorization-id");
-    let departmentRow = document.getElementById("department-id");
-    let semesterRow = document.getElementById("semester-id");
+    authorizationRow.classList.toggle("hide");
+    departmentRow.classList.toggle("hide");
+    semesterRow.classList.toggle("hide");
 
-    if (selectedValue == "Tutor") {
-      departmentRow.classList.add("show-department");
-      authorizationRow.classList.add("show-authorization");
+    roleSelector.addEventListener("click", function () {
 
-      semesterRow.classList.remove("show-semester");
-    } else if (selectedValue == "Student") {
-      departmentRow.classList.add("show-department");
-      semesterRow.classList.add("show-semester");
+        let selectedValue = roleSelector[roleSelector.selectedIndex].value;
 
-      authorizationRow.classList.remove("show-authorization");
-    } else if (selectedValue == "Admin") {
-      authorizationRow.classList.add("show-authorization");
+        console.log("you selected:", selectedValue);
 
-      departmentRow.classList.remove("show-department");
-      semesterRow.classList.remove("show-semester");
-    } else if (selectedValue == "select role") {
-      departmentRow.classList.remove("show-department");
-      semesterRow.classList.remove("show-semester");
-      authorizationRow.classList.remove("show-authorization");
-    }
-  });
+        if (selectedValue == "Tutor") {
+
+            departmentRow.classList.toggle("show");
+            authorizationRow.classList.toggle("show");
+            semesterRow.classList.toggle("hide");
+        }
+        else if (selectedValue == "Student") {
+
+            departmentRow.classList.toggle("show");
+            semesterRow.classList.toggle("show");
+            authorizationRow.classList.toggle("hide");
+        }
+        else if (selectedValue == "Admin") {
+
+            authorizationRow.classList.toggle("show");
+            departmentRow.classList.toggle("hide");
+            semesterRow.classList.toggle("hide");
+        }
+        else if (selectedValue == "select role") {
+
+            departmentRow.classList.toggle("hide");
+            semesterRow.classList.toggle("hide");
+            authorizationRow.classList.toggle("hide");
+        }
+    });
 });

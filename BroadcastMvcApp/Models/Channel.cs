@@ -11,8 +11,8 @@ public class Channel
     public string? Profile { get; set; }
     public string? Description { get; set; }
 
-    public List<Account>? Admins { get; set; }
+    public string? PinnedMessage { get; set; }
+
     public List<Account>? Accounts { get; set; }
     public List<Message>? Messages { get; set; }
-    public List<Message>? PinnedMessages { get; set; }
 }

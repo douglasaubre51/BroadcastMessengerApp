@@ -16,7 +16,9 @@ builder.Services.AddSession();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("BroadcastDbString"));
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("BroadcastDbString")
+        );
     options.EnableSensitiveDataLogging();
     options.EnableDetailedErrors();
 });
