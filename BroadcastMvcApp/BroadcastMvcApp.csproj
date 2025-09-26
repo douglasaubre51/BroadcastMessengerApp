@@ -35,4 +35,9 @@
     <Watch Remove="*.*.swp;*.swp;**\*.swp;**\*.swo;**\*~;**\#*#;**\.DS_Store;**\Thumbs.db;**\*.obj;**\*.dll;**\*.exe;**\*.pdb;**\.git\*" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\Account\" />
+    <Folder Include="wwwroot\lib\" />
+  </ItemGroup>
+
 </Project>

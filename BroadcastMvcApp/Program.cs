@@ -33,8 +33,6 @@ builder.Services.AddScoped<IMessageRepository, MessageRepository>();
 
 builder.Services.AddScoped<PhotoService>();
 
-builder.Services.AddScoped<AuthorizationService>();
-
 var app = builder.Build();
 
 app.UseHttpsRedirection();
