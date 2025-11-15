@@ -1,7 +1,6 @@
-using BroadcastMvcApp.Models;
-using BroadcastMvcApp.Interface;
 using BroadcastMvcApp.Data;
-
+using BroadcastMvcApp.Interface;
+using BroadcastMvcApp.Models;
 using Microsoft.EntityFrameworkCore;
 
 public class MessageRepository : IMessageRepository

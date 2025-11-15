@@ -10,23 +10,7 @@
 </head>
 
 <body>
-    <header>
-        <nav class="navbar-container">
-            <a class="navbar-item" asp-area="" asp-controller="Home" asp-action="Index">BroadcastMvcApp</a>
-            <ul class="nav-list-container">
-                <li class="nav-text">
-                    <a class="" asp-controller="Account" asp-action="Login">Log
-                        In</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="body-container">
             @RenderBody()
-        </main>
-    </div>
-
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

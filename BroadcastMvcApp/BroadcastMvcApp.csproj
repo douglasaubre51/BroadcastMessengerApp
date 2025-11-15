@@ -28,11 +28,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
+    <Compile Remove="Migrations\**" />
+    <Content Remove="Migrations\**" />
+    <EmbeddedResource Remove="Migrations\**" />
+    <None Remove="Migrations\**" />
+    <Watch Remove="*.*.swp;*.swp;**\*.swp;**\*.swo;**\*~;**\#*#;**\.DS_Store;**\Thumbs.db;**\*.obj;**\*.dll;**\*.exe;**\*.pdb;**\.git\*" />
   </ItemGroup>
 
   <ItemGroup>
-    <Watch Remove="*.*.swp;*.swp;**\*.swp;**\*.swo;**\*~;**\#*#;**\.DS_Store;**\Thumbs.db;**\*.obj;**\*.dll;**\*.exe;**\*.pdb;**\.git\*" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 
 </Project>
